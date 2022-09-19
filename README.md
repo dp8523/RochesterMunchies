@@ -6,10 +6,10 @@ An online E-store system built in Java 8=>11 and ___ _replace with other platfor
 ## Team
 
 - Dara Prak
-- MEMBER2
-- Robert Huang
-- Jaden Seaton
+- Lucie Lim
 - Adam Pang
+- Robert Huang
+- NAME 5
 
 
 ## Prerequisites
