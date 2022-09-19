@@ -7,8 +7,9 @@ An online E-store system built in Java 8=>11 and ___ _replace with other platfor
 
 - Dara Prak
 - MEMBER2
-- MEMBER3
-- MEMBER4
+- Robert Huang
+- Jaden Seaton
+- Adam Pang
 
 
 ## Prerequisites
