@@ -65,4 +65,31 @@ public class EstoreController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }   
     }
+
+    /**
+     * Responds to the GET request for all {@linkplain Snack snacks} whose name contains
+     * the text in name
+     * 
+     * @param name The name parameter which contains the text used to find the {@link Snack snacks}
+     * 
+     * @return ResponseEntity with array of {@link Snack snack} objects (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * <p>
+     * Example: Find all heroes that contain the text "ma"
+     * GET http://localhost:8080/heroes/?name=ma
+     */
+    @GetMapping("/")
+    public ResponseEntity<Snack[]> searchSnacks(@RequestParam String name) {
+        LOG.info("GET /snacks/?name="+name);
+        try {
+            Snack snack[] = snackDao.findSnacks( name );
+            return new ResponseEntity<Snack[]>(snack, HttpStatus.OK);
+        }
+        catch ( IOException e ) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+    }
+
 }
