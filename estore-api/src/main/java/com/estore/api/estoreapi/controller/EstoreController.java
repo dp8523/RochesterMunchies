@@ -107,7 +107,7 @@ public class EstoreController {
 
         try {
             if (snackDao.getSnack(snack.getId()) != null) {
-                Snack theSnack = snackDao.updateSnack(snack);
+                Snack theSnack = snackDao.updateSnack(snack, null, null);
                 return new ResponseEntity<Snack>(theSnack,HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
