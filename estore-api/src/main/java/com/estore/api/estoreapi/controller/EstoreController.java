@@ -146,6 +146,26 @@ public class EstoreController {
     }
 
     /**
+     * Responds to the GET request for all {@linkplain Hero heroes}
+     * 
+     * @return ResponseEntity with array of {@link Hero hero} objects (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("")
+    public ResponseEntity<Snack[]> getSnacks() {
+        LOG.info("GET /heroes");
+        try {
+            Snack[] snackArray = snackDao.getSnacks();
+            return new ResponseEntity<Snack[]>(snackArray, HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
      * Deletes a {@linkplain Snack snack} with the given id
      * 
      * @param id The id of the {@link Snack snack} to deleted
