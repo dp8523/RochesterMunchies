@@ -13,6 +13,7 @@ public class Snack {
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
     @JsonProperty("description") String description;
+    @JsonProperty("quantity") Integer quantity;
 
     /**
      * Create a hero with the given id and name
@@ -61,6 +62,19 @@ public class Snack {
      * @return The description of the snack
      */
     public String getDescription() {return description;}
+
+    /**
+     * Sets the description of the snack - necessary for JSON object to Java object deserialization
+     * @param name The description of the snack
+     */
+    public void setQuantity(Integer quantity) {this.quantity = quantity;}
+
+    /**
+     * Retrieves the quantity of the snack
+     * @return The quantity of the snack
+     */
+    public Integer getQuantity() {return quantity;}
+
 
     /**
      * {@inheritDoc}

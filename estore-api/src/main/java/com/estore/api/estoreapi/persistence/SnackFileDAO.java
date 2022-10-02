@@ -183,11 +183,16 @@ public class SnackFileDAO implements SnackDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Snack updateSnack(Snack snack) throws IOException {
+    public Snack updateSnack(Snack snack, String type, String value) throws IOException {
         synchronized(snacks) {
             if (snacks.containsKey(snack.getId()) == false)
                 return null;  // snack does not exist
-
+            if (type.equals("d")) {
+                snack.setDescription(value);
+            } else if (type.equals("q")) {
+                Integer newQuantity = Integer.parseInt(value);
+                snack.setQuantity(newQuantity);
+            }
             snacks.put(snack.getId(),snack);
             save(); // may throw an IOException
             return snack;

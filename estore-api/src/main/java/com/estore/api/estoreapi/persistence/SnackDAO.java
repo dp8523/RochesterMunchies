@@ -65,7 +65,7 @@ public interface SnackDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Snack updateSnack(Snack snack) throws IOException;
+    Snack updateSnack(Snack snack, String type, String value) throws IOException;
 
     /**
      * Deletes a {@linkplain Snack snack} with the given id
