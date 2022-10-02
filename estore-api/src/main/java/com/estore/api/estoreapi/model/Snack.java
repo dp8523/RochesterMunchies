@@ -8,12 +8,12 @@ public class Snack {
     private static final Logger LOG = Logger.getLogger(Snack.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Snack [id=%d, name=%s, description=%s, quantity=%s, price=%f]";
+    static final String STRING_FORMAT = "Snack [id=%d, name=%s, description=%s, quantity=%d, price=%f]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
     @JsonProperty("description") private String description;
-    @JsonProperty("quantity") private Integer quantity;
+    @JsonProperty("quantity") private int quantity;
     @JsonProperty("price") private double price;
 
     /**
@@ -30,7 +30,7 @@ public class Snack {
      * value, i.e. 0 for int
      */
     public Snack(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("description") String description, 
-                @JsonProperty("quantity") Integer quantity, @JsonProperty("price") double price){
+                @JsonProperty("quantity") int quantity, @JsonProperty("price") double price){
         
         this.id = id;
         this.name = name;
@@ -73,13 +73,13 @@ public class Snack {
      * Sets the description of the snack - necessary for JSON object to Java object deserialization
      * @param name The description of the snack
      */
-    public void setQuantity(Integer quantity) {this.quantity = quantity;}
+    public void setQuantity(int quantity) {this.quantity = quantity;}
 
     /**
      * Retrieves the quantity of the snack
      * @return The quantity of the snack
      */
-    public Integer getQuantity() {return quantity;}
+    public int getQuantity() {return quantity;}
 
     /**
      * Sets the price of the snack - necessary for JSON object to Java object deserialization
