@@ -103,7 +103,7 @@ public class SnackFileDAO implements SnackDAO {
     }
 
     /**
-     * Loads {@linkplain Hero heroes} from the JSON file into the map
+     * Loads {@linkplain Snack snacks} from the JSON file into the map
      * <br>
      * Also sets next id to one more than the greatest id found in the file
      * 
