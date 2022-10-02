@@ -76,8 +76,8 @@ public class EstoreController {
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
-     * Example: Find all heroes that contain the text "ma"
-     * GET http://localhost:8080/heroes/?name=ma
+     * Example: Find all snacks that contain the text "ma"
+     * GET http://localhost:8080/snacks/?name=ma
      */
     @GetMapping("/")
     public ResponseEntity<Snack[]> searchSnacks(@RequestParam String name) {
@@ -92,4 +92,30 @@ public class EstoreController {
         }
     }
 
+    /**
+     * Updates the {@linkplain Snack snack} with the provided {@linkplain Snack snack} object, if it exists
+     * 
+     * @param snack The {@link Snack snack} to update
+     * 
+     * @return ResponseEntity with updated {@link Snack snack} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("")
+    public ResponseEntity<Snack> updateSnack(@RequestBody Snack snack) {
+        LOG.info("PUT /snacks " + snack);
+
+        try {
+            if (snackDao.getSnack(snack.getId()) != null) {
+                Snack theSnack = snackDao.updateSnack(snack);
+                return new ResponseEntity<Snack>(theSnack,HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
