@@ -97,6 +97,8 @@ public class EstoreController {
      * Updates the {@linkplain Snack snack} with the provided {@linkplain Snack snack} object, if it exists
      * 
      * @param snack The {@link Snack snack} to update
+     * @param type The {@link String type} to update
+     * @param value The {@link String value} to update
      * 
      * @return ResponseEntity with updated {@link Snack snack} object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
