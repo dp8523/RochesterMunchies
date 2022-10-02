@@ -190,8 +190,11 @@ public class SnackFileDAO implements SnackDAO {
             if (type.equals("d")) {
                 snack.setDescription(value);
             } else if (type.equals("q")) {
-                Integer newQuantity = Integer.parseInt(value);
+                int newQuantity = Integer.parseInt(value);
                 snack.setQuantity(newQuantity);
+            } else if (type.equals("p")) {
+                double newPrice = Double.parseDouble(value);
+                snack.setPrice(newPrice);
             }
             snacks.put(snack.getId(),snack);
             save(); // may throw an IOException
