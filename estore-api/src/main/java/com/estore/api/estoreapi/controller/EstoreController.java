@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -102,12 +103,12 @@ public class EstoreController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Snack> updateSnack(@RequestBody Snack snack) {
+    public ResponseEntity<Snack> updateSnack(@RequestBody Snack snack, @RequestBody String type, @RequestBody String value) {
         LOG.info("PUT /snacks " + snack);
 
         try {
             if (snackDao.getSnack(snack.getId()) != null) {
-                Snack theSnack = snackDao.updateSnack(snack, null, null);
+                Snack theSnack = snackDao.updateSnack(snack, type, value);
                 return new ResponseEntity<Snack>(theSnack,HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
