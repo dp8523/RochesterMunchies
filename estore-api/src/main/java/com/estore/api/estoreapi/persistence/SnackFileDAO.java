@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
+// import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,7 +17,7 @@ import com.estore.api.estoreapi.model.Snack;
 @Component
 public class SnackFileDAO implements SnackDAO {
 
-    private static final Logger LOG = Logger.getLogger(SnackFileDAO.class.getName());
+    // private static final Logger LOG = Logger.getLogger(SnackFileDAO.class.getName());
     Map<Integer,Snack> snacks;   // Provides a local cache of the snack objects
                                 // so that we don't need to read from the file
                                 // each time
