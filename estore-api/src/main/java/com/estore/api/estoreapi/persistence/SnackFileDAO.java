@@ -21,7 +21,7 @@ public class SnackFileDAO implements SnackDAO {
     Map<Integer,Snack> snacks;   // Provides a local cache of the snack objects
                                 // so that we don't need to read from the file
                                 // each time
-    private ObjectMapper objectMapper;  // Provides conversion between Hero
+    private ObjectMapper objectMapper;  // Provides conversion between Snack
                                         // objects and JSON text format written
                                         // to the file
     private static int nextId;  // The next Id to assign to a new snack
@@ -115,12 +115,12 @@ public class SnackFileDAO implements SnackDAO {
         snacks = new TreeMap<>();
         nextId = 0;
 
-        // Deserializes the JSON objects from the file into an array of heroes
+        // Deserializes the JSON objects from the file into an array of snacks
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
         Snack[] snackArray = objectMapper.readValue(new File(filename),Snack[].class);
 
-        // Add each hero to the tree map and keep track of the greatest id
+        // Add each snack to the tree map and keep track of the greatest id
         for (Snack snack : snackArray) {
             snacks.put(snack.getId(),snack);
             if (snack.getId() > nextId)
@@ -170,7 +170,7 @@ public class SnackFileDAO implements SnackDAO {
     @Override
     public Snack createSnack(Snack snack) throws IOException {
         synchronized(snacks) {
-            // We create a new hero object because the id field is immutable
+            // We create a new snack object because the id field is immutable
             // and we need to assign the next unique id
             Snack newSnack = new Snack(nextId(),snack.getName(), null);
             snacks.put(newSnack.getId(),newSnack);

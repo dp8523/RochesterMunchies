@@ -118,4 +118,53 @@ public class EstoreController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Responds to the GET request for a {@linkplain Snack snack} for the given id
+     * 
+     * @param id The id used to locate the {@link Snack snack}
+     * 
+     * @return ResponseEntity with {@link Snack snack} object and HTTP status of OK if found<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Snack> getSnack(@PathVariable int id) {
+        LOG.info("GET /snacks/" + id);
+        try {
+            Snack snack = snackDao.getSnack(id);
+            if (snack != null)
+                return new ResponseEntity<Snack>(snack,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Deletes a {@linkplain Snack snack} with the given id
+     * 
+     * @param id The id of the {@link Snack snack} to deleted
+     * 
+     * @return ResponseEntity HTTP status of OK if deleted<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Snack> deleteSnack(@PathVariable int id) {
+        LOG.info("DELETE /snacks/" + id);
+        try {
+            if (snackDao.deleteSnack(id)) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
