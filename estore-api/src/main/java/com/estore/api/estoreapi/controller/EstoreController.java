@@ -46,83 +46,6 @@ public class EstoreController {
     }
 
     /**
-     * Creates a {@linkplain Snack snack} with the provided snack object
-     * 
-     * @param snack - The {@link Snack snack} to create
-     * 
-     * @return ResponseEntity with created {@link Snack snack} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Snack snack} object already exists<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     */
-    @PostMapping("")
-    public ResponseEntity<Snack> createSnack(@RequestBody Snack snack) {
-        LOG.info("POST /snacks " + snack);
-        try{
-            Snack s = snackDao.createSnack(snack);
-            return new ResponseEntity<Snack>(s, HttpStatus.OK);
-        }
-        catch (IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }   
-    }
-
-    /**
-     * Responds to the GET request for all {@linkplain Snack snacks} whose name contains
-     * the text in name
-     * 
-     * @param name The name parameter which contains the text used to find the {@link Snack snacks}
-     * 
-     * @return ResponseEntity with array of {@link Snack snack} objects (may be empty) and
-     * HTTP status of OK<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     * <p>
-     * Example: Find all snacks that contain the text "ma"
-     * GET http://localhost:8080/snacks/?name=ma
-     */
-    @GetMapping("/")
-    public ResponseEntity<Snack[]> searchSnacks(@RequestParam String name) {
-        LOG.info("GET /snacks/?name="+name);
-        try {
-            Snack snack[] = snackDao.findSnacks( name );
-            return new ResponseEntity<Snack[]>(snack, HttpStatus.OK);
-        }
-        catch ( IOException e ) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-
-        }
-    }
-
-    /**
-     * Updates the {@linkplain Snack snack} with the provided {@linkplain Snack snack} object, if it exists
-     * 
-     * @param snack The {@link Snack snack} to update
-     * @param type The {@link String type} to update
-     * @param value The {@link String value} to update
-     * 
-     * @return ResponseEntity with updated {@link Snack snack} object and HTTP status of OK if updated<br>
-     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     */
-    @PutMapping("")
-    public ResponseEntity<Snack> updateSnack(@RequestBody Snack snack, @RequestBody String type, @RequestBody String value) {
-        LOG.info("PUT /snacks " + snack);
-
-        try {
-            if (snackDao.getSnack(snack.getId()) != null) {
-                Snack theSnack = snackDao.updateSnack(snack, type, value);
-                return new ResponseEntity<Snack>(theSnack,HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    /**
      * Responds to the GET request for a {@linkplain Snack snack} for the given id
      * 
      * @param id The id used to locate the {@link Snack snack}
@@ -160,6 +83,83 @@ public class EstoreController {
         try {
             Snack[] snackArray = snackDao.getSnacks();
             return new ResponseEntity<Snack[]>(snackArray, HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Responds to the GET request for all {@linkplain Snack snacks} whose name contains
+     * the text in name
+     * 
+     * @param name The name parameter which contains the text used to find the {@link Snack snacks}
+     * 
+     * @return ResponseEntity with array of {@link Snack snack} objects (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * <p>
+     * Example: Find all snacks that contain the text "ma"
+     * GET http://localhost:8080/snacks/?name=ma
+     */
+    @GetMapping("/")
+    public ResponseEntity<Snack[]> searchSnacks(@RequestParam String name) {
+        LOG.info("GET /snacks/?name="+name);
+        try {
+            Snack snack[] = snackDao.findSnacks( name );
+            return new ResponseEntity<Snack[]>(snack, HttpStatus.OK);
+        }
+        catch ( IOException e ) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+    }
+
+    /**
+     * Creates a {@linkplain Snack snack} with the provided snack object
+     * 
+     * @param snack - The {@link Snack snack} to create
+     * 
+     * @return ResponseEntity with created {@link Snack snack} object and HTTP status of CREATED<br>
+     * ResponseEntity with HTTP status of CONFLICT if {@link Snack snack} object already exists<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PostMapping("")
+    public ResponseEntity<Snack> createSnack(@RequestBody Snack snack) {
+        LOG.info("POST /snacks " + snack);
+        try{
+            Snack s = snackDao.createSnack(snack);
+            return new ResponseEntity<Snack>(s, HttpStatus.OK);
+        }
+        catch (IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }   
+    }
+
+    /**
+     * Updates the {@linkplain Snack snack} with the provided {@linkplain Snack snack} object, if it exists
+     * 
+     * @param snack The {@link Snack snack} to update
+     * @param type The {@link String type} to update
+     * @param value The {@link String value} to update
+     * 
+     * @return ResponseEntity with updated {@link Snack snack} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("")
+    public ResponseEntity<Snack> updateSnack(@RequestBody Snack snack, @RequestBody String type, @RequestBody String value) {
+        LOG.info("PUT /snacks " + snack);
+
+        try {
+            if (snackDao.getSnack(snack.getId()) != null) {
+                Snack theSnack = snackDao.updateSnack(snack, type, value);
+                return new ResponseEntity<Snack>(theSnack,HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
