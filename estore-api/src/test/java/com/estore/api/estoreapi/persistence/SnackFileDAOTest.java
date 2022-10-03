@@ -120,7 +120,7 @@ public class SnackFileDAOTest {
         Snack snack = new Snack(99,"Animal Crackers", "Crackers shaped like animals", 12, 8.99);
 
         // Invoke
-        Snack result = assertDoesNotThrow(() -> snackFileDAO.updateSnack(snack, "p", "6"),
+        Snack result = assertDoesNotThrow(() -> snackFileDAO.updateSnack(snack),
                                 "Unexpected exception thrown");
 
         // Analyze
@@ -168,7 +168,7 @@ public class SnackFileDAOTest {
         Snack snack = new Snack(98,"Twix","Chocolate covered, caramel filled, cookie sticks",50,2.99);
 
         // Invoke
-        Snack result = assertDoesNotThrow(() -> snackFileDAO.updateSnack(snack, "p", "9.99"),
+        Snack result = assertDoesNotThrow(() -> snackFileDAO.updateSnack(snack),
                                                 "Unexpected exception thrown");
 
         // Analyze

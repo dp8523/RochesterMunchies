@@ -158,13 +158,30 @@ public class EstoreController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
+    // @PutMapping("")
+    // public ResponseEntity<Snack> updateSnack(@RequestBody Snack snack, @RequestBody String type, @RequestBody String value) {
+    //     LOG.info("PUT /snacks " + snack);
+
+    //     try {
+    //         if (snackDao.getSnack(snack.getId()) != null) {
+    //             Snack theSnack = snackDao.updateSnack(snack, type, value);
+    //             return new ResponseEntity<Snack>(theSnack,HttpStatus.OK);
+    //         } else {
+    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //         }
+    //     }
+    //     catch(IOException e) {
+    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
+    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
     @PutMapping("")
-    public ResponseEntity<Snack> updateSnack(@RequestBody Snack snack, @RequestBody String type, @RequestBody String value) {
+    public ResponseEntity<Snack> updateSnack(@RequestBody Snack snack) {
         LOG.info("PUT /snacks " + snack);
 
         try {
             if (snackDao.getSnack(snack.getId()) != null) {
-                Snack theSnack = snackDao.updateSnack(snack, type, value);
+                Snack theSnack = snackDao.updateSnack(snack);
                 return new ResponseEntity<Snack>(theSnack,HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);

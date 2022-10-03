@@ -8,7 +8,7 @@ public class Snack {
     // private static final Logger LOG = Logger.getLogger(Snack.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Snack [id=%d, name=%s, description=%s, quantity=%i, price=%d]";
+    static final String STRING_FORMAT = "Snack [id=%d, name=%s, description=%s, quantity=%d, price=%f]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
@@ -98,6 +98,6 @@ public class Snack {
      */
     @Override
     public String toString(){
-        return String.format(STRING_FORMAT, id, name, description);
+        return String.format(STRING_FORMAT, id, name, description, quantity, price);
     }
 }

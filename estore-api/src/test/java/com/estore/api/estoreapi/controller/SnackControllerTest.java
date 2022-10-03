@@ -137,12 +137,12 @@ public class SnackControllerTest {
         Snack Snack = new Snack(99,"Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 10, 4.99);
         // when updateSnack is called, return true simulating successful
         // update and save
-        when(mockSnackDAO.updateSnack(Snack, "p","5")).thenReturn(Snack);
-        ResponseEntity<Snack> response = snackController.updateSnack(Snack, "p","5");
+        when(mockSnackDAO.updateSnack(Snack)).thenReturn(Snack);
+        ResponseEntity<Snack> response = snackController.updateSnack(Snack);
         Snack.setName("Oreos");
 
         // Invoke
-        response = snackController.updateSnack(Snack, "p","5");
+        response = snackController.updateSnack(Snack);
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -155,10 +155,10 @@ public class SnackControllerTest {
         Snack Snack = new Snack(99,"Camel Balls", "Extra Sour Bubble Gum Jawbreaker", 5, 9.99);
         // when updateSnack is called, return true simulating successful
         // update and save
-        when(mockSnackDAO.updateSnack(Snack, "p","6")).thenReturn(null);
+        when(mockSnackDAO.updateSnack(Snack)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Snack> response = snackController.updateSnack(Snack, "p","6");
+        ResponseEntity<Snack> response = snackController.updateSnack(Snack);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
@@ -169,10 +169,10 @@ public class SnackControllerTest {
         // Setup
         Snack Snack = new Snack(99,"Camel Balls", "Extra Sour Bubble Gum Jawbreaker", 5, 9.99);
         // When updateSnack is called on the Mock Snack DAO, throw an IOException
-        doThrow(new IOException()).when(mockSnackDAO).updateSnack(Snack, "d","Sour camel balls");
+        doThrow(new IOException()).when(mockSnackDAO).updateSnack(Snack);
 
         // Invoke
-        ResponseEntity<Snack> response = snackController.updateSnack(Snack, "d","Sour camel balls");
+        ResponseEntity<Snack> response = snackController.updateSnack(Snack);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
