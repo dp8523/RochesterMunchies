@@ -172,7 +172,7 @@ public class SnackFileDAO implements SnackDAO {
         synchronized(snacks) {
             // We create a new snack object because the id field is immutable
             // and we need to assign the next unique id
-            Snack newSnack = new Snack(nextId(),snack.getName(), null, 1, 0);
+            Snack newSnack = new Snack(nextId(),snack.getName(), snack.getDescription(), snack.getQuantity(), snack.getPrice());
             snacks.put(newSnack.getId(),newSnack);
             save(); // may throw an IOException
             return newSnack;
