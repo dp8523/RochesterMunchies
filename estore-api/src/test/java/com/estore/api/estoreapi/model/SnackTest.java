@@ -1,7 +1,7 @@
 package com.estore.api.estoreapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.description;
+// import static org.mockito.Mockito.description;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
