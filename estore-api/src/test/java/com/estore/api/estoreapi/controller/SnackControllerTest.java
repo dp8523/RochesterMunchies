@@ -22,7 +22,7 @@ import org.springframework.http.ResponseEntity;
  * @author SWEN Faculty
  */
 @Tag("Controller-tier")
-public class EstoreControllerTest {
+public class SnackControllerTest {
     private EstoreController snackController;
     private SnackDAO mockSnackDAO;
 
