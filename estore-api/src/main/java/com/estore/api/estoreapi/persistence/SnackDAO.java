@@ -4,14 +4,14 @@ import java.io.IOException;
 import com.estore.api.estoreapi.model.Snack;
 
 /**
- * Defines the interface for Hero object persistence
+ * Defines the interface for Snack object persistence
  */
 public interface SnackDAO {
     
     /**
-     * Retrieves all {@linkplain Hero heroes}
+     * Retrieves all {@linkplain Snack snacks}
      * 
-     * @return An array of {@link Hero hero} objects, may be empty
+     * @return An array of {@link Snack snack} objects, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
