@@ -78,7 +78,7 @@ public class EstoreController {
      */
     @GetMapping("")
     public ResponseEntity<Snack[]> getSnacks() {
-        LOG.info("GET /heroes");
+        LOG.info("GET /snacks");
         try {
             Snack[] snackArray = snackDao.getSnacks();
             return new ResponseEntity<Snack[]>(snackArray, HttpStatus.OK);
