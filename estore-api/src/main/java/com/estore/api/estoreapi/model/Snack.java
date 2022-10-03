@@ -8,7 +8,7 @@ public class Snack {
     // private static final Logger LOG = Logger.getLogger(Snack.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Snack [id=%d, name=%s, description=%s, quantity=%d, price=%f]";
+    static final String STRING_FORMAT = "Snack [id=%d, name=%s, description=%s, quantity=%i, price=%d]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;

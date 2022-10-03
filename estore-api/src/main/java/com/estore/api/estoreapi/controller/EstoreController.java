@@ -130,11 +130,18 @@ public class EstoreController {
     @PostMapping("")
     public ResponseEntity<Snack> createSnack(@RequestBody Snack snack) {
         LOG.info("POST /snacks " + snack);
+
         try{
-            Snack s = snackDao.createSnack(snack);
-            return new ResponseEntity<Snack>(s, HttpStatus.OK);
+            Snack newSnack = snackDao.createSnack(snack);
+
+            if (newSnack != null) {
+                return new ResponseEntity<Snack>(newSnack, HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
-        catch (IOException e) {
+        catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }   
@@ -160,7 +167,6 @@ public class EstoreController {
                 Snack theSnack = snackDao.updateSnack(snack, type, value);
                 return new ResponseEntity<Snack>(theSnack,HttpStatus.OK);
             } else {
-                LOG.info(snack + " NOT PUT");
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }
@@ -184,7 +190,7 @@ public class EstoreController {
         LOG.info("DELETE /snacks/" + id);
         try {
             if (snackDao.deleteSnack(id)) {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<Snack>(HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
