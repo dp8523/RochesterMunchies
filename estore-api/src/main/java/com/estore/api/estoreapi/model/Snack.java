@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Snack {
-    private static final Logger LOG = Logger.getLogger(Snack.class.getName());
+    // private static final Logger LOG = Logger.getLogger(Snack.class.getName());
 
     // Package private for tests
     static final String STRING_FORMAT = "Snack [id=%d, name=%s, description=%s, quantity=%d, price=%f]";
