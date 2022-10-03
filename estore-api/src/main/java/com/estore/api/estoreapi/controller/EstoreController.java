@@ -106,7 +106,6 @@ public class EstoreController {
     public ResponseEntity<Snack[]> searchSnacks(@RequestParam String name) {
         LOG.info("GET /snacks/?name="+name);
 
-
         try {
             Snack[] snackArray = snackDao.findSnacks(name);
             return new ResponseEntity<Snack[]>(snackArray, HttpStatus.OK);
