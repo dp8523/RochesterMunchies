@@ -1,0 +1,37 @@
+[
+    {
+        "id":11,
+        "name":"Camel Balls",
+        "description":"Extra Sour Bubble Gum Jawbreaker",
+        "quantitiy":"5",
+        "price":"9.99"
+    },
+    {
+        "id":12,
+        "name":"Haribo Coca-Cola Gummies",
+        "description":"Coca-cola flavored gummies in coca-cola bottle shapes",
+        "quantitiy":"10",
+        "price":"4.99"
+    },
+    {
+        "id":11,
+        "name":"Oreos",
+        "description":"Chocolate creme sandwich cookies",
+        "quantitiy":"5",
+        "price":"9.99"
+    },
+    {
+        "id":11,
+        "name":"Animal Crackers",
+        "description":"Crackers shaped like animals",
+        "quantitiy":"12",
+        "price":"8.99"
+    },
+    {
+        "id":11,
+        "name":"Twix",
+        "description":"Chocolate covered, caramel filled, cookie sticks",
+        "quantitiy":"50",
+        "price":"2.99"
+    }
+ ]
