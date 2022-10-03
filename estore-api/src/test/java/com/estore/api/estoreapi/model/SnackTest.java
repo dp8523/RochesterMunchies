@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  * @author SWEN Faculty
  */
 @Tag("Model-tier")
-public class HeroTest {
+public class SnackTest {
     @Test
     public void testCtor() {
         // Setup
