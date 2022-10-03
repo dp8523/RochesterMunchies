@@ -40,9 +40,9 @@ public class SnackFileDAOTest {
     public void setupSnackFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testSnacks = new Snack[3];
-        testSnacks[0] = new Snack(99,"Wi-Fire");
-        testSnacks[1] = new Snack(100,"Galactic Agent");
-        testSnacks[2] = new Snack(101,"Ice Gladiator");
+        testSnacks[0] = new Snack(99,"Animal Crackers", "Crackers shaped like animals", 12, 8.99);
+        testSnacks[1] = new Snack(100,"Camel Balls", "Extra Sour Bubble Gum Jawbreaker", 5, 9.99);
+        testSnacks[2] = new Snack(101,"Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 10, 4.99);
 
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the hero array above
@@ -101,7 +101,7 @@ public class SnackFileDAOTest {
     @Test
     public void testCreateSnack() {
         // Setup
-        Snack snack = new Snack(102,"Wonder-Person");
+        Snack snack = new Snack(102,"Oreos", "Chocolate creme sandwich cookies", 20,  2.99);
 
         // Invoke
         Snack result = assertDoesNotThrow(() -> snackFileDAO.createSnack(snack),
@@ -117,10 +117,10 @@ public class SnackFileDAOTest {
     @Test
     public void testUpdateSnack() {
         // Setup
-        Snack snack = new Snack(99,"Galactic Agent");
+        Snack snack = new Snack(99,"Animal Crackers", "Crackers shaped like animals", 12, 8.99);
 
         // Invoke
-        Snack result = assertDoesNotThrow(() -> snackFileDAO.updateSnack(snack),
+        Snack result = assertDoesNotThrow(() -> snackFileDAO.updateSnack(snack, "p", "6"),
                                 "Unexpected exception thrown");
 
         // Analyze
@@ -135,7 +135,7 @@ public class SnackFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(Snack[].class));
 
-        Snack hero = new Snack(102,"Wi-Fire");
+        Snack hero = new Snack(102,"Animal Crackers", "Crackers shaped like animals", 12, 8.99);
 
         assertThrows(IOException.class,
                         () -> snackFileDAO.createSnack(hero),
@@ -165,10 +165,10 @@ public class SnackFileDAOTest {
     @Test
     public void testUpdateSnackNotFound() {
         // Setup
-        Snack snack = new Snack(98,"Bolt");
+        Snack snack = new Snack(98,"Twix","Chocolate covered, caramel filled, cookie sticks",50,2.99);
 
         // Invoke
-        Snack result = assertDoesNotThrow(() -> snackFileDAO.updateSnack(snack),
+        Snack result = assertDoesNotThrow(() -> snackFileDAO.updateSnack(snack, "p", "9.99"),
                                                 "Unexpected exception thrown");
 
         // Analyze
