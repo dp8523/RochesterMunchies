@@ -105,11 +105,14 @@ public class EstoreController {
     @GetMapping("/")
     public ResponseEntity<Snack[]> searchSnacks(@RequestParam String name) {
         LOG.info("GET /snacks/?name="+name);
+
+
         try {
-            Snack snack[] = snackDao.findSnacks( name );
-            return new ResponseEntity<Snack[]>(snack, HttpStatus.OK);
+            Snack[] snackArray = snackDao.findSnacks(name);
+            return new ResponseEntity<Snack[]>(snackArray, HttpStatus.OK);
         }
         catch ( IOException e ) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
@@ -157,6 +160,7 @@ public class EstoreController {
                 Snack theSnack = snackDao.updateSnack(snack, type, value);
                 return new ResponseEntity<Snack>(theSnack,HttpStatus.OK);
             } else {
+                LOG.info(snack + " NOT PUT");
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }

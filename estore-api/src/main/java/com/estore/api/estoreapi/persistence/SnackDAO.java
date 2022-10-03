@@ -67,6 +67,7 @@ public interface SnackDAO {
      */
     Snack updateSnack(Snack snack, String type, String value) throws IOException;
 
+
     /**
      * Deletes a {@linkplain Snack snack} with the given id
      * 
