@@ -1,1 +1,13 @@
 <h2>Inventory</h2>
+
+<ul class="Inventory">
+    <li>
+        <button [class.selected]="snack == selectedSnack" type="button" (click)="onSelect(snack)">
+            <span class="id">{{snack.id}} </span>
+            <span class="name">{{snack.name}}</span>
+        </button>
+    </li>
+</ul>
+
+<app-snack-detail [snack]="selectedSnack"></app-snack-detail>
+
