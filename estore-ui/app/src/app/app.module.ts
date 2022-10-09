@@ -8,12 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { SnackDetailComponent } from './snack-detail/snack-detail.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { SnackSearchComponent } from './snack-search/snack-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InventoryComponent,
-    SnackDetailComponent
+    SnackDetailComponent,
+    SnackSearchComponent
   ],
   imports: [
     BrowserModule,

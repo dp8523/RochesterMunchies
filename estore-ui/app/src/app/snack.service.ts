@@ -28,6 +28,18 @@ export class SnackService {
     .pipe(catchError(this.handleError<Snack>(`getSnack id=${id}`)));
   }
 
+  //GET snacks whose name contains search item
+  searchSnacks(term: string): Observable<Snack[]> {
+    if(!term.trim()) {
+      return of([]);
+    }
+    return this.http.get<Snack[]>(`${this.snacksURL}/?name=${term}`).pipe(
+      catchError(this.handleError<Snack[]>('searchSnacks', []))
+    );
+  }
+
+  ///////////// Save Methods /////////////////
+
   // POST: add a new snack to the server
   addSnack(snack: Snack): Observable<Snack> {
     return this.http.post<Snack>(this.snacksURL, snack, this.httpOptions)

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Snack } from '../Snack';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -11,7 +11,7 @@ import { SnackService } from '../snack.service';
 })
 export class SnackDetailComponent implements OnInit {
 
-  @Input() snack?: Snack;
+  snack: Snack | undefined;
 
   constructor(
     private route: ActivatedRoute,
