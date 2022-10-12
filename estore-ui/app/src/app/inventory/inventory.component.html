@@ -1,13 +1,9 @@
 <h2>Inventory</h2>
 
 <ul class="Inventory">
-    <li>
-        <button [class.selected]="snack == selectedSnack" type="button" (click)="onSelect(snack)">
-            <span class="id">{{snack.id}} </span>
-            <span class="name">{{snack.name}}</span>
-        </button>
+    <li *ngFor="let snack of snacks">
+        <a routerLink="/detail/{{snack.id}}">
+            <span class="badge">{{snack.id}}</span> {{snack.name}}
+        </a>
     </li>
 </ul>
-
-<app-snack-detail [snack]="selectedSnack"></app-snack-detail>
-
