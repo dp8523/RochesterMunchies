@@ -8,17 +8,8 @@ import { SnackService } from '../snack.service';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
-
-  snack: Snack = {
-    id: 1,
-    name: 'Oreos',
-    description: 'Cream cookies',
-    price: 5.99
-  };
   
   snacks: Snack[] = [];
-
-  selectedSnack?: Snack;
 
   constructor(
     private snackService: SnackService
@@ -28,11 +19,9 @@ export class InventoryComponent implements OnInit {
     this.getSnacks();
   }
 
-  onSelect(snack: Snack): void {
-    this.selectedSnack = snack;
-  }
-
   getSnacks(): void {
     this.snackService.getSnacks().subscribe(snacks => this.snacks = snacks);
   }
+
+  
 }
