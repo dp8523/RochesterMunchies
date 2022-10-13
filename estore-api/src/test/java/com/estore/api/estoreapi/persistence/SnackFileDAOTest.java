@@ -74,6 +74,7 @@ public class SnackFileDAOTest {
         assertEquals(heroes[1],testSnacks[2]);
     }
 
+    
     @Test
     public void testGetSnack() {
         // Invoke
