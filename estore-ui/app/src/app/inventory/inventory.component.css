@@ -9,14 +9,13 @@
 
 .Inventory a {
 
-    box-shadow: 2px 2px gray;
     padding: 1rem;
     text-decoration: none;
     margin-top: 10px;
     display: inline-block;
     background-color: #e8e8e8;
     color: #3d3d3d;
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
 .Inventory a:hover {
@@ -29,6 +28,12 @@
 
 .badge {
     display: inline-block;
-    padding: 0.8em 0.7em 0 0.7em;
+    
     color: black;
+}
+
+.button {
+    background-color: red;
+    padding: 15px;
+    border-radius: 5px;
 }
