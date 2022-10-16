@@ -1,0 +1,43 @@
+commit 106b7261d207927d2a0bcb334788cacea4a85760
+Merge: d83927f 02cda71
+Author: Jaden Seaton <jis6849@rit.edu>
+Date:   Mon Sep 19 19:45:17 2022 -0400
+
+    name add
+
+commit d83927f551c5f467591512c273f5fd2d444675da
+Author: Jaden Seaton <jis6849@rit.edu>
+Date:   Mon Sep 19 19:44:00 2022 -0400
+
+    comment
+
+commit 02cda71221d788e50f30aef5041aef09a859c1ce
+Merge: 59155ba d58c52b
+Author: Robert Huang <rh5661@rit.edu>
+Date:   Mon Sep 19 19:42:28 2022 -0400
+
+    names
+
+commit 59155ba172eea14530103ac1ed2e3180416683e5
+Author: Robert Huang <rh5661@rit.edu>
+Date:   Mon Sep 19 19:41:48 2022 -0400
+
+    names
+
+commit d58c52b6b1efa5f94368fe9f509f0cecf62e0efc
+Author: Lucie Lim <ll5880@g.rit.edu>
+Date:   Mon Sep 19 19:41:09 2022 -0400
+
+    wrote names
+
+commit d87fb6d810142b40814d94abf600d5f9c4dc8f20
+Author: dp8523 <dp8523@g.rit.edu>
+Date:   Mon Sep 19 19:36:00 2022 -0400
+
+    added my name: Dara Prak
+
+commit 40bed33908213372f991174e0c2299ef66babdd9
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Mon Sep 19 23:23:25 2022 +0000
+
+    Initial commit

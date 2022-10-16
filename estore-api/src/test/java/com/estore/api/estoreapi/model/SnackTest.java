@@ -57,7 +57,7 @@ public class SnackTest {
         String description = "Extra Sour Bubble Gum Jawbreaker";
         int quantity = 5;
         double price = 9.99;
-        String expected_string = String.format(Snack.STRING_FORMAT,id,name);
+        String expected_string = String.format(Snack.STRING_FORMAT,id,name,description,quantity,price);
         Snack snack = new Snack(id,name,description,quantity,price);
 
         // Invoke
