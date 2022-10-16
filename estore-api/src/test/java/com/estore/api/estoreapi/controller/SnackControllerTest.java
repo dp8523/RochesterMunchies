@@ -84,7 +84,7 @@ public class SnackControllerTest {
      * The following tests will fail until all SnackController methods
      * are implemented.
      ****************************************************************/
-
+    
     @Test
     public void testCreateSnack() throws IOException {  // createSnack may throw IOException
         // Setup
@@ -100,7 +100,7 @@ public class SnackControllerTest {
         assertEquals(HttpStatus.CREATED,response.getStatusCode());
         assertEquals(Snack,response.getBody());
     }
-
+    
     @Test
     public void testCreateSnackFailed() throws IOException {  // createSnack may throw IOException
         // Setup
@@ -116,6 +116,7 @@ public class SnackControllerTest {
         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
     }
 
+    
     @Test
     public void testCreateSnackHandleException() throws IOException {  // createSnack may throw IOException
         // Setup

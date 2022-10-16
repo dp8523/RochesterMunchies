@@ -63,6 +63,7 @@ public class SnackFileDAOTest {
             assertEquals(snackList[i],testSnacks[i]);
     }
 
+    
     @Test
     public void testFindSnacks() {
         // Invoke
@@ -73,7 +74,7 @@ public class SnackFileDAOTest {
         assertEquals(snacks[0],testSnacks[1]);
         assertEquals(snacks[1],testSnacks[2]);
     }
-    
+
     @Test
     public void testGetSnack() {
         // Invoke

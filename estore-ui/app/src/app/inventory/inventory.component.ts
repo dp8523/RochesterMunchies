@@ -23,5 +23,19 @@ export class InventoryComponent implements OnInit {
     this.snackService.getSnacks().subscribe(snacks => this.snacks = snacks);
   }
 
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.snackService.addSnack({ name } as Snack)
+    .subscribe(snack => {
+      this.snacks.push(snack);
+    })
+  }
+
+  delete(snack: Snack): void {
+    this.snacks = this.snacks.filter(s => s !== snack);
+    this.snackService.deleteSnack(snack.id).subscribe();
+  }
+
   
 }
