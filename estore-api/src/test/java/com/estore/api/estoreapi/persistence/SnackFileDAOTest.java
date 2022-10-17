@@ -67,7 +67,7 @@ public class SnackFileDAOTest {
     @Test
     public void testFindSnacks() {
         // Invoke
-        Snack[] snacks = SnackFileDAO.findSnacks("la");
+        Snack[] snacks = snackFileDAO.findSnacks("la");
 
         // Analyze
         assertEquals(snacks.length,2);
