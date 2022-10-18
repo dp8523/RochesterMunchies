@@ -53,6 +53,69 @@ public class SnackFileDAOTest {
     }
 
     @Test
+    public void testGetSnacks() {
+        // Invoke
+        Snack[] snackList = snackFileDAO.getSnacks();
+
+        // Analyze
+        assertEquals(snackList.length,testSnacks.length);
+        for (int i = 0; i < testSnacks.length;++i)
+            assertEquals(snackList[i],testSnacks[i]);
+    }
+
+    
+    @Test
+    public void testFindSnacks() {
+        // Invoke
+        Snack[] snacks = snackFileDAO.findSnacks("la");
+
+        // Analyze
+        assertEquals(snacks.length,2);
+        assertEquals(snacks[0],testSnacks[1]);
+        assertEquals(snacks[1],testSnacks[2]);
+    }
+
+    @Test
+    public void testGetSnack() {
+        // Invoke
+        Snack hero = snackFileDAO.getSnack(99);
+
+        // Analzye
+        assertEquals(hero,testSnacks[0]);
+    }
+
+    @Test
+    public void testDeleteSnack() {
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> snackFileDAO.deleteSnack(99),
+                            "Unexpected exception thrown");
+
+        // Analzye
+        assertEquals(result,true);
+        // We check the internal tree map size against the length
+        // of the test heroes array - 1 (because of the delete)
+        // Because heroes attribute of HeroFileDAO is package private
+        // we can access it directly
+        assertEquals(snackFileDAO.snacks.size(),testSnacks.length-1);
+    }
+
+    @Test
+    public void testCreateSnack() {
+        // Setup
+        Snack snack = new Snack(102,"Oreos", "Chocolate creme sandwich cookies", 20,  2.99);
+
+        // Invoke
+        Snack result = assertDoesNotThrow(() -> snackFileDAO.createSnack(snack),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertNotNull(result);
+        Snack actual = snackFileDAO.getSnack(snack.getId());
+        assertEquals(actual.getId(),snack.getId());
+        assertEquals(actual.getName(),snack.getName());
+    }
+
+    @Test
     public void testUpdateSnack() {
         /**
          * tests the updateSnack method with snack that exists
