@@ -1,0 +1,39 @@
+.Inventory li {
+    
+    list-style: none;
+    padding: 10px;
+    cursor: pointer;
+    background-color: white;
+    position: relative;
+}
+
+.Inventory a {
+
+    padding: 1rem;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #e8e8e8;
+    color: #3d3d3d;
+    border-radius: 5px;
+}
+
+.Inventory a:hover {
+    background-color: rgb(221, 221, 221);
+}
+
+.Inventory a:link {
+    text-decoration: none;
+}
+
+.badge {
+    display: inline-block;
+    
+    color: black;
+}
+
+.button {
+    background-color: red;
+    padding: 15px;
+    border-radius: 5px;
+}

@@ -55,23 +55,24 @@ public class SnackFileDAOTest {
     @Test
     public void testGetSnacks() {
         // Invoke
-        Snack[] heroes = snackFileDAO.getSnacks();
+        Snack[] snackList = snackFileDAO.getSnacks();
 
         // Analyze
-        assertEquals(heroes.length,testSnacks.length);
+        assertEquals(snackList.length,testSnacks.length);
         for (int i = 0; i < testSnacks.length;++i)
-            assertEquals(heroes[i],testSnacks[i]);
+            assertEquals(snackList[i],testSnacks[i]);
     }
 
+    
     @Test
     public void testFindSnacks() {
         // Invoke
-        Snack[] heroes = snackFileDAO.findSnacks("la");
+        Snack[] snacks = snackFileDAO.findSnacks("la");
 
         // Analyze
-        assertEquals(heroes.length,2);
-        assertEquals(heroes[0],testSnacks[1]);
-        assertEquals(heroes[1],testSnacks[2]);
+        assertEquals(snacks.length,2);
+        assertEquals(snacks[0],testSnacks[1]);
+        assertEquals(snacks[1],testSnacks[2]);
     }
 
     @Test

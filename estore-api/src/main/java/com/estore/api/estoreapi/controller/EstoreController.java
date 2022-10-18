@@ -134,10 +134,10 @@ public class EstoreController {
             Snack newSnack = snackDao.createSnack(snack);
 
             if (newSnack != null) {
-                return new ResponseEntity<Snack>(newSnack, HttpStatus.OK);
+                return new ResponseEntity<Snack>(newSnack, HttpStatus.CREATED);
             }
             else {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         }
         catch(IOException e) {

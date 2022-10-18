@@ -1,0 +1,30 @@
+<div class="total" *ngIf="snack">
+
+    <h2>{{snack.name}} Details </h2>
+    <div class="list">
+        <li>
+            <span class="id">id: </span>{{snack.id}}
+        </li>
+        <li>
+            <label class="label" for="snack-name"> Snack Name: </label>
+            <input class="input" id="snack-name" [(ngModel)]="snack.name" placeholder="name">
+        </li>
+        <li>
+            <label class="label" for="snack-description">Snack description: </label>
+            <input class="input" id="snack-description" [(ngModel)]="snack.description" placeholder="description">
+        </li>
+        <li>
+            <label class="label" for="snack-quantity">Snack quantity: </label>
+            <input class="input" id="snack-quantity" [(ngModel)]="snack.quantity" placeholder="quantity">
+        </li>
+        <li>
+            <label class="label" for="snack-price">Snack Price: </label>
+            <input class="input" id="snack-price" [(ngModel)]="snack.price" placeholder="price">
+        </li>  
+    </div>
+    <div class="buttons">
+        <button class="back" type="button" (click)="goBack()">Go Back</button>
+        <button class="save" type="button" (click)="save()">Save</button>
+    </div>
+
+</div>
