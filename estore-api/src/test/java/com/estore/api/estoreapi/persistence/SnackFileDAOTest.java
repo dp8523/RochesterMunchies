@@ -71,8 +71,7 @@ public class SnackFileDAOTest {
 
         // Analyze
         assertEquals(snacks.length,1);
-        assertEquals(snacks[0],testSnacks[1]);
-        assertEquals(snacks[1],testSnacks[2]);
+        assertEquals(snacks[0],testSnacks[2]);
     }
 
     @Test
