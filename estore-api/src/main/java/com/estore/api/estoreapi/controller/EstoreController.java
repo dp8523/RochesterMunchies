@@ -179,11 +179,13 @@ public class EstoreController {
         LOG.info("PUT /snacks " + snack);
 
         try {
-            if (snackDao.getSnack(snack.getId()) != null) {
-                Snack theSnack = snackDao.updateSnack(snack);
-                return new ResponseEntity<Snack>(theSnack,HttpStatus.OK);
-            } else {
+            Snack newSnack = snackDao.updateSnack(snack);
+
+            if (newSnack == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else {
+                return new ResponseEntity<Snack>(newSnack, HttpStatus.OK);
             }
         }
         catch(IOException e) {
