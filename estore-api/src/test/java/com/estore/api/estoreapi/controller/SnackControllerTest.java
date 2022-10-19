@@ -135,7 +135,7 @@ public class SnackControllerTest {
     @Test
     public void testUpdateSnack() throws IOException { // updateSnack may throw IOException
         // Setup
-        Snack Snack = new Snack(99,"Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 10, 4.99);
+        Snack Snack = new Snack(12,"Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 10, 4.99);
         // when updateSnack is called, return true simulating successful
         // update and save
         when(mockSnackDAO.updateSnack(Snack)).thenReturn(Snack);
