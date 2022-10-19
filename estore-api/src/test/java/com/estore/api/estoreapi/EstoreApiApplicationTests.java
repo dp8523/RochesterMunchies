@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class EstoreApiApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void testContextLoads() {
 	}
 
 }
