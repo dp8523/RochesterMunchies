@@ -70,7 +70,7 @@ public class SnackFileDAOTest {
         Snack[] snacks = snackFileDAO.findSnacks("la");
 
         // Analyze
-        assertEquals(snacks.length,2);
+        assertEquals(snacks.length,1);
         assertEquals(snacks[0],testSnacks[1]);
         assertEquals(snacks[1],testSnacks[2]);
     }
