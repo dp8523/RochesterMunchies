@@ -10,7 +10,13 @@ import { SnackService } from '../snack.service';
 export class InventoryComponent implements OnInit {
   
   snacks: Snack[] = [];
-  snack: Snack | undefined;
+  snack: Snack = {
+      id: 1,
+      name: "Oreos",
+      description: "Cream cookies",
+      quantity: 5,
+      price: 3.99   
+  };
 
   constructor(
     private snackService: SnackService
@@ -25,13 +31,12 @@ export class InventoryComponent implements OnInit {
   }
 
   add(name: string, description: string, quantity: string, price: string): void {
-    this.snack = {
-      id: 1,
-      name: name.trim(),
-      description: description.trim(),
-      quantity: +quantity,
-      price: +price 
-    };
+  
+    this.snack.name = name.trim();
+    this.snack.description = description.trim();
+    this.snack.quantity = +quantity;
+    this.snack.price = +price;
+
     
     /*
     name = name.trim();
@@ -42,6 +47,7 @@ export class InventoryComponent implements OnInit {
     */
     if (!name && !description && !quantity && !price) { return; }
     
+    console.log(this.snack);
     this.snackService.addSnack(this.snack)
     .subscribe(snack => {
       this.snacks.push(snack);

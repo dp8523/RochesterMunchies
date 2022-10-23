@@ -10,7 +10,7 @@ export class SnackService {
   private snacksURL = 'http://localhost:8080/snacks'
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'applications/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'applications/json; charset=utf-8' })
   };
 
   constructor( private http: HttpClient) { }
