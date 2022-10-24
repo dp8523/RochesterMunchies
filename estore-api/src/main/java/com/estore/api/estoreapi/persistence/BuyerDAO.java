@@ -46,5 +46,5 @@ public interface BuyerDAO {
      */
     boolean deleteBuyer(String username) throws IOException;
 
-    boolean addItem(int snackID, String username) throws IOException;
+    Buyer updateCart(Buyer buyer) throws IOException;
 }

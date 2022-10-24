@@ -123,4 +123,24 @@ public class BuyerController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("")
+    public ResponseEntity<Buyer> updateCart(@RequestBody Buyer buyer) {
+        LOG.info("PUT /buyers " + buyer);
+
+        try {
+            Buyer newBuyer = buyerDao.updateCart(buyer);
+
+            if (newBuyer == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else {
+                return new ResponseEntity<Buyer>(newBuyer, HttpStatus.OK);
+            }
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

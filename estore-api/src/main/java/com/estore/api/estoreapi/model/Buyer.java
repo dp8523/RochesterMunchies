@@ -40,15 +40,6 @@ public class Buyer {
         return cart;
     }
 
-    public int addToCart(@JsonProperty("id") int snackID) {
-        if(this.cart.addItemToCart(snackID)) {
-            return snackID;
-        }
-        else {
-            return -1;
-        }
-    }
-
     /**
      * {@inheritDoc}
      */
