@@ -35,7 +35,7 @@ public class Buyer {
      * @return The username of the Buyer
      */
     public String getName() {return username;}
-    
+
     public int addToCart(@JsonProperty("id") int snackID) {
         if (this.cart.addItemToCart(snackID)) {
             return snackID;
@@ -54,31 +54,31 @@ public class Buyer {
     /**
      * {@inheritDoc}
      */
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((username == null) ? 0 : username.hashCode());
-        return result;
-    }
+    // @Override
+    // public int hashCode() {
+    //     final int prime = 31;
+    //     int result = 1;
+    //     result = prime * result + ((username == null) ? 0 : username.hashCode());
+    //     return result;
+    // }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Buyer other = (Buyer) obj;
-        if (username == null) {
-            if (other.username != null)
-                return false;
-        } else if (!username.equals(other.username))
-            return false;
-        return true;
-    }
+    // /**
+    //  * {@inheritDoc}
+    //  */
+    // @Override
+    // public boolean equals(Object obj) {
+    //     if (this == obj)
+    //         return true;
+    //     if (obj == null)
+    //         return false;
+    //     if (getClass() != obj.getClass())
+    //         return false;
+    //     Buyer other = (Buyer) obj;
+    //     if (username == null) {
+    //         if (other.username != null)
+    //             return false;
+    //     } else if (!username.equals(other.username))
+    //         return false;
+    //     return true;
+    // }
 }
