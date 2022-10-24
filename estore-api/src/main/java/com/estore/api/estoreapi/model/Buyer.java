@@ -41,10 +41,12 @@ public class Buyer {
     }
 
     public int addToCart(@JsonProperty("id") int snackID) {
-        if (this.cart.addItemToCart(snackID)) {
+        if(this.cart.addItemToCart(snackID)) {
             return snackID;
         }
-        return 0;
+        else {
+            return -1;
+        }
     }
 
     /**
