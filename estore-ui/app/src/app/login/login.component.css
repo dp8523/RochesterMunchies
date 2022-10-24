@@ -1,0 +1,47 @@
+.total {
+    background-color: lightblue;
+    padding: 5px;
+}
+
+.customer-login {
+    list-style: none;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    background-color: aliceblue;
+}
+
+.owner-login {
+    list-style: none;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    background-color: aliceblue;
+}
+
+.register {
+    list-style: none;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    background-color: aliceblue;
+}
+
+.input {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.label {
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+
+.button {
+    
+}
