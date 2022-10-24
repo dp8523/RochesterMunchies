@@ -1,0 +1,15 @@
+[
+    {
+        "username": "adam",
+        "shoppingcart": [
+            {
+                "id": 12,
+                "quantity": 5
+            },
+            {
+                "id": 13,
+                "quantity": 2
+            }
+        ]
+    }
+]

@@ -4,12 +4,14 @@ import { BuyerInventoryComponent } from './buyer-inventory/buyer-inventory.compo
 import { BuyerSnackDetailComponent } from './buyer-snack-detail/buyer-snack-detail.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { SnackDetailComponent } from './snack-detail/snack-detail.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   {path: 'buyer_detail/:id', component: BuyerSnackDetailComponent},
   {path: 'buyer_inventory', component: BuyerInventoryComponent},
   {path: 'detail/:id', component: SnackDetailComponent},
   {path: 'inventory', component: InventoryComponent},
+  {path: 'shopping_cart', component: ShoppingCartComponent}
 ]
 
 @NgModule({
