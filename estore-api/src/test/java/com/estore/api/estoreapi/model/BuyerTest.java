@@ -22,7 +22,7 @@ public class BuyerTest {
         Buyer buyer = new Buyer(expectedUsername);
 
         // Analyze
-        assertEquals(expectedUsername,buyer.getName());
+        assertEquals(expectedUsername,buyer.retrieveUsername());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class BuyerTest {
         buyer.setName(expectedUsername);
 
         // Analyze
-        assertEquals(expectedUsername,buyer.getName());
+        assertEquals(expectedUsername,buyer.retrieveUsername());
     }
 
     @Test
