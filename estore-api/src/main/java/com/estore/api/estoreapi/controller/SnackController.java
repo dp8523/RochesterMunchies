@@ -29,8 +29,8 @@ import com.estore.api.estoreapi.model.Snack;
 
 @RestController
 @RequestMapping("snacks")
-public class EstoreController {
-    private static final Logger LOG = Logger.getLogger(EstoreController.class.getName());
+public class SnackController {
+    private static final Logger LOG = Logger.getLogger(SnackController.class.getName());
     private SnackDAO snackDao;
 
     /**
@@ -40,7 +40,7 @@ public class EstoreController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public EstoreController(SnackDAO snackDao) {
+    public SnackController(SnackDAO snackDao) {
         this.snackDao = snackDao;
     }
 
