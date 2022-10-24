@@ -52,7 +52,7 @@ public class Buyer {
      */
     @Override
     public String toString(){
-        return String.format(STRING_FORMAT, username, cart.toString());
+        return String.format(STRING_FORMAT, username, cart);
     }
 
     /**
