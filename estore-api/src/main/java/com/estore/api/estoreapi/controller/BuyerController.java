@@ -85,11 +85,12 @@ public class BuyerController {
 
         try{
             String result = buyerDao.login(username);
-            if (result.equals("admin") || result.equals("invalid")) {
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
-            } else {
+            if (!result.equals("admin") && result.equals("invalid")) {
                 Buyer buyer = buyerDao.createBuyer(username);
                 return new ResponseEntity<Buyer>(buyer, HttpStatus.CREATED);
+                
+            } else {
+                return new ResponseEntity<Buyer>(HttpStatus.CONFLICT);
             }
         }
         catch(IOException e) {
