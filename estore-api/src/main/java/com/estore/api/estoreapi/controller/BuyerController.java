@@ -51,7 +51,7 @@ public class BuyerController {
      */
     @GetMapping("/{username}")
     public ResponseEntity<Boolean> buyerExists(@PathVariable String username) {
-        LOG.info("buyers/" + username);
+        LOG.info("GET buyers/" + username);
 
         try{
             boolean result = buyerDao.buyerExists(username);
