@@ -21,9 +21,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test the Hero File DAO class
- * 
- * @author SWEN Faculty
+ * Test the Snack File DAO class
  */
 @Tag("Persistence-tier")
 public class SnackFileDAOTest {
@@ -45,7 +43,7 @@ public class SnackFileDAOTest {
         testSnacks[2] = new Snack(101,"Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 10, 4.99);
 
         // When the object mapper is supposed to read from the file
-        // the mock object mapper will return the hero array above
+        // the mock object mapper will return the snack array above
         when(mockObjectMapper
             .readValue(new File("doesnt_matter.txt"),Snack[].class))
                 .thenReturn(testSnacks);
@@ -77,10 +75,10 @@ public class SnackFileDAOTest {
     @Test
     public void testGetSnack() {
         // Invoke
-        Snack hero = snackFileDAO.getSnack(99);
+        Snack snack = snackFileDAO.getSnack(99);
 
         // Analzye
-        assertEquals(hero,testSnacks[0]);
+        assertEquals(snack,testSnacks[0]);
     }
 
     @Test
@@ -92,8 +90,8 @@ public class SnackFileDAOTest {
         // Analzye
         assertEquals(result,true);
         // We check the internal tree map size against the length
-        // of the test heroes array - 1 (because of the delete)
-        // Because heroes attribute of HeroFileDAO is package private
+        // of the test snacks array - 1 (because of the delete)
+        // Because snacks attribute of SnackFileDAO is package private
         // we can access it directly
         assertEquals(snackFileDAO.snacks.size(),testSnacks.length-1);
     }
@@ -135,10 +133,10 @@ public class SnackFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(Snack[].class));
 
-        Snack hero = new Snack(102,"Animal Crackers", "Crackers shaped like animals", 12, 8.99);
+        Snack snack = new Snack(102,"Animal Crackers", "Crackers shaped like animals", 12, 8.99);
 
         assertThrows(IOException.class,
-                        () -> snackFileDAO.createSnack(hero),
+                        () -> snackFileDAO.createSnack(snack),
                         "IOException not thrown");
     }
 
@@ -183,7 +181,7 @@ public class SnackFileDAOTest {
         // exception was raised during JSON object deseerialization
         // into Java objects
         // When the Mock Object Mapper readValue method is called
-        // from the HeroFileDAO load method, an IOException is
+        // from the SnackFileDAO load method, an IOException is
         // raised
         doThrow(new IOException())
             .when(mockObjectMapper)
