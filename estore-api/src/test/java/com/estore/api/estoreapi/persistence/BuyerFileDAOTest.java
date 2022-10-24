@@ -47,19 +47,19 @@ public class BuyerFileDAOTest {
     }
 
     @Test
-    public void testBuyerExists() {
+    public void testLoginAdmin() {
         // Invoke
-        boolean result = assertDoesNotThrow(() -> buyerFileDAO.buyerExists("sweet"),
+        String result = assertDoesNotThrow(() -> buyerFileDAO.login("admin"),
                                     "Unexpected exception thrown");
 
         // Analyze
-        assertEquals(true,result);
+        assertEquals("admin",result);
     }
 
     @Test
-    public void testBuyerDoesNotExist() {
+    public void testLoginBuyer() {
         // Invoke
-        boolean result = assertDoesNotThrow(() -> buyerFileDAO.buyerExists("sour"),
+        String result = assertDoesNotThrow(() -> buyerFileDAO.login("sweet"),
         "Unexpected exception thrown");
 
         // Analyze
