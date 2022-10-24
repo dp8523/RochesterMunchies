@@ -36,6 +36,10 @@ public class Buyer {
      */
     public String getName() {return username;}
 
+    public ShoppingCart getCart() {
+        return cart;
+    }
+
     public int addToCart(@JsonProperty("id") int snackID) {
         if (this.cart.addItemToCart(snackID)) {
             return snackID;
