@@ -83,10 +83,16 @@ public class BuyerFileDAO implements BuyerDAO {
     ** {@inheritDoc}
      */
     @Override
-    public boolean buyerExists(String username) throws IOException {
+    public String login(String username) throws IOException {
         synchronized(buyers) {
             Buyer buyer = new Buyer(username);
-            return buyers.contains(buyer);
+            if (buyer.getName().equals("admin")) {
+                return "admin";
+            } else if (buyers.contains(buyer)) {
+                return buyer.getName();
+            } else {
+                return "invalid";
+            }
         }
     }
 
