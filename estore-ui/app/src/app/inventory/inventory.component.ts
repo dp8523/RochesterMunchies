@@ -47,7 +47,7 @@ export class InventoryComponent implements OnInit {
     */
     if (!name && !description && !quantity && !price) { return; }
     
-    console.log(this.snack);
+    console.log(JSON.stringify(this.snack));
     this.snackService.addSnack(this.snack)
     .subscribe(snack => {
       this.snacks.push(snack);

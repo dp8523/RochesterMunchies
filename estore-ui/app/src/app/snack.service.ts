@@ -10,7 +10,7 @@ export class SnackService {
   private snacksURL = 'http://localhost:8080/snacks'
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'applications/json; charset=utf-8' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json;'})
   };
 
   constructor( private http: HttpClient) { }
@@ -42,7 +42,7 @@ export class SnackService {
 
   // POST: add a new snack to the server
   addSnack(snack: Snack): Observable<Snack> {
-    return this.http.post<Snack>(this.snacksURL, snack, this.httpOptions)
+    return this.http.post<Snack>(this.snacksURL, JSON.stringify(snack), this.httpOptions)
     .pipe(catchError(this.handleError<Snack>('addSnack')));
   }
 
