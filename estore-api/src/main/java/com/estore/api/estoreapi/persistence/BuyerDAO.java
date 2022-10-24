@@ -19,7 +19,7 @@ public interface BuyerDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    String login(String username) throws IOException;
+    Buyer login(String username) throws IOException;
 
     /**
      * Creates and saves a {@linkplain Buyer buyer}
