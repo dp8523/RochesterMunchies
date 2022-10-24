@@ -50,16 +50,18 @@ public class BuyerController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{username}")
-    public ResponseEntity<Boolean> buyerExists(@PathVariable String username) {
+    public ResponseEntity<String> login(@PathVariable String username) {
         LOG.info("GET buyers/" + username);
 
         try{
-            boolean result = buyerDao.buyerExists(username);
-            if (result) {
-                return new ResponseEntity<Boolean>(result, HttpStatus.FOUND);
+            String result = buyerDao.login(username);
+            if (result.equals("admin")) {
+                return new ResponseEntity<String>(result, HttpStatus.FOUND);
             }
-            else {
-                return new ResponseEntity<Boolean>(result, HttpStatus.NOT_FOUND);
+            else if (result.equals("invalid")){
+                return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<String>(result, HttpStatus.FOUND);
             }
         }
         catch(IOException e) {
@@ -82,7 +84,8 @@ public class BuyerController {
         LOG.info("POST /buyers " + username);
 
         try{
-            if (buyerDao.buyerExists(username)) {
+            String result = buyerDao.login(username);
+            if (result.equals("admin") || result.equals("invalid")) {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             } else {
                 Buyer buyer = buyerDao.createBuyer(username);
