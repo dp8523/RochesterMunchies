@@ -18,8 +18,6 @@ import org.springframework.http.ResponseEntity;
 
 /**
  * Test the Snack Controller class
- * 
- * @author SWEN Faculty
  */
 @Tag("Controller-tier")
 public class SnackControllerTest {
