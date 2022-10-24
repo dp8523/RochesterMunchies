@@ -23,7 +23,7 @@ import org.springframework.http.ResponseEntity;
  */
 @Tag("Controller-tier")
 public class SnackControllerTest {
-    private EstoreController snackController;
+    private SnackController snackController;
     private SnackDAO mockSnackDAO;
 
     /**
@@ -33,7 +33,7 @@ public class SnackControllerTest {
     @BeforeEach
     public void setupSnackController() {
         mockSnackDAO = mock(SnackDAO.class);
-        snackController = new EstoreController(mockSnackDAO);
+        snackController = new SnackController(mockSnackDAO);
     }
 
     @Test
@@ -180,26 +180,26 @@ public class SnackControllerTest {
     }
 
     @Test
-    public void testGetEstore() throws IOException { // getestore may throw IOException
+    public void testGetSnacks() throws IOException { // getSnacks may throw IOException
         // Setup
-        Snack[] estore = new Snack[2];
-        estore[0] = new Snack(99,"Oreos", "Chocolate creme sandwich cookies", 20,  2.99);
-        estore[1] = new Snack(100,"Twix","Chocolate covered, caramel filled, cookie sticks",50,2.99);
-        // When getestore is called return the estore created above
-        when(mockSnackDAO.getSnacks()).thenReturn(estore);
+        Snack[] snacks = new Snack[2];
+        snacks[0] = new Snack(99,"Oreos", "Chocolate creme sandwich cookies", 20,  2.99);
+        snacks[1] = new Snack(100,"Twix","Chocolate covered, caramel filled, cookie sticks",50,2.99);
+        // When getSnacks is called return the snacks created above
+        when(mockSnackDAO.getSnacks()).thenReturn(snacks);
 
         // Invoke
         ResponseEntity<Snack[]> response = snackController.getSnacks();
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
-        assertEquals(estore,response.getBody());
+        assertEquals(snacks,response.getBody());
     }
 
     @Test
-    public void testGetEstoreHandleException() throws IOException { // getestore may throw IOException
+    public void testGetSnacksHandleException() throws IOException { // getSnacks may throw IOException
         // Setup
-        // When getestore is called on the Mock Snack DAO, throw an IOException
+        // When getSnacks is called on the Mock Snack DAO, throw an IOException
         doThrow(new IOException()).when(mockSnackDAO).getSnacks();
 
         // Invoke
@@ -210,26 +210,26 @@ public class SnackControllerTest {
     }
 
     @Test
-    public void testSearchEstore() throws IOException { // findestore may throw IOException
+    public void testSearchSnacks() throws IOException { // findSnacks may throw IOException
         // Setup
         String searchString = "la";
-        Snack[] estore = new Snack[2];
-        estore[0] = new Snack(99,"Camel Balls", "Extra Sour Bubble Gum Jawbreaker", 5, 9.99);
-        estore[1] = new Snack(100,"Animal Crackers", "Crackers shaped like animals", 12, 8.99);
-        // When findestore is called with the search string, return the two
-        /// estore above
-        when(mockSnackDAO.findSnacks(searchString)).thenReturn(estore);
+        Snack[] snacks = new Snack[2];
+        snacks[0] = new Snack(99,"Camel Balls", "Extra Sour Bubble Gum Jawbreaker", 5, 9.99);
+        snacks[1] = new Snack(100,"Animal Crackers", "Crackers shaped like animals", 12, 8.99);
+        // When findSnacks is called with the search string, return the two
+        /// snacks above
+        when(mockSnackDAO.findSnacks(searchString)).thenReturn(snacks);
 
         // Invoke
         ResponseEntity<Snack[]> response = snackController.searchSnacks(searchString);
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
-        assertEquals(estore,response.getBody());
+        assertEquals(snacks,response.getBody());
     }
 
     @Test
-    public void testSearchEstoreHandleException() throws IOException { // findestore may throw IOException
+    public void testSearchSnacksHandleException() throws IOException { // findSnacks may throw IOException
         // Setup
         String searchString = "an";
         // When createSnack is called on the Mock Snack DAO, throw an IOException
