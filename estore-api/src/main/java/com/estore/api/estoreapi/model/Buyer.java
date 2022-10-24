@@ -1,6 +1,10 @@
 package com.estore.api.estoreapi.model;
 
+import java.util.HashMap;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Buyer {
 
@@ -8,7 +12,7 @@ public class Buyer {
     static final String STRING_FORMAT = "Buyer [username=%s, cart=%s]";
 
     @JsonProperty("username") private String username;
-    @JsonProperty("cart") private ShoppingCart cart;
+    @JsonProperty("cart") private HashMap<Integer, Integer> cart;
 
     /**
      * Create a Buyer with the given username
@@ -21,7 +25,7 @@ public class Buyer {
      */
     public Buyer(@JsonProperty("username") String username){
         this.username = username;
-        this.cart = new ShoppingCart();
+        this.cart = new HashMap<Integer, Integer>();
     }
 
     /**
@@ -34,17 +38,45 @@ public class Buyer {
      * Retrieves the username of the Buyer
      * @return The username of the Buyer
      */
-    public String getName() {return username;}
+    public String retrieveUsername() {return username;}
 
-    public ShoppingCart getCart() {
+    public HashMap<Integer, Integer> getCart() {
         return cart;
     }
 
-    public int addToCart(@JsonProperty("id") int snackID) {
-        if (this.cart.addItemToCart(snackID)) {
-            return snackID;
+    public boolean addToCart(@JsonProperty("id") int snackID) {
+        try {
+            if (cart.containsKey(snackID)) {
+                cart.put(snackID, cart.get(snackID) + 1);
+                return true;
+            }
+            else {
+                cart.put(snackID, 1);
+                return true;
+            }
         }
-        return 0;
+        catch (Exception e) {
+            System.out.printf("Error adding SnackID: %i to cart.", snackID);
+            return false;
+        }
+    }
+
+    public boolean setCart(HashMap<Integer,Integer> newCart) {
+        try {
+            cart = newCart;
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean clearCart() {
+        try {
+            cart.clear();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -52,7 +84,7 @@ public class Buyer {
      */
     @Override
     public String toString(){
-        return String.format(STRING_FORMAT, username, cart);
+        return String.format(STRING_FORMAT, username, cart.toString());
     }
 
     /**
