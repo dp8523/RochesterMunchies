@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Snack } from '../Snack';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { SnackService } from '../snack.service';
 
 @Component({
@@ -9,11 +11,18 @@ import { SnackService } from '../snack.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  constructor( private snackService: SnackService ) {}
+  constructor(  
+    private route: ActivatedRoute,
+    private snackService: SnackService,
+    private location: Location ) {}
 
   ngOnInit(): void {
   }
   
+  goBack(): void {
+    this.location.back();
+  }
+
   /*
   addToCart() 
   */
