@@ -1,9 +1,13 @@
 <app-buyer-search-snack></app-buyer-search-snack>
 
+<a routerLink="/shopping_cart">Shopping Cart</a>
+
+
 <ul class="Buyer_Inventory">
     <li *ngFor="let snack of snacks">
         <a routerLink="/buyer_detail/{{snack.id}}">
             <span class="badge">{{snack.id}}</span> {{snack.name}}
         </a>
+        <button class="addToCart" type="button" >Add to Cart</button>
     </li>
 </ul>
