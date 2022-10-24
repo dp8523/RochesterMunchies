@@ -2,8 +2,9 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,7 +16,7 @@ import com.estore.api.estoreapi.model.Buyer;
 @Component
 public class BuyerFileDAO implements BuyerDAO {
 
-    Set<Buyer> buyers;   // Provides a local cache of the Buyer objects
+    Map<String,Buyer> buyers;   // Provides a local cache of the snack objects
                                 // so that we don't need to read from the file
                                 // each time
     private ObjectMapper objectMapper;  // Provides conversion between Buyer
@@ -38,6 +39,24 @@ public class BuyerFileDAO implements BuyerDAO {
         load();  // load the buyers from the file
     }
 
+    private Buyer[] getBuyersArray() {
+        return getBuyersArray(null);
+    }
+
+    private Buyer[] getBuyersArray(String containsText) { // if containsText == null, no filter
+        ArrayList<Buyer> buyerArrayList = new ArrayList<>();
+
+        for (Buyer buyer : buyers.values()) {
+            if (containsText == null || buyer.getName().contains(containsText)) {
+                buyerArrayList.add(buyer);
+            }
+        }
+
+        Buyer[] buyerArray = new Buyer[buyerArrayList.size()];
+        buyerArrayList.toArray(buyerArray);
+        return buyerArray;
+    }
+
     /**
      * Saves the {@linkplain Buyer buyer} from the set into the file as an array of JSON objects
      * 
@@ -46,7 +65,7 @@ public class BuyerFileDAO implements BuyerDAO {
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        Buyer[] buyerArray = buyers.toArray(new Buyer[0]);
+        Buyer[] buyerArray = getBuyersArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
@@ -64,7 +83,7 @@ public class BuyerFileDAO implements BuyerDAO {
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
-        buyers = new HashSet<>();
+        buyers = new TreeMap<>();
 
         // Deserializes the JSON objects from the file into an array of buyers
         // readValue will throw an IOException if there's an issue with the file
@@ -73,7 +92,7 @@ public class BuyerFileDAO implements BuyerDAO {
 
         // Add each Buyer to the hash set
         for (Buyer buyer : buyerArray) {
-            buyers.add(buyer);
+            buyers.put(buyer.getName(), buyer);
         }
         
         return true;
@@ -83,10 +102,13 @@ public class BuyerFileDAO implements BuyerDAO {
     ** {@inheritDoc}
      */
     @Override
-    public boolean buyerExists(String username) throws IOException {
+    public Buyer login(String username) throws IOException {
         synchronized(buyers) {
-            Buyer buyer = new Buyer(username);
-            return buyers.contains(buyer);
+            if (buyers.containsKey(username)) {
+                return buyers.get(username);
+            } else {
+                return null;
+            }
         }
     }
 
@@ -97,7 +119,7 @@ public class BuyerFileDAO implements BuyerDAO {
     public Buyer createBuyer(String username) throws IOException {
         synchronized(buyers) {
             Buyer buyer = new Buyer(username);
-            buyers.add(buyer);
+            buyers.put(buyer.getName(), buyer);
             save(); // may throw an IOException
             return buyer;
         }
@@ -110,8 +132,8 @@ public class BuyerFileDAO implements BuyerDAO {
     public boolean deleteBuyer(String username) throws IOException {
         synchronized(buyers) {
             Buyer buyer = new Buyer(username);
-            if (buyers.contains(buyer)) {
-                buyers.remove(buyer);
+            if (buyers.containsKey(buyer.getName())) {
+                buyers.remove(buyer.getName());
                 return save();
             } else {
                 return false;

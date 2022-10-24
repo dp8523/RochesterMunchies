@@ -1,15 +1,1 @@
-[
-    {
-        "username": "adam",
-        "shoppingcart": [
-            {
-                "id": 12,
-                "quantity": 5
-            },
-            {
-                "id": 13,
-                "quantity": 2
-            }
-        ]
-    }
-]
+[{"username":"adam","name":"adam","cart":{"cart":{}}},{"username":"admin","name":"admin","cart":{"cart":{}}}]
