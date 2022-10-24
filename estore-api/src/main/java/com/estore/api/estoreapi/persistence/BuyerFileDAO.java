@@ -133,7 +133,7 @@ public class BuyerFileDAO implements BuyerDAO {
         synchronized(buyers) {
             Buyer buyer = new Buyer(username);
             if (buyers.containsKey(buyer.retrieveUsername())) {
-                buyers.remove(buyer.retrieveUsernameaName());
+                buyers.remove(buyer.retrieveUsername());
                 return save();
             } else {
                 return false;
