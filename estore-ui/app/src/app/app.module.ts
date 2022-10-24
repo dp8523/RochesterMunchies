@@ -9,13 +9,19 @@ import { SnackDetailComponent } from './snack-detail/snack-detail.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { SnackSearchComponent } from './snack-search/snack-search.component';
+import { BuyerInventoryComponent } from './buyer-inventory/buyer-inventory.component';
+import { BuyerSnackDetailComponent } from './buyer-snack-detail/buyer-snack-detail.component';
+import { BuyerSearchSnackComponent } from './buyer-search-snack/buyer-search-snack.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InventoryComponent,
     SnackDetailComponent,
-    SnackSearchComponent
+    SnackSearchComponent,
+    BuyerInventoryComponent,
+    BuyerSnackDetailComponent,
+    BuyerSearchSnackComponent,
   ],
   imports: [
     BrowserModule,

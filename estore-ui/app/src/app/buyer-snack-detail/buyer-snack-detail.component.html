@@ -1,0 +1,25 @@
+<div class="total" *ngIf="snack">
+
+    <h2>{{snack.name}} Details </h2>
+    <div class="list">
+        <li>
+            <span class="id">id: </span>{{snack.id}}
+        </li>
+        <li>
+            <span class="snack-name"> Snack Name: </span>{{snack.name}}
+        </li>
+        <li>
+            <span class="snack-description"> Description: </span>{{snack.description}}
+        </li>
+        <li>
+            <span class="snack-quantity"> Quantity: </span>{{snack.quantity}}
+        </li>
+        <li>
+            <span class="snack-price"> Price: </span>{{snack.price}}
+        </li>
+    </div>
+    <div class="buttons">
+        <button class="back" type="button" (click)="goBack()">Go Back</button>
+    </div>
+
+</div>

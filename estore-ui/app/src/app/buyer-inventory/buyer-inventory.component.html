@@ -1,0 +1,9 @@
+<app-buyer-search-snack></app-buyer-search-snack>
+
+<ul class="Buyer_Inventory">
+    <li *ngFor="let snack of snacks">
+        <a routerLink="/buyer_detail/{{snack.id}}">
+            <span class="badge">{{snack.id}}</span> {{snack.name}}
+        </a>
+    </li>
+</ul>

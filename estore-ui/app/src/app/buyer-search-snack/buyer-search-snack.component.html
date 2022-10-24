@@ -4,7 +4,7 @@
   
     <ul class="search-result">
       <li *ngFor="let snack of inventory$ | async" >
-        <a routerLink="/detail/{{snack.id}}">
+        <a routerLink="/buyer_detail/{{snack.id}}">
           {{snack.name}}
         </a>
       </li>
