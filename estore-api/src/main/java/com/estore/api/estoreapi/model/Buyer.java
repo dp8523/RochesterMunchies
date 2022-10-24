@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Buyer {
 
     // Package private for tests
-    static final String STRING_FORMAT = "Buyer [username=%s]";
+    static final String STRING_FORMAT = "Buyer [username=%s, cart=%s]";
 
     @JsonProperty("username") private String username;
-    // TODO: add shopping cart attribute and methods
+    @JsonProperty("cart") private ShoppingCart cart;
 
     /**
      * Create a Buyer with the given username
@@ -21,6 +21,7 @@ public class Buyer {
      */
     public Buyer(@JsonProperty("username") String username){
         this.username = username;
+        this.cart = new ShoppingCart();
     }
 
     /**
@@ -34,13 +35,20 @@ public class Buyer {
      * @return The username of the Buyer
      */
     public String getName() {return username;}
+    
+    public int addToCart(@JsonProperty("id") int snackID) {
+        if (this.cart.addItemToCart(snackID)) {
+            return snackID;
+        }
+        return 0;
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString(){
-        return String.format(STRING_FORMAT, username);
+        return String.format(STRING_FORMAT, username, cart.toString());
     }
 
     /**
