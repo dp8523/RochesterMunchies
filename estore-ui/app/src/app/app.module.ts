@@ -12,6 +12,8 @@ import { SnackSearchComponent } from './snack-search/snack-search.component';
 import { BuyerInventoryComponent } from './buyer-inventory/buyer-inventory.component';
 import { BuyerSnackDetailComponent } from './buyer-snack-detail/buyer-snack-detail.component';
 import { BuyerSearchSnackComponent } from './buyer-search-snack/buyer-search-snack.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,9 @@ import { BuyerSearchSnackComponent } from './buyer-search-snack/buyer-search-sna
     BuyerInventoryComponent,
     BuyerSnackDetailComponent,
     BuyerSearchSnackComponent,
+    ShoppingCartComponent,
+    LoginComponent
+
   ],
   imports: [
     BrowserModule,
