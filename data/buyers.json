@@ -1,1 +1,16 @@
-[{"username":"adam","name":"adam","cart":{"cart":{}}},{"username":"admin","name":"admin","cart":{"cart":{}}}]
+[
+    {
+        "username": "adam",
+        "name": "adam",
+        "cart": {
+            "cart": {}
+        }
+    },
+    {
+        "username": "admin",
+        "name": "admin",
+        "cart": {
+            "cart": {}
+        }
+    }
+]

@@ -144,13 +144,12 @@ public class BuyerFileDAO implements BuyerDAO {
     @Override
     public Buyer updateCart(Buyer buyer) throws IOException {
         synchronized(buyers) {
-            // User is found
-            if (buyers.containsKey(buyer.getName())) {
-                buyers.put(buyer.getName(), buyer);
-                return buyer;
-            }
+            if (buyers.containsKey(buyer.getName()) == false)
+                return null;  // snack does not exist
             else {
-                return null;
+                buyers.put(buyer.getName(),buyer);
+                save(); // may throw an IOException
+                return buyer;
             }
         }
     }
