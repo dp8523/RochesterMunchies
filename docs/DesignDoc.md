@@ -88,7 +88,7 @@ details of a snack.
 
 This section describes the application domain.
 
-![Domain Model](Team 4 SWEN Treat-Store Domain Analysis.png)
+![Domain Model](Team4SWENTreatStoreDomainAnalysis.png)
 
 This is a domain model of our snack e-store, it shows the relations
 between the user, and the features of our website such as the 
@@ -204,6 +204,9 @@ and conditional statements. The code coverage achieved from unit
 testing our snack files have shown to be above 90% covered, where
 the final 10% lie in additional functions yet to be covered and will
 be our primary focus for code coverage. 
+![EstoreAPI Code Coverage](EstoreAPICoverage.png)
+![EstoreAPIController Code Coverage](EstoreAPIControllerCoverage.png)
+![EstoreController Code Coverage](EstoreControllerCoverage.png)
 The team's coverage target is now in finishing the final 10% of snack
 files and then shifting over to the buyer files as we implement
 the shopping cart. 
