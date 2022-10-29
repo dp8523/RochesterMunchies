@@ -165,11 +165,6 @@ where they can login as the owner, a customer, or register for the website.
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
 ### Static Code Analysis/Design Improvements
-> _Discuss design improvements that you would make if the project were
-> to continue. These improvement should be based on your direct
-> analysis of where there are problems in the code base which could be
-> addressed with design changes, and describe those suggested design
-> improvements._
 Our Buyer implementation files have not been covered yet, and should the project continue, 
 it would be in our best interest to focus on the buyer files and testing each individual
 function. Testing these functions would allow us to continue developing the shopping
@@ -190,11 +185,6 @@ analysis shows that we have malfunctioning methods that need to be revised.
 > and the results of the testing._
 
 ### Acceptance Testing
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
 Passed All Criteria: 11
 Passed Some Criteria: 5
 Passed No Criteria: 17
@@ -208,11 +198,6 @@ On the backend, a lot of our stories passed no criteria since they
 have failed to work or need to be improved on.
 
 ### Unit Testing and Code Coverage
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
 Our unit testing strategy is primarily in creating a fake database
 of snacks and using that fake database to assert various functions
 and conditional statements. The code coverage achieved from unit 
