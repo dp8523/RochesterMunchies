@@ -32,20 +32,20 @@ public class Buyer {
      * Sets the username of the Buyer
      * @param username The username of the Buyer
      */
-    public void setName(String username) {this.username = username;}
+    public void setUsername(String username) {this.username = username;}
 
     /**
      * Retrieves the username of the Buyer
      * @return The username of the Buyer
      */
-    public String retrieveUsername() {return username;}
+    public String getUsername() {return username;}
 
-    public HashMap<Integer, Integer> getCart() {
+    public ShoppingCart getUserCart() {
         return cart;
     }
 
-    public boolean addToCart(@JsonProperty("id") int snackID) {
-        return cart.addItemToCart(snackID);
+    public void addToCart(@JsonProperty("id") int snackID) {
+        cart.addItemToCart(snackID);
     }
 
     public boolean setCart(ShoppingCart newCart) {

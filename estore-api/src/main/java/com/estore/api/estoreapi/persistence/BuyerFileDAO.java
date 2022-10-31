@@ -47,7 +47,7 @@ public class BuyerFileDAO implements BuyerDAO {
         ArrayList<Buyer> buyerArrayList = new ArrayList<>();
 
         for (Buyer buyer : buyers.values()) {
-            if (containsText == null || buyer.retrieveUsername().contains(containsText)) {
+            if (containsText == null || buyer.getUsername().contains(containsText)) {
                 buyerArrayList.add(buyer);
             }
         }
@@ -92,7 +92,7 @@ public class BuyerFileDAO implements BuyerDAO {
 
         // Add each Buyer to the hash set
         for (Buyer buyer : buyerArray) {
-            buyers.put(buyer.retrieveUsername(), buyer);
+            buyers.put(buyer.getUsername(), buyer);
         }
         
         return true;
@@ -119,7 +119,7 @@ public class BuyerFileDAO implements BuyerDAO {
     public Buyer createBuyer(String username) throws IOException {
         synchronized(buyers) {
             Buyer buyer = new Buyer(username);
-            buyers.put(buyer.retrieveUsername(), buyer);
+            buyers.put(buyer.getUsername(), buyer);
             save(); // may throw an IOException
             return buyer;
         }
@@ -132,11 +132,31 @@ public class BuyerFileDAO implements BuyerDAO {
     public boolean deleteBuyer(String username) throws IOException {
         synchronized(buyers) {
             Buyer buyer = new Buyer(username);
-            if (buyers.containsKey(buyer.retrieveUsername())) {
-                buyers.remove(buyer.retrieveUsername());
+            if (buyers.containsKey(buyer.getUsername())) {
+                buyers.remove(buyer.getUsername());
                 return save();
             } else {
                 return false;
+            }
+        }
+    }
+
+    @Override
+    public Buyer addToCart(String username, int snackID) throws IOException {
+        synchronized(buyers) {
+            Buyer buyer = buyers.get(username);
+
+            // Buyer is not found
+            if (buyers.containsKey(username) == false)
+                return null; 
+            else {
+                // Add to cart
+                buyer.addToCart(snackID);
+
+                // Update buyers list with new cart
+                buyers.put(buyer.getUsername(),buyer);
+                save(); 
+                return buyer;
             }
         }
     }

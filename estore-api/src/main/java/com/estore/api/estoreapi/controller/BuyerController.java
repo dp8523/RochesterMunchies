@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.persistence.BuyerDAO;
+import com.estore.api.estoreapi.persistence.SnackDAO;
 import com.estore.api.estoreapi.model.Buyer;
+import com.estore.api.estoreapi.model.Snack;
 
 /**
  * Handles the REST API requests for the Buyer resource
@@ -29,6 +33,7 @@ import com.estore.api.estoreapi.model.Buyer;
 public class BuyerController {
     private static final Logger LOG = Logger.getLogger(BuyerController.class.getName());
     private BuyerDAO buyerDao;
+    private SnackDAO snackDao;
 
     /**
      * Creates a REST API controller to reponds to requests
@@ -37,8 +42,9 @@ public class BuyerController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public BuyerController(BuyerDAO buyerDao) {
+    public BuyerController(BuyerDAO buyerDao, SnackDAO snackDao) {
         this.buyerDao = buyerDao;
+        this.snackDao = snackDao;
     }
 
     /**
@@ -82,7 +88,7 @@ public class BuyerController {
 
         try{
             Buyer result = buyerDao.login(username);
-            if (result == null || !result.retrieveUsername().equals("admin")) {
+            if (result == null || !result.getUsername().equals("admin")) {
                 System.out.println("valid");
                 Buyer buyer = buyerDao.createBuyer(username);
                 return new ResponseEntity<Buyer>(buyer, HttpStatus.CREATED);
@@ -113,6 +119,34 @@ public class BuyerController {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/{username}/{snackID}")
+    public ResponseEntity<Buyer> addToCart(@PathVariable String username, @PathVariable int snackID) {
+        LOG.info("PUT / " + username + "/" + snackID);
+
+        try {
+            Snack snack = snackDao.getSnack(snackID);
+
+            if (snack != null) {
+                // Check if Buyer exists
+                Buyer newBuyer = buyerDao.addToCart(username, snackID);
+
+                if (newBuyer == null) {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+                else {
+                    return new ResponseEntity<Buyer>(newBuyer, HttpStatus.OK);
+                }
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

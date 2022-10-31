@@ -1,1 +1,1 @@
-[{"username":"adaaaaaaaaaaaaaaaaam","cart":{}},{"username":"adaaam","cart":{}},{"username":"adam","cart":{}},{"username":"sssadaaaaaam","cart":{}}]
+[{"username":"adaaaaaaaaaaaaaaaaam","userCart":{},"cart":{}},{"username":"adaaaaaam","userCart":{},"cart":{}},{"username":"adaaam","userCart":{},"cart":{}},{"username":"adam","userCart":{"12":1,"13":1},"cart":{"12":1,"13":1}}]

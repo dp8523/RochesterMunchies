@@ -45,4 +45,6 @@ public interface BuyerDAO {
      * @throws IOException if underlying storage cannot be accessed
      */
     boolean deleteBuyer(String username) throws IOException;
+
+    Buyer addToCart(String username, int snackID) throws IOException;
 }
