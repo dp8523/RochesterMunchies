@@ -126,7 +126,7 @@ public class BuyerController {
         }
     }
 
-    @PutMapping("/{username}/{snackID}")
+    @PutMapping("/a/{username}/{snackID}")
     public ResponseEntity<Buyer> addToCart(@PathVariable String username, @PathVariable int snackID) {
         LOG.info("PUT / " + username + "/" + snackID);
 
@@ -136,6 +136,34 @@ public class BuyerController {
             if (snack != null) {
                 // Check if Buyer exists
                 Buyer newBuyer = buyerDao.addToCart(username, snackID);
+
+                if (newBuyer == null) {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+                else {
+                    return new ResponseEntity<Buyer>(newBuyer, HttpStatus.OK);
+                }
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/d/{username}/{snackID}")
+    public ResponseEntity<Buyer> deleteFromCart(@PathVariable String username, @PathVariable int snackID) {
+        LOG.info("DELETE / " + username + "/" + snackID);
+
+        try {
+            Snack snack = snackDao.getSnack(snackID);
+
+            if (snack != null) {
+                // Check if Buyer exists
+                Buyer newBuyer = buyerDao.deleteFromCart(username, snackID);
 
                 if (newBuyer == null) {
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);

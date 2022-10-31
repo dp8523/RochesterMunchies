@@ -45,7 +45,11 @@ public class Buyer {
     }
 
     public void addToCart(@JsonProperty("id") int snackID) {
-        cart.addItemToCart(snackID);
+        cart.addToCart(snackID);
+    }
+
+    public void deleteFromCart(@JsonProperty("id") int snackID) {
+        cart.deleteFromCart(snackID);
     }
 
     public boolean setCart(ShoppingCart newCart) {

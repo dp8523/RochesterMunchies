@@ -11,7 +11,7 @@ public class ShoppingCart extends HashMap<Integer,Integer>{
     //     cart = new HashMap<Integer,Integer>();
     // }
 
-    public boolean addItemToCart(@JsonProperty("id") int id) {
+    public boolean addToCart(@JsonProperty("id") int id) {
         // Assume that id is valid snack
         try {
             if (this.containsKey(id)) {
@@ -21,6 +21,28 @@ public class ShoppingCart extends HashMap<Integer,Integer>{
             else {
                 this.put(id, 1);
                 return true;
+            }
+        }
+        catch (Exception e) {
+            System.out.printf("Error adding SnackID: %i to cart.", id);
+            return false;
+        }
+    }
+
+    public boolean deleteFromCart(@JsonProperty("id") int id) {
+        // Assume that id is valid snack
+        try {
+            if (this.containsKey(id)) {
+                if (this.get(id) == 1) {
+                    this.remove(id);
+                }
+                else {
+                    this.put(id, this.get(id) - 1);
+                }
+                return true;
+            }
+            else {
+                return false;
             }
         }
         catch (Exception e) {
