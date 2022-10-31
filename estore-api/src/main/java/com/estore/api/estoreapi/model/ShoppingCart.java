@@ -4,22 +4,22 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 
-public class ShoppingCart {
-    @JsonProperty("cart") private HashMap<Integer,Integer> cart;
+public class ShoppingCart extends HashMap<Integer,Integer>{
+    // @JsonProperty("cart") private HashMap<Integer,Integer> cart;
 
-    public ShoppingCart() {
-        cart = new HashMap<Integer,Integer>();
-    }
+    // public ShoppingCart() {
+    //     cart = new HashMap<Integer,Integer>();
+    // }
 
     public boolean addItemToCart(@JsonProperty("id") int id) {
         // Assume that id is valid snack
         try {
-            if (cart.containsKey(id)) {
-                cart.put(id, cart.get(id) + 1);
+            if (this.containsKey(id)) {
+                this.put(id, this.get(id) + 1);
                 return true;
             }
             else {
-                cart.put(id, 1);
+                this.put(id, 1);
                 return true;
             }
         }
@@ -30,23 +30,23 @@ public class ShoppingCart {
     }
 
     public HashMap<Integer,Integer> getCart() {
-        return cart;
+        return this;
     }
 
-    // public boolean setCart(HashMap<Integer,Integer> newCart) {
-    //     try {
-    //         cart = newCart;
-    //         return true;
-    //     } catch (Exception e) {
-    //         return false;
-    //     }
-    // }
+    public boolean clearCart() {
+        try {
+            this.clear();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     @Override
     public String toString() {
         String s = "";
         try {
-            s = new ObjectMapper().writeValueAsString(cart);
+            s = new ObjectMapper().writeValueAsString(this);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
