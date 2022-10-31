@@ -47,7 +47,7 @@ public class BuyerFileDAO implements BuyerDAO {
         ArrayList<Buyer> buyerArrayList = new ArrayList<>();
 
         for (Buyer buyer : buyers.values()) {
-            if (containsText == null || buyer.getName().contains(containsText)) {
+            if (containsText == null || buyer.getUsername().contains(containsText)) {
                 buyerArrayList.add(buyer);
             }
         }
@@ -92,7 +92,7 @@ public class BuyerFileDAO implements BuyerDAO {
 
         // Add each Buyer to the hash set
         for (Buyer buyer : buyerArray) {
-            buyers.put(buyer.getName(), buyer);
+            buyers.put(buyer.getUsername(), buyer);
         }
         
         return true;
@@ -119,7 +119,7 @@ public class BuyerFileDAO implements BuyerDAO {
     public Buyer createBuyer(String username) throws IOException {
         synchronized(buyers) {
             Buyer buyer = new Buyer(username);
-            buyers.put(buyer.getName(), buyer);
+            buyers.put(buyer.getUsername(), buyer);
             save(); // may throw an IOException
             return buyer;
         }
@@ -132,8 +132,8 @@ public class BuyerFileDAO implements BuyerDAO {
     public boolean deleteBuyer(String username) throws IOException {
         synchronized(buyers) {
             Buyer buyer = new Buyer(username);
-            if (buyers.containsKey(buyer.getName())) {
-                buyers.remove(buyer.getName());
+            if (buyers.containsKey(buyer.getUsername())) {
+                buyers.remove(buyer.getUsername());
                 return save();
             } else {
                 return false;
@@ -144,10 +144,10 @@ public class BuyerFileDAO implements BuyerDAO {
     @Override
     public Buyer updateCart(Buyer buyer) throws IOException {
         synchronized(buyers) {
-            if (buyers.containsKey(buyer.getName()) == false)
+            if (buyers.containsKey(buyer.getUsername()) == false)
                 return null;  // snack does not exist
             else {
-                buyers.put(buyer.getName(),buyer);
+                buyers.put(buyer.getUsername(),buyer);
                 save(); // may throw an IOException
                 return buyer;
             }

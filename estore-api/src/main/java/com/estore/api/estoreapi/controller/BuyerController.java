@@ -86,7 +86,7 @@ public class BuyerController {
 
         try{
             Buyer result = buyerDao.login(username);
-            if (result == null || !result.getName().equals("admin")) {
+            if (result == null || !result.getUsername().equals("admin")) {
                 System.out.println("valid");
                 Buyer buyer = buyerDao.createBuyer(username);
                 return new ResponseEntity<Buyer>(buyer, HttpStatus.CREATED);
