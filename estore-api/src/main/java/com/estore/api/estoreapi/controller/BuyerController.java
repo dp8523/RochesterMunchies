@@ -33,6 +33,7 @@ import com.estore.api.estoreapi.model.Snack;
 public class BuyerController {
     private static final Logger LOG = Logger.getLogger(BuyerController.class.getName());
     private BuyerDAO buyerDao;
+    private SnackDAO snackDao;
 
     /**
      * Creates a REST API controller to reponds to requests
@@ -41,8 +42,9 @@ public class BuyerController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public BuyerController(BuyerDAO buyerDao) {
+    public BuyerController(BuyerDAO buyerDao, SnackDAO snackDao) {
         this.buyerDao = buyerDao;
+        this.snackDao = snackDao;
     }
 
     /**
@@ -124,18 +126,26 @@ public class BuyerController {
         }
     }
 
-    @PutMapping("")
-    public ResponseEntity<Buyer> updateCart(@RequestBody Buyer buyer) {
-        LOG.info("PUT /buyers " + buyer);
+    @PutMapping("/{username}/{snackID}")
+    public ResponseEntity<Buyer> addToCart(@PathVariable String username, @PathVariable int snackID) {
+        LOG.info("PUT / " + username + "/" + snackID);
 
         try {
-            Buyer newBuyer = buyerDao.updateCart(buyer);
+            Snack snack = snackDao.getSnack(snackID);
 
-            if (newBuyer == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            if (snack != null) {
+                // Check if Buyer exists
+                Buyer newBuyer = buyerDao.addToCart(username, snackID);
+
+                if (newBuyer == null) {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+                else {
+                    return new ResponseEntity<Buyer>(newBuyer, HttpStatus.OK);
+                }
             }
             else {
-                return new ResponseEntity<Buyer>(newBuyer, HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }
         catch(IOException e) {

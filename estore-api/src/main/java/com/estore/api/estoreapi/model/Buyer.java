@@ -12,7 +12,7 @@ public class Buyer {
     static final String STRING_FORMAT = "Buyer [username=%s, cart=%s]";
 
     @JsonProperty("username") private String username;
-    @JsonProperty("cart") private HashMap<Integer, Integer> cart;
+    @JsonProperty("cart") private ShoppingCart cart;
 
     /**
      * Create a Buyer with the given username
@@ -25,7 +25,7 @@ public class Buyer {
      */
     public Buyer(@JsonProperty("username") String username){
         this.username = username;
-        this.cart = new HashMap<Integer, Integer>();
+        this.cart = new ShoppingCart();
     }
 
     /**
@@ -40,39 +40,17 @@ public class Buyer {
      */
     public String getUsername() {return username;}
 
-    public HashMap<Integer, Integer> getCart() {
+    public ShoppingCart getUserCart() {
         return cart;
     }
 
-    public boolean addToCart(@JsonProperty("id") int snackID) {
-        try {
-            if (cart.containsKey(snackID)) {
-                cart.put(snackID, cart.get(snackID) + 1);
-                return true;
-            }
-            else {
-                cart.put(snackID, 1);
-                return true;
-            }
-        }
-        catch (Exception e) {
-            System.out.printf("Error adding SnackID: %i to cart.", snackID);
-            return false;
-        }
+    public void addToCart(@JsonProperty("id") int snackID) {
+        cart.addItemToCart(snackID);
     }
 
-    public boolean setCart(HashMap<Integer,Integer> newCart) {
+    public boolean setCart(ShoppingCart newCart) {
         try {
             cart = newCart;
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean clearCart() {
-        try {
-            cart.clear();
             return true;
         } catch (Exception e) {
             return false;
