@@ -40,7 +40,7 @@ public class Buyer {
      */
     public String getUsername() {return username;}
 
-    public ShoppingCart getUserCart() {
+    public ShoppingCart getCart() {
         return cart;
     }
 
@@ -63,6 +63,10 @@ public class Buyer {
 
     public boolean checkoutCart() {
         return cart.clearCart();
+    }
+
+    public boolean snackInCart(int snackID) {
+        return cart.containsKey(snackID);
     }
 
     /**

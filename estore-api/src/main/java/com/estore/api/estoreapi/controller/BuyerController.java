@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -154,7 +156,7 @@ public class BuyerController {
         }
     }
 
-    @PutMapping("/d/{username}/{snackID}")
+    @DeleteMapping("/d/{username}/{snackID}")
     public ResponseEntity<Buyer> deleteFromCart(@PathVariable String username, @PathVariable int snackID) {
         LOG.info("DELETE / " + username + "/" + snackID);
 
@@ -169,6 +171,9 @@ public class BuyerController {
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 }
                 else {
+                    if (!newBuyer.snackInCart(snackID)) {
+                        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                    }
                     return new ResponseEntity<Buyer>(newBuyer, HttpStatus.OK);
                 }
             }
