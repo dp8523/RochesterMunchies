@@ -40,18 +40,18 @@ public class BuyerTest {
         assertEquals(expectedUsername,buyer.getName());
     }
 
-    @Test
-    public void testToString() {
-        // Setup
-        String username = "SnackLover";
+    // @Test
+    // public void testToString() {
+    //     // Setup
+    //     String username = "SnackLover";
 
-        String expectedString = String.format(Buyer.STRING_FORMAT,username);
-        Buyer buyer = new Buyer(username);
+    //     String expectedString = String.format(Buyer.STRING_FORMAT,username);
+    //     Buyer buyer = new Buyer(username);
 
-        // Invoke
-        String actualString = buyer.toString();
+    //     // Invoke
+    //     String actualString = buyer.toString();
 
-        // Analyze
-        assertEquals(expectedString,actualString);
-    }
+    //     // Analyze
+    //     assertEquals(expectedString,actualString);
+    // }
 }
