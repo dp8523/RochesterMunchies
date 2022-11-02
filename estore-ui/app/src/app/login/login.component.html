@@ -1,11 +1,11 @@
 <div class="total">
     <div class="login">
-        <h3>Customer Login</h3>
+        <h3>Login</h3>
         <li>
             <label class="label">Username: </label>
             <input class="input" placeholder="username" #username>
         </li>
-        <button class="button" (click)="login(username.value)">Login</button>
+        <a href={{htmlPage}} class="button" (click)="login(username.value)">Login</a>
     </div>
     <div class="register">
         <h3>Create Account</h3>

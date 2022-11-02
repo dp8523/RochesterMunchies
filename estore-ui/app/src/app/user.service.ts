@@ -4,9 +4,7 @@ import { User } from './user';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root'})
 export class UserService {
 
   private userURL = 'http://localhost:8080/buyers';
@@ -24,8 +22,7 @@ export class UserService {
   }
 
   register(username: String): Observable<User> {
-    const url = `${this.userURL}/${username}`;
-    return this.http.post<User>(url, username, this.httpOptions)
+    return this.http.post<User>(this.userURL, username, this.httpOptions)
     .pipe(catchError(this.handleError<User>(`createUser username=${username}`)))
   }
 
