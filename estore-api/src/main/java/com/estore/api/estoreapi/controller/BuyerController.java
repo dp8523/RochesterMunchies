@@ -48,7 +48,7 @@ public class BuyerController {
     }
 
     /**
-     * Determines whether a {@linkplain Buyer buyer} exists with the given username
+     * Determines whether a {@linkplain Buyer buyer} exists with the given username and logs in if so
      * 
      * @param username the username of the {@link Buyer buyer}
      * @return ResponseEntity with true and HTTP status of FOUND if the buyer exists
@@ -78,8 +78,8 @@ public class BuyerController {
      * 
      * @param username - The username of the {@link Buyer buyer} to create
      * 
-     * @return ResponseEntity with created {@link Buyer buyer} object and HTTP status of CREATED if the it is unique<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Buyer buyer} object already exists<br>
+     * @return ResponseEntity with created {@link Buyer buyer} object and HTTP status of CREATED if the it is unique
+     * ResponseEntity with HTTP status of CONFLICT if {@link Buyer buyer} object already exists
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("/{username}")
@@ -88,8 +88,7 @@ public class BuyerController {
 
         try{
             Buyer result = buyerDao.login(username);
-            if (result == null || !result.getUsername().equals("admin")) {
-                System.out.println("valid");
+            if (result == null) {
                 Buyer buyer = buyerDao.createBuyer(username);
                 return new ResponseEntity<Buyer>(buyer, HttpStatus.CREATED);
             } else {
@@ -107,8 +106,8 @@ public class BuyerController {
      * 
      * @param username The username of the {@link Buyer buyer} to be deleted
      * 
-     * @return ResponseEntity HTTP status of OK if deleted<br>
-     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * @return ResponseEntity HTTP status of OK if deleted
+     * ResponseEntity with HTTP status of NOT_FOUND if not found or if attempting to delete admin
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{username}")

@@ -135,6 +135,9 @@ public class BuyerFileDAO implements BuyerDAO {
     @Override
     public boolean deleteBuyer(String username) throws IOException {
         synchronized(buyers) {
+            if (username.equals("admin")) {
+                return false;
+            }
             Buyer buyer = new Buyer(username, snackDAO);
             if (buyers.containsKey(buyer.getUsername())) {
                 buyers.remove(buyer.getUsername());
