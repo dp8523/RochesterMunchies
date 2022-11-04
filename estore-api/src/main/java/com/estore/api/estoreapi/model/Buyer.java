@@ -69,16 +69,16 @@ public class Buyer {
         return cart.containsKey(snackID);
     }
     
-    public double getCartCost() {
-        double cartTotal = 0;
-        for(int snackId : cart.keySet()) {
-            double snackPrice = snackId;
-            int quantity = cart.get(snackId);
-            double snackTotal = snackPrice * quantity;
-            cartTotal += snackTotal;
-        }
-        return cartTotal;
-    }
+    // public double getCartCost() {
+    //     double cartTotal = 0;
+    //     for(int snackId : cart.keySet()) {
+    //         double snackPrice = snackId;
+    //         int quantity = cart.get(snackId);
+    //         double snackTotal = snackPrice * quantity;
+    //         cartTotal += snackTotal;
+    //     }
+    //     return cartTotal;
+    // }
 
     /**
      * {@inheritDoc}

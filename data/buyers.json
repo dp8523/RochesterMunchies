@@ -1,14 +1,16 @@
 [
     {
         "username": "adam",
-        "cart": {}
+        "cart": {
+            "12": 3
+        }
     },
     {
         "username": "dara",
         "cart": {}
     },
     {
-        "username": "robert",
+        "username": "jaden",
         "cart": {}
     },
     {
@@ -19,7 +21,7 @@
         }
     },
     {
-        "username": "jaden",
+        "username": "robert",
         "cart": {}
     }
 ]
