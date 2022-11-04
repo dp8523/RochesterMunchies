@@ -1,118 +1,125 @@
-// package com.estore.api.estoreapi.controller;
+package com.estore.api.estoreapi.controller;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.mockito.Mockito.doThrow;
-// import static org.mockito.Mockito.mock;
-// import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-// import java.io.IOException;
+import java.io.IOException;
 
-// import com.estore.api.estoreapi.persistence.BuyerDAO;
-// import com.estore.api.estoreapi.model.Buyer;
+import com.estore.api.estoreapi.persistence.BuyerDAO;
+import com.estore.api.estoreapi.model.Buyer;
+import com.estore.api.estoreapi.persistence.SnackDAO;
+import com.estore.api.estoreapi.model.Snack;
 
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Tag;
-// import org.junit.jupiter.api.Test;
-// import org.springframework.http.HttpStatus;
-// import org.springframework.http.ResponseEntity;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-// /**
-//  * Test the Buyer Controller class
-//  */
-// @Tag("Controller-tier")
-// public class BuyerControllerTest {
-//     private BuyerController buyerController;
-//     private BuyerDAO mockBuyerDAO;
+/**
+ * Test the Buyer Controller class
+ */
+@Tag("Controller-tier")
+public class BuyerControllerTest {
+    private BuyerController buyerController;
+    private BuyerDAO mockBuyerDAO;
+    private SnackDAO mockSnackDAO;
 
-//     /**
-//      * Before each test, create a new BuyerController object and inject
-//      * a mock Buyer DAO
-//      */
-//     @BeforeEach
-//     public void setupBuyerController() {
-//         mockBuyerDAO = mock(BuyerDAO.class);
-//         buyerController = new BuyerController(mockBuyerDAO);
-//     }
+    /**
+     * Before each test, create a new BuyerController object and inject
+     * a mock Buyer DAO
+     */
+    @BeforeEach
+    public void setupBuyerController() {
+        mockBuyerDAO = mock(BuyerDAO.class);
+        mockSnackDAO = mock(SnackDAO.class);
+        buyerController = new BuyerController(mockBuyerDAO, mockSnackDAO);
+    }
 
-//     @Test
-//     public void testBuyerExists() throws IOException {
-//         // Setup
-//         Buyer buyer = new Buyer("sweet");
-//         // When the same username is passed in, our mock Buyer DAO will return true
-//         when(mockBuyerDAO.buyerExists(buyer.getName())).thenReturn(true);
+    @Test
+    public void testLogin() throws IOException {
+        // Setup
+        Buyer buyer = new Buyer("sweet");
+        // When the same username is passed in, our mock Buyer DAO will return true
+        when(mockBuyerDAO.login(buyer.getUsername())).thenReturn(buyer);
 
-//         // Invoke
-//         ResponseEntity<Boolean> response = buyerController.buyerExists(buyer.getName());
+        // Invoke
+        ResponseEntity<Buyer> response = buyerController.login(buyer.getUsername());
 
-//         // Analyze
-//         assertEquals(HttpStatus.FOUND,response.getStatusCode());
-//         assertEquals(true,response.getBody());
-//     }
+        // Analyze
+        assertEquals(HttpStatus.FOUND,response.getStatusCode());
+        assertEquals(buyer,response.getBody());
+    }
 
-//     @Test
-//     public void testBuyerDoesNotExist() throws Exception {
-//         // Setup
-//         int SnackId = 99;
-//         // When the same id is passed in, our mock Snack DAO will return null, simulating
-//         // no Snack found
-//         when(mockSnackDAO.getSnack(SnackId)).thenReturn(null);
+    @Test
+    public void testLoginNotFound() throws Exception {
+        // Setup
+        String username = "Sudhir";
+        // When the same id is passed in, our mock Snack DAO will return null, simulating
+        // no Snack found
+        when(mockBuyerDAO.login(username)).thenReturn(null);
 
-//         // Invoke
-//         ResponseEntity<Snack> response = snackController.getSnack(SnackId);
+        // Invoke
+        ResponseEntity<Buyer> response = buyerController.login(username);
 
-//         // Analyze
-//         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
-//     }
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+        assertEquals(null,response.getBody());
+    }
 
-//     @Test
-//     public void testGetSnackHandleException() throws Exception { // createSnack may throw IOException
-//         // Setup
-//         int SnackId = 99;
-//         // When getSnack is called on the Mock Snack DAO, throw an IOException
-//         doThrow(new IOException()).when(mockSnackDAO).getSnack(SnackId);
+    @Test
+    public void testLoginHandleException() throws Exception { // createSnack may throw IOException
+        // Setup
+        String username = "Sudhir";
+        // When getSnack is called on the Mock Snack DAO, throw an IOException
+        doThrow(new IOException()).when(mockBuyerDAO).login(username);
 
-//         // Invoke
-//         ResponseEntity<Snack> response = snackController.getSnack(SnackId);
+        // Invoke
+        ResponseEntity<Buyer> response = buyerController.login(username);
 
-//         // Analyze
-//         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
-//     }
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 
-//     /*****************************************************************
-//      * The following tests will fail until all SnackController methods
-//      * are implemented.
-//      ****************************************************************/
+    /*****************************************************************
+     * The following tests will fail until all BuyerController methods
+     * are implemented.
+     ****************************************************************/
     
-//     @Test
-//     public void testCreateSnack() throws IOException {  // createSnack may throw IOException
-//         // Setup
-//         Snack Snack = new Snack(99,"Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 10, 4.99);
-//         // when createSnack is called, return true simulating successful
-//         // creation and save
-//         when(mockSnackDAO.createSnack(Snack)).thenReturn(Snack);
+    @Test
+    public void testCreateBuyer() throws IOException {  // createSnack may throw IOException
+        // Setup
+        String username = "Sudhir";
+        Buyer buyer = new Buyer(username);
+        // when createSnack is called, return true simulating successful
+        // creation and save
+        when(mockBuyerDAO.createBuyer(username)).thenReturn(buyer);
 
-//         // Invoke
-//         ResponseEntity<Snack> response = snackController.createSnack(Snack);
+        // Invoke
+        ResponseEntity<Buyer> response = buyerController.createBuyer(username);
 
-//         // Analyze
-//         assertEquals(HttpStatus.CREATED,response.getStatusCode());
-//         assertEquals(Snack,response.getBody());
-//     }
+        // Analyze
+        assertEquals(HttpStatus.CREATED,response.getStatusCode());
+        assertEquals(buyer,response.getBody());
+    }
     
-//     @Test
-//     public void testCreateSnackFailed() throws IOException {  // createSnack may throw IOException
-//         // Setup
-//         Snack Snack = new Snack(99,"Oreos", "Chocolate creme sandwich cookies", 20,  2.99);
-//         // when createSnack is called, return false simulating failed
-//         // creation and save
-//         when(mockSnackDAO.createSnack(Snack)).thenReturn(null);
+    @Test
+    public void testCreateBuyerConflict() throws IOException {  // createSnack may throw IOException
+        // Setup
+        String username = "Sudhir";
+        Buyer dupeBuyer = new Buyer("Sudhir");
+        // when createSnack is called, return false simulating failed
+        // creation and save
+        when(mockBuyerDAO.createBuyer(username)).thenReturn(dupeBuyer);
 
-//         // Invoke
-//         ResponseEntity<Snack> response = snackController.createSnack(Snack);
+        // Invoke
+        ResponseEntity<Buyer> response = buyerController.createBuyer(username);
 
-//         // Analyze
-//         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
-//     }
+        // Analyze
+        assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
+    }
 
     
 //     @Test
@@ -281,4 +288,4 @@
 //         // Analyze
 //         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
 //     }
-// }
+}
