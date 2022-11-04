@@ -9,13 +9,13 @@ import com.estore.api.estoreapi.model.Buyer;
 public interface BuyerDAO {
 
     /**
-     * Checks if a {@linkplain Buyer buyer} account exists
+     * Checks if a {@linkplain Buyer buyer} account exists and returns the buyer if so
      * 
      * @param username The username of the {@link Buyer buyer} to check
      * 
-     * @return true if a {@link Buyer buyer} object with the given username exists
+     * @return the {@link Buyer buyer} object with the given username if it exists
      * <br>
-     * false otherwise
+     * null otherwise
      * 
      * @throws IOException if an issue with underlying storage
      */
@@ -40,7 +40,7 @@ public interface BuyerDAO {
      * 
      * @return true if the {@link Buyer buyer} was deleted
      * <br>
-     * false if buyer with the given username does not exist
+     * false if buyer with the given username does not exist or if attempting to delete admin
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
