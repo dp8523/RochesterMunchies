@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import com.estore.api.estoreapi.persistence.BuyerDAO;
 import com.estore.api.estoreapi.persistence.SnackDAO;
 import com.estore.api.estoreapi.model.Buyer;
+import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.model.Snack;
 
 /**
@@ -177,6 +178,35 @@ public class BuyerController {
                 }
             }
             else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/{username}/cartTotal")
+    public ResponseEntity<Double> getTotalCartCost(@PathVariable String username) {
+        LOG.info("GET / " + username + "/cartTotal");
+
+        try {
+
+            Buyer buyer = buyerDao.login(username);
+            if (buyer != null) {
+                double cartTotal = 0;
+                ShoppingCart cart = buyer.getCart();
+
+                for(int snackId : cart.keySet()) {
+                    Snack snack = snackDao.getSnack(snackId);
+                    double snackPrice = snack.getPrice();
+                    int quantity = cart.get(snackId);
+                    double snackTotal = snackPrice * quantity;
+                    cartTotal += snackTotal;
+                }
+                return new ResponseEntity<Double>(cartTotal, HttpStatus.OK);
+            } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }

@@ -26,8 +26,6 @@ public class BuyerFileDAO implements BuyerDAO {
 
     private String filename;    // Filename to read from and write to
 
-    private SnackDAO snackDAO;
-
     /**
      * Creates a Buyer File Data Access Object
      * 
@@ -36,10 +34,9 @@ public class BuyerFileDAO implements BuyerDAO {
      * 
      * @throws IOException when file cannot be accessed or read from
      */
-    public BuyerFileDAO(@Value("${buyers.file}") String filename, ObjectMapper objectMapper, SnackDAO snackDAO) throws IOException {
+    public BuyerFileDAO(@Value("${buyers.file}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        this.snackDAO = snackDAO;
         load();  // load the buyers from the file
     }
 
@@ -122,7 +119,7 @@ public class BuyerFileDAO implements BuyerDAO {
     @Override
     public Buyer createBuyer(String username) throws IOException {
         synchronized(buyers) {
-            Buyer buyer = new Buyer(username, snackDAO);
+            Buyer buyer = new Buyer(username);
             buyers.put(buyer.getUsername(), buyer);
             save(); // may throw an IOException
             return buyer;
@@ -138,7 +135,7 @@ public class BuyerFileDAO implements BuyerDAO {
             if (username.equals("admin")) {
                 return false;
             }
-            Buyer buyer = new Buyer(username, snackDAO);
+            Buyer buyer = new Buyer(username);
             if (buyers.containsKey(buyer.getUsername())) {
                 buyers.remove(buyer.getUsername());
                 return save();
