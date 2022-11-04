@@ -40,5 +40,12 @@
         "description": "This is our example snack for the SprintGFDJNSKGVNERNGIOVEKLRDS 1 Demo",
         "quantity": 100,
         "price": 10.99
+    },
+    {
+        "id": 18,
+        "name": "Sprint 2 Testing",
+        "description": "This is our example snack for the SprintGFDJNSKGVNERNGIOVEKLRDS 1 Demo",
+        "quantity": 100,
+        "price": 10.99
     }
 ]
