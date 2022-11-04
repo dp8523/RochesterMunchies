@@ -2,6 +2,7 @@ package com.estore.api.estoreapi.model;
 
 import java.util.HashMap;
 
+import com.estore.api.estoreapi.persistence.SnackDAO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +14,7 @@ public class Buyer {
 
     @JsonProperty("username") private String username;
     @JsonProperty("cart") private ShoppingCart cart;
+    @JsonProperty("snackDAO") private SnackDAO snackDAO;
 
     /**
      * Create a Buyer with the given username
@@ -23,9 +25,10 @@ public class Buyer {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Buyer(@JsonProperty("username") String username){
+    public Buyer(@JsonProperty("username") String username, @JsonProperty("snackDAO") SnackDAO snackDAO){
         this.username = username;
         this.cart = new ShoppingCart();
+        this.snackDAO = snackDAO;
     }
 
     /**
@@ -67,6 +70,17 @@ public class Buyer {
 
     public boolean snackInCart(int snackID) {
         return cart.containsKey(snackID);
+    }
+    
+    public double getCartCost() {
+        double cartTotal = 0;
+        for(int snackId : cart.keySet()) {
+            double snackPrice = snackId;
+            int quantity = cart.get(snackId);
+            double snackTotal = snackPrice * quantity;
+            cartTotal += snackTotal;
+        }
+        return cartTotal;
     }
 
     /**

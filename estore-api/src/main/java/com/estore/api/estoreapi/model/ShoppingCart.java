@@ -5,11 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 
 public class ShoppingCart extends HashMap<Integer,Integer>{
-    // @JsonProperty("cart") private HashMap<Integer,Integer> cart;
-
-    // public ShoppingCart() {
-    //     cart = new HashMap<Integer,Integer>();
-    // }
 
     public boolean addToCart(@JsonProperty("id") int id) {
         // Assume that id is valid snack
