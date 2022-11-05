@@ -83,14 +83,9 @@ public class BuyerControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
-
-    /*****************************************************************
-     * The following tests will fail until all BuyerController methods
-     * are implemented.
-     ****************************************************************/
     
     @Test
-    public void testCreateBuyer() throws IOException {  // createSnack may throw IOException
+    public void testCreateBuyer() throws IOException {  // createBuyer may throw IOException
         // Setup
         String username = "Sudhir";
         Buyer buyer = new Buyer(username);
@@ -106,7 +101,7 @@ public class BuyerControllerTest {
     }
     
     @Test
-    public void testCreateBuyerConflict() throws IOException {  // createSnack may throw IOException
+    public void testCreateBuyerConflict() throws IOException {  // createBuyer may throw IOException
         // Setup
         String username = "Sudhir";
         Buyer buyer = new Buyer(username);
@@ -122,11 +117,11 @@ public class BuyerControllerTest {
 
     
     @Test
-    public void testCreateBuyerHandleException() throws IOException {  // createSnack may throw IOException
+    public void testCreateBuyerHandleException() throws IOException {  // createBuyer may throw IOException
         // Setup
         String username = "Sudhir";
 
-        // When createSnack is called on the Mock Snack DAO, throw an IOException
+        // When createBuyer is called on the Mock BuyerDAO, throw an IOException
         doThrow(new IOException()).when(mockBuyerDAO).createBuyer(username);
 
         // Invoke
@@ -137,10 +132,10 @@ public class BuyerControllerTest {
     }
 
     @Test
-    public void testDeleteBuyer() throws IOException { // deleteSnack may throw IOException
+    public void testDeleteBuyer() throws IOException { // deleteBuyer may throw IOException
         // Setup
         String username = "Sudhir";
-        // when deleteSnack is called return true, simulating successful deletion
+        // when deleteBuyer is called return true, simulating successful deletion
         when(mockBuyerDAO.deleteBuyer(username)).thenReturn(true);
 
         // Invoke
@@ -151,10 +146,10 @@ public class BuyerControllerTest {
     }
 
     @Test
-    public void testDeleteBuyerNotFound() throws IOException { // deleteSnack may throw IOException
+    public void testDeleteBuyerNotFound() throws IOException { // deleteBuyer may throw IOException
         // Setup
         String username = "Sudhir";
-        // when deleteSnack is called return false, simulating failed deletion
+        // when deleteBuyer is called return false, simulating failed deletion
         when(mockBuyerDAO.deleteBuyer(username)).thenReturn(false);
 
         // Invoke
@@ -165,10 +160,10 @@ public class BuyerControllerTest {
     }
 
     @Test
-    public void testDeleteBuyerHandleException() throws IOException { // deleteSnack may throw IOException
+    public void testDeleteBuyerHandleException() throws IOException { // deleteBuyer may throw IOException
         // Setup
         String username = "Sudhir";
-        // When deleteSnack is called on the Mock Snack DAO, throw an IOException
+        // When deleteBuyer is called on the Mock BuyerDAO, throw an IOException
         doThrow(new IOException()).when(mockBuyerDAO).deleteBuyer(username);
 
         // Invoke
