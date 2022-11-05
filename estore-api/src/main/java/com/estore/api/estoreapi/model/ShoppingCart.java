@@ -1,19 +1,13 @@
 package com.estore.api.estoreapi.model;
-
-import java.util.HashMap;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.HashMap;
 
 public class ShoppingCart extends HashMap<Integer,Integer>{
-    // @JsonProperty("cart") private HashMap<Integer,Integer> cart;
 
-    // public ShoppingCart() {
-    //     this = new HashMap<Integer,Integer>();
-    // }
-
-    public boolean addItemToCart(@JsonProperty("id") int id) {
+    public boolean addToCart(@JsonProperty("id") int id) {
+        // Assume that id is valid snack
         try {
             if (this.containsKey(id)) {
                 this.put(id, this.get(id) + 1);
@@ -22,6 +16,28 @@ public class ShoppingCart extends HashMap<Integer,Integer>{
             else {
                 this.put(id, 1);
                 return true;
+            }
+        }
+        catch (Exception e) {
+            System.out.printf("Error adding SnackID: %i to cart.", id);
+            return false;
+        }
+    }
+
+    public boolean deleteFromCart(@JsonProperty("id") int id) {
+        // Assume that id is valid snack
+        try {
+            if (this.containsKey(id)) {
+                if (this.get(id) == 1) {
+                    this.remove(id);
+                }
+                else {
+                    this.put(id, this.get(id) - 1);
+                }
+                return true;
+            }
+            else {
+                return false;
             }
         }
         catch (Exception e) {
