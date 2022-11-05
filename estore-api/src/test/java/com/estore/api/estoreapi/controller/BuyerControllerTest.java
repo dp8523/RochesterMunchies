@@ -29,7 +29,7 @@ public class BuyerControllerTest {
 
     /**
      * Before each test, create a new BuyerController object and inject
-     * a mock Buyer DAO
+     * a mock BuyerDAO and SnackDAO
      */
     @BeforeEach
     public void setupBuyerController() {
@@ -41,12 +41,13 @@ public class BuyerControllerTest {
     @Test
     public void testLogin() throws IOException {
         // Setup
-        Buyer buyer = new Buyer("sweet");
-        // When the same username is passed in, our mock Buyer DAO will return true
-        when(mockBuyerDAO.login(buyer.getUsername())).thenReturn(buyer);
+        String username = "Adam";
+        Buyer buyer = new Buyer(username);
+        // When the same username is passed in, our mock BuyerDAO will return the corresponding Buyer
+        when(mockBuyerDAO.login(username)).thenReturn(buyer);
 
         // Invoke
-        ResponseEntity<Buyer> response = buyerController.login(buyer.getUsername());
+        ResponseEntity<Buyer> response = buyerController.login(username);
 
         // Analyze
         assertEquals(HttpStatus.FOUND,response.getStatusCode());
@@ -57,8 +58,8 @@ public class BuyerControllerTest {
     public void testLoginNotFound() throws Exception {
         // Setup
         String username = "Sudhir";
-        // When the same id is passed in, our mock Snack DAO will return null, simulating
-        // no Snack found
+        // When the same username is passed in, our mock BuyerDAO will return null, simulating
+        // no Buyer found
         when(mockBuyerDAO.login(username)).thenReturn(null);
 
         // Invoke
@@ -70,10 +71,10 @@ public class BuyerControllerTest {
     }
 
     @Test
-    public void testLoginHandleException() throws Exception { // createSnack may throw IOException
+    public void testLoginHandleException() throws Exception { // createBuyer may throw IOException
         // Setup
         String username = "Sudhir";
-        // When getSnack is called on the Mock Snack DAO, throw an IOException
+        // When getBuyer is called on the Mock BuyerDAO, throw an IOException
         doThrow(new IOException()).when(mockBuyerDAO).login(username);
 
         // Invoke
@@ -93,8 +94,7 @@ public class BuyerControllerTest {
         // Setup
         String username = "Sudhir";
         Buyer buyer = new Buyer(username);
-        // when createSnack is called, return true simulating successful
-        // creation and save
+
         when(mockBuyerDAO.createBuyer(username)).thenReturn(buyer);
 
         // Invoke
@@ -109,10 +109,9 @@ public class BuyerControllerTest {
     public void testCreateBuyerConflict() throws IOException {  // createSnack may throw IOException
         // Setup
         String username = "Sudhir";
-        Buyer dupeBuyer = new Buyer("Sudhir");
-        // when createSnack is called, return false simulating failed
-        // creation and save
-        when(mockBuyerDAO.createBuyer(username)).thenReturn(dupeBuyer);
+        Buyer buyer = new Buyer(username);
+
+        when(mockBuyerDAO.login(username)).thenReturn(buyer);
 
         // Invoke
         ResponseEntity<Buyer> response = buyerController.createBuyer(username);
