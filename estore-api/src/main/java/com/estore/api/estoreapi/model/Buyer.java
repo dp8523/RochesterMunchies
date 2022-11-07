@@ -1,10 +1,6 @@
 package com.estore.api.estoreapi.model;
 
-import java.util.HashMap;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Buyer {
 

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.estore.api.estoreapi.model.Buyer;
-import com.estore.api.estoreapi.model.ShoppingCart;
 
 @Component
 public class BuyerFileDAO implements BuyerDAO {
