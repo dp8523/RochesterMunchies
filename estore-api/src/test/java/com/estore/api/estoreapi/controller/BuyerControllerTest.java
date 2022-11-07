@@ -304,10 +304,11 @@ public class BuyerControllerTest {
         String username = "Sudhir";
         Buyer buyer = new Buyer(username);
         Snack snack = new Snack(snackID, "Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 5, 4.99);
+        buyer.addToCart(snackID);
 
         // When snack does exist
         when(mockSnackDAO.getSnack(snackID)).thenReturn(snack);
-        when(buyer.snackInCart(snackID)).thenReturn(true);
+
         // When buyer does exist
         when(mockBuyerDAO.deleteFromCart(username, snackID)).thenReturn(buyer);
 
@@ -318,7 +319,6 @@ public class BuyerControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
         assertEquals(buyer, response.getBody());
-        // assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
