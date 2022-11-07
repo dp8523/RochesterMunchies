@@ -191,9 +191,6 @@ public class BuyerControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
-    /* TODO: Not sure if this function is needed, unsure of how to separate test from 
-     * testing snackNotFound and buyerNotFound
-     **/
     @Test
     public void testAddToCartBuyerNotFound() throws IOException { // addToCart may throw IOException
         // Setup
