@@ -236,8 +236,8 @@ public class BuyerControllerTest {
         String username = "Sudhir";
         int snackID = 99;
     
-        // When addToCart is called on the Mock Buyer DAO, throw an IOException
-        doThrow(new IOException()).when(mockBuyerDAO).addToCart(username, snackID);
+        // When getSnack is called on the Mock Snack DAO, throw an IOException
+        doThrow(new IOException()).when(mockSnackDAO).getSnack(snackID);
 
         // Invoke
         ResponseEntity<Buyer> response = buyerController.addToCart(username, snackID);
@@ -327,8 +327,8 @@ public class BuyerControllerTest {
         String username = "Sudhir";
         int snackID = 99;
     
-        // When deleteFromCart is called on the Mock Buyer DAO, throw an IOException
-        doThrow(new IOException()).when(mockBuyerDAO).deleteFromCart(username, snackID);
+        // When getSnack is called on the Mock Snack DAO, throw an IOException
+        doThrow(new IOException()).when(mockSnackDAO).getSnack(snackID);
 
         // Invoke
         ResponseEntity<Buyer> response = buyerController.deleteFromCart(username, snackID);
