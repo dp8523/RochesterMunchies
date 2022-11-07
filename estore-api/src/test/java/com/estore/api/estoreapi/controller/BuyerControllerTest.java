@@ -311,10 +311,6 @@ public class BuyerControllerTest {
 
         // When snack does exist
         when(mockSnackDAO.getSnack(snackID)).thenReturn(snack);
-<<<<<<< HEAD
-=======
-
->>>>>>> 1a3fddee0930868c78fab75a8ef5c2224724f039
         // When buyer does exist
         when(mockBuyerDAO.deleteFromCart(username, snackID)).thenReturn(buyer);
 
