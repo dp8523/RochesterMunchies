@@ -210,7 +210,7 @@ public class BuyerControllerTest {
     }
 
     @Test
-    public void testAddToCart() throws IOException { // updateSnack may throw IOException
+    public void testAddToCart() throws IOException { // addToCart may throw IOException
         // Setup
         int snackID = 99;
         String username = "Sudhir";
@@ -230,22 +230,21 @@ public class BuyerControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
-    // TODO: Figure out mismatched HTTPStatus
-    // @Test
-    // public void testAddToCartHandleException() throws IOException { // updateSnack may throw IOException
-    //     // Setup
-    //     String username = "Sudhir";
-    //     int snackID = 99;
+    @Test
+    public void testAddToCartHandleException() throws IOException { // addToCart may throw IOException
+        // Setup
+        String username = "Sudhir";
+        int snackID = 99;
     
-    //     // When addToCart is called on the Mock Buyer DAO, throw an IOException
-    //     doThrow(new IOException()).when(mockBuyerDAO).addToCart(username, snackID);
+        // When addToCart is called on the Mock Buyer DAO, throw an IOException
+        doThrow(new IOException()).when(mockBuyerDAO).addToCart(username, snackID);
 
-    //     // Invoke
-    //     ResponseEntity<Buyer> response = buyerController.addToCart(username, snackID);
+        // Invoke
+        ResponseEntity<Buyer> response = buyerController.addToCart(username, snackID);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 
     // TODO: Figure out how to test function when gettotalcartcost is fully done within controllers
     // @Test
@@ -263,5 +262,78 @@ public class BuyerControllerTest {
     //     // Analyze
     //     assertEquals(HttpStatus.OK,response.getStatusCode());
     //     assertEquals(Snack,response.getBody());
+    // }
+
+    @Test
+    public void testDeleteFromCartSnackNotFound() throws IOException { // deleteFromCart may throw IOException
+        // Setup
+        String username = "Sudhir";
+        int snackID = 99;
+        Buyer buyer = new Buyer(username);
+
+        // When snack does not exist
+        when(mockSnackDAO.getSnack(snackID)).thenReturn(null);
+        // When buyer exists in mock
+        when(mockBuyerDAO.deleteFromCart(username, snackID)).thenReturn(null);
+
+        ResponseEntity<Buyer> response = buyerController.deleteFromCart(username, snackID);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteFromCartBuyerNotFound() throws IOException { // deleteFromCart may throw IOException
+        // Setup
+        String username = "Sudhir";
+        int snackID = 99;
+        Snack snack = new Snack(99, "Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 5, 4.99);
+
+        // When snack does exist
+        when(mockSnackDAO.getSnack(snackID)).thenReturn(snack);
+        // When buyer does not exist
+        when(mockBuyerDAO.deleteFromCart(username, snackID)).thenReturn(null);
+
+        ResponseEntity<Buyer> response = buyerController.deleteFromCart(username, snackID);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteFromCart() throws IOException { // deleteFromCart may throw IOException
+        // Setup
+        int snackID = 99;
+        String username = "Sudhir";
+        Buyer buyer = new Buyer(username);
+        Snack snack = new Snack(snackID, "Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 5, 4.99);
+
+        // When snack does exist
+        when(mockSnackDAO.getSnack(snackID)).thenReturn(snack);
+        // When buyer does exist
+        when(mockBuyerDAO.deleteFromCart(username, snackID)).thenReturn(buyer);
+
+        // Invoke
+        ResponseEntity<Buyer> response = buyerController.deleteFromCart(username, snackID);
+
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(buyer, response.getBody());
+    }
+
+    // @Test
+    // public void testDeleteFromCartHandleException() throws IOException { // deleteFromCart may throw IOException
+    //     // Setup
+    //     String username = "Sudhir";
+    //     int snackID = 99;
+    
+    //     // When deleteFromCart is called on the Mock Buyer DAO, throw an IOException
+    //     doThrow(new IOException()).when(mockBuyerDAO).deleteFromCart(username, snackID);
+
+    //     // Invoke
+    //     ResponseEntity<Buyer> response = buyerController.deleteFromCart(username, snackID);
+
+    //     // Analyze
+    //     assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     // }
 }
