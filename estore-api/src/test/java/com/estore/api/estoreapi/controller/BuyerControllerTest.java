@@ -307,9 +307,14 @@ public class BuyerControllerTest {
         String username = "Sudhir";
         Buyer buyer = new Buyer(username);
         Snack snack = new Snack(snackID, "Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 5, 4.99);
+        buyer.addToCart(snackID);
 
         // When snack does exist
         when(mockSnackDAO.getSnack(snackID)).thenReturn(snack);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1a3fddee0930868c78fab75a8ef5c2224724f039
         // When buyer does exist
         when(mockBuyerDAO.deleteFromCart(username, snackID)).thenReturn(buyer);
 
