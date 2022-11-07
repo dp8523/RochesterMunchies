@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"username":"adam","name":"adam","cart":{"cart":{}}},{"username":"admin","name":"admin","cart":{"cart":{}}},{"username":"bob","name":"bob","cart":{"cart":{}}}]
+=======
+[{"username":"adam","cart":{"cart":{}}},{"username":"admin","cart":{"cart":{}}}]
+>>>>>>> 8280b119fd14d41c152d7fd49a72355fc3f8679f

@@ -9,7 +9,8 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
-  username: String | undefined;
+  htmlPage: String | undefined;
+  user: User | undefined;
 
   constructor(private userService: UserService) { }
 
@@ -18,14 +19,36 @@ export class LoginComponent implements OnInit {
   }
 
   login(username: String): void {
-    username.trim();
-    this.userService.login(username).subscribe();
+
+    console.log("Before");
+    username = username.trim();
+    this.userService.login(username).subscribe(user => this.user = user);
+
+    console.log(this.user);
+    if (this.user){
+
+      console.log("User exists!");
+      if(this.user.username === "admin"){
+      this.htmlPage = "/inventory";
+      }
+      else if (this.user.username){
+        this.htmlPage = "/buyer_inventory";
+      }
+    }
+    this.htmlPage = "/login";
   }
 
   register(username: String): void {
-    
     username.trim();
-    this.userService.register(username).subscribe();
+    this.userService.register(username).subscribe(user => this.user = user);
+
+    if (this.user){
+      console.log("User exists!");
+      if (this.user.username){
+        this.htmlPage = "/buyer_inventory";
+      }
+    }
+    this.htmlPage = "/login";
   }
 
   
