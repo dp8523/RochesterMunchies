@@ -193,8 +193,8 @@ public class BuyerController {
         LOG.info("GET / " + username + "/cartTotal");
 
         try {
-
             Buyer buyer = buyerDao.login(username);
+
             if (buyer != null) {
                 double cartTotal = 0;
                 ShoppingCart cart = buyer.getCart();
@@ -206,6 +206,7 @@ public class BuyerController {
                     double snackTotal = snackPrice * quantity;
                     cartTotal += snackTotal;
                 }
+                
                 return new ResponseEntity<Double>(cartTotal, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
