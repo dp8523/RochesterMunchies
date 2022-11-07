@@ -1,4 +1,4 @@
 export interface User {
     username: String;
-    cart: Map<number, number>;
+    cart: Map<Number, Number>;
 }
