@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
@@ -85,13 +86,13 @@ public class BuyerController {
      * ResponseEntity with HTTP status of CONFLICT if {@link Buyer buyer} object already exists
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("/{username}")
-    public ResponseEntity<Buyer> createBuyer(@PathVariable String username) {
+    @PostMapping("")
+    public ResponseEntity<Buyer> createBuyer(@RequestParam String username) {
         LOG.info("POST /buyers " + username);
 
         try{
             Buyer result = buyerDao.login(username);
-
+            
             if (result == null) {
                 Buyer buyer = buyerDao.createBuyer(username);
                 return new ResponseEntity<Buyer>(buyer, HttpStatus.CREATED);

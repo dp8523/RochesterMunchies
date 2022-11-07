@@ -1,0 +1,54 @@
+.list {
+    list-style: none;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    background-color: aliceblue;
+}
+
+.total {
+    background-color: lightblue;
+    padding: 5px;
+}
+
+.id {
+    font-size: 18px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.label {
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+
+
+.buttons {
+    text-align: center;
+}
+
+.back {
+    padding: 10px;
+    margin-right: 5px;
+}
+
+.save {
+    margin-left: 5px;
+    padding: 10px;
+}
+
+.a { 
+    padding: 1rem;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #e8e8e8;
+    color: #3d3d3d;
+    border-radius: 4px;
+ }
