@@ -1,17 +1,47 @@
 h1 {
     text-align: center; 
+    color: #fffefe;
     }
     nav {
         text-align: center;
         padding-bottom: 10px;
+        width: 100%;
+        height: 100px;
+        background-color: black;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+    
     }
-    nav a{
-        padding: 1rem;
+    nav a1, a2, a3 {
         text-decoration: none;
-        margin-top: 10px;
+        margin: 5px;
         display: inline-block;
         background-color: #e8e8e8;
-        color: #3d3d3d;
+        color: #fffefe;
         border-radius: 4px;
+        background: transparent;
+        transition: all .3s cubic-bezier(.39,.575,.565,1);
+        box-shadow: none;
     }
+
+    .a1 {
+        
+    }
+
+    .a2 {
+        position: absolute;
+        top: 100px;
+        left: 50px; 
+       
+    }
+
+    .a3 {
+        position: absolute;
+        top: 100px;
+        right : 20px; 
+        text-align: right;
+    }
+    
 
