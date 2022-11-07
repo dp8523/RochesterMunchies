@@ -230,6 +230,7 @@ public class BuyerControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+    // TODO: Figure out mismatched HTTPStatus
     @Test
     public void testAddToCartHandleException() throws IOException { // updateSnack may throw IOException
         // Setup
