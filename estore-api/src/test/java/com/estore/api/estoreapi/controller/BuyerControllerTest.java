@@ -172,4 +172,92 @@ public class BuyerControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
+    @Test
+    public void testAddToCartSnackNotFound() throws IOException { // addToCart may throw IOException
+        // Setup
+        String username = "Sudhir";
+        int snackID = 99;
+        Buyer buyer = new Buyer(username);
+
+        // When snack does not exist
+        when(mockSnackDAO.getSnack(snackID)).thenReturn(null);
+        // When buyer exists in mock
+        when(mockBuyerDAO.addToCart(username, snackID)).thenReturn(buyer);
+
+        ResponseEntity<Buyer> response = buyerController.addToCart(username, snackID);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testAddToCartBuyerNotFound() throws IOException { // addToCart may throw IOException
+        // Setup
+        String username = "Sudhir";
+        int snackID = 99;
+        Snack snack = new Snack(99, "Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 5, 4.99);
+
+        // When snack does exist
+        when(mockSnackDAO.getSnack(snackID)).thenReturn(snack);
+        // When buyer does not exist
+        when(mockBuyerDAO.addToCart(username, snackID)).thenReturn(null);
+
+        ResponseEntity<Buyer> response = buyerController.addToCart(username, snackID);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testAddToCart() throws IOException { // updateSnack may throw IOException
+        // Setup
+        int snackID = 12;
+        String username = "adam";
+        Buyer buyer = new Buyer(username);
+        Snack snack = new Snack(snackID, "Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 5, 4.99);
+
+        // When snack does exist
+        when(mockSnackDAO.getSnack(snackID)).thenReturn(snack);
+        // When buyer does exist
+        when(mockBuyerDAO.addToCart(username, snackID)).thenReturn(buyer);
+
+        // Invoke
+        ResponseEntity<Buyer> response = buyerController.addToCart(username, snackID);
+
+        // Analyze
+        assertEquals(buyer, response.getBody());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testAddToCartHandleException() throws IOException { // updateSnack may throw IOException
+        // Setup
+        String username = "Sudhir";
+        int snackID = 99;
+    
+        // When addToCart is called on the Mock Buyer DAO, throw an IOException
+        doThrow(new IOException()).when(mockBuyerDAO).addToCart(username, snackID);
+
+        // Invoke
+        ResponseEntity<Buyer> response = buyerController.addToCart(username, snackID);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    // @Test
+    // public void testGetTotalCartCost() throws IOException { // addToCart may throw IOException
+    //     // Setup
+    //     Snack Snack = new Snack(99,"Camel Balls", "Extra Sour Bubble Gum Jawbreaker", 5, 9.99);
+    //     // When the same id is passed in, our mock Snack DAO will return the Snack object
+    //     when(mockBuyerDAO.getTotalCartCost(Snack.getId())).thenReturn(Snack);
+
+    //     // Invoke
+    //     ResponseEntity<Snack> response = snackController.getSnack(Snack.getId());
+
+    //     // Analyze
+    //     assertEquals(HttpStatus.OK,response.getStatusCode());
+    //     assertEquals(Snack,response.getBody());
+    // }
 }

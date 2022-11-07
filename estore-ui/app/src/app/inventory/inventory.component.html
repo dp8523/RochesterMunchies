@@ -1,5 +1,31 @@
 <app-snack-search></app-snack-search>
 
+<div class="add-snack">
+    <li>
+        <label class="label" for="new-snack">Snack name: </label>
+        <input class="input" id="new-snack-name" #snackName/>
+    </li>
+    <li>
+        <label class="label" for="new-snack">Snack description: </label>
+        <input class="input" id="new-snack-description" #snackDescription/>
+    </li>
+    <li>
+        <label class="label" for="new-snack">Snack quantity: </label>
+        <input class="input" id="new-snack-quantity" #snackQuantity/>
+    </li>
+    <li>
+        <label class="label" for="new-snack">Snack price: </label>
+        <input class="input" id="new-snack-price" #snackPrice/>
+    </li>
+    <div class="buttons">
+        <button type="button" class="add-button" (click)="add(snackName.value, snackDescription.value, snackQuantity.value, snackPrice.value);">
+            Add snack
+        </button>
+    </div>
+
+</div>
+
+
 <ul class="Inventory">
     <li *ngFor="let snack of snacks">
         <a routerLink="/detail/{{snack.id}}">
