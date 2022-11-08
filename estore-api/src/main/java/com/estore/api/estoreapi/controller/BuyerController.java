@@ -86,8 +86,8 @@ public class BuyerController {
      * ResponseEntity with HTTP status of CONFLICT if {@link Buyer buyer} object already exists
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("")
-    public ResponseEntity<Buyer> createBuyer(@RequestParam String username) {
+    @PostMapping("/{username}")
+    public ResponseEntity<Buyer> createBuyer(@PathVariable String username) {
         LOG.info("POST /buyers " + username);
 
         try{
