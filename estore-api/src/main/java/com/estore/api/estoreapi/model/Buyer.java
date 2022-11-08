@@ -36,6 +36,15 @@ public class Buyer {
      */
     public String getUsername() {return username;}
 
+    public boolean setCart(ShoppingCart newCart) {
+        try {
+            cart = newCart;
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public ShoppingCart getCart() {
         return cart;
     }
@@ -46,15 +55,6 @@ public class Buyer {
 
     public void deleteFromCart(@JsonProperty("id") int snackID) {
         cart.deleteFromCart(snackID);
-    }
-
-    public boolean setCart(ShoppingCart newCart) {
-        try {
-            cart = newCart;
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     public boolean checkoutCart() {
