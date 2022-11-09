@@ -69,6 +69,19 @@ public class BuyerFileDAOTest {
     }
 
     @Test
+    public void testCreateBuyerAlreadyExists() {
+        // Setup
+        String username = "Adam";
+
+        // Invoke
+        Buyer result = assertDoesNotThrow(() -> buyerFileDAO.createBuyer(username),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertEquals(null, result);
+    }
+
+    @Test
     public void testCreateBuyer() {
         // Setup
         String username = "Robert";
