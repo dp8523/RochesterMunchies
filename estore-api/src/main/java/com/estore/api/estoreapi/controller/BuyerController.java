@@ -88,8 +88,8 @@ public class BuyerController {
         LOG.info("POST /buyers " + username);
 
         try{            
-            if (buyerDao.createBuyer(username) != null) {
-                Buyer buyer = buyerDao.createBuyer(username);
+            Buyer buyer = buyerDao.createBuyer(username);
+            if (buyer != null) {
                 return new ResponseEntity<Buyer>(buyer, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<Buyer>(HttpStatus.CONFLICT);
