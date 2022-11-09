@@ -36,6 +36,10 @@ public class Buyer {
      */
     public String getUsername() {return username;}
 
+    public void setCart(ShoppingCart newCart) {
+        cart = newCart;
+    }
+
     public ShoppingCart getCart() {
         return cart;
     }
@@ -48,33 +52,13 @@ public class Buyer {
         cart.deleteFromCart(snackID);
     }
 
-    public boolean setCart(ShoppingCart newCart) {
-        try {
-            cart = newCart;
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean checkoutCart() {
+    public boolean clearCart() {
         return cart.clearCart();
     }
 
     public boolean snackInCart(int snackID) {
         return cart.containsKey(snackID);
     }
-    
-    // public double getCartCost() {
-    //     double cartTotal = 0;
-    //     for(int snackId : cart.keySet()) {
-    //         double snackPrice = snackId;
-    //         int quantity = cart.get(snackId);
-    //         double snackTotal = snackPrice * quantity;
-    //         cartTotal += snackTotal;
-    //     }
-    //     return cartTotal;
-    // }
 
     /**
      * {@inheritDoc}
@@ -106,6 +90,8 @@ public class Buyer {
             return false;
         if (getClass() != obj.getClass())
             return false;
+
+        
         Buyer other = (Buyer) obj;
         if (username == null) {
             if (other.username != null)
