@@ -1,9 +1,6 @@
 package com.estore.api.estoreapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.mockito.Mockito.description;
-
-import java.util.Map;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -76,7 +73,6 @@ public class BuyerTest {
 
         // Analyze
         assertEquals(expectedCart,buyer.getCart());
-
     }
 
     @Test
@@ -98,17 +94,53 @@ public class BuyerTest {
 
         // Analyze
         assertEquals(expectedCart,buyer.getCart());
+    }
 
+    @Test
+    public void testClearCart() {
+        // Setup
+        String username = "SnackLover";
+        Buyer buyer = new Buyer(username);
+
+        buyer.addToCart(1);
+        buyer.addToCart(1);
+        buyer.addToCart(2);
+
+        ShoppingCart expectedCart = new ShoppingCart();
+
+        // Invoke
+        buyer.clearCart();
+
+        // Analyze
+        assertEquals(expectedCart,buyer.getCart());
     }
 
     @Test
     public void testSnackInCart() {
         // Setup
+        String username = "SnackLover";
+        Buyer buyer = new Buyer(username);
+
+        buyer.addToCart(1);
 
         // Invoke
+        boolean result = buyer.snackInCart(1);
 
         // Analyze
+        assertEquals(true,result);
+    }
 
+    @Test
+    public void testSnackNotInCart() {
+        // Setup
+        String username = "SnackLover";
+        Buyer buyer = new Buyer(username);
+
+        // Invoke
+        boolean result = buyer.snackInCart(1);
+
+        // Analyze
+        assertEquals(false,result);
     }
 
     @Test
@@ -124,5 +156,36 @@ public class BuyerTest {
 
         // Analyze
         assertEquals(expectedString,actualString);
+    }
+
+    @Test
+    public void testHashCode() {
+        // Setup
+        String username = "SnackLover";
+
+        Buyer buyer1 = new Buyer(username);
+        Buyer buyer2 = new Buyer(username);
+
+        // Invoke
+        int result1 = buyer1.hashCode();
+        int result2 = buyer2.hashCode();
+
+        // Analyze
+        assertEquals(result1,result2);
+    }
+
+    @Test
+    public void testEquals() {
+        // Setup
+        String username = "SnackLover";
+
+        Buyer buyer1 = new Buyer(username);
+        Buyer buyer2 = new Buyer(username);
+
+        // Invoke
+        boolean result = buyer1.equals(buyer2);
+
+        // Analyze
+        assertEquals(true,result);
     }
 }

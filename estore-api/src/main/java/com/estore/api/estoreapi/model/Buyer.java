@@ -36,13 +36,8 @@ public class Buyer {
      */
     public String getUsername() {return username;}
 
-    public boolean setCart(ShoppingCart newCart) {
-        try {
-            cart = newCart;
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public void setCart(ShoppingCart newCart) {
+        cart = newCart;
     }
 
     public ShoppingCart getCart() {
@@ -57,7 +52,7 @@ public class Buyer {
         cart.deleteFromCart(snackID);
     }
 
-    public boolean checkoutCart() {
+    public boolean clearCart() {
         return cart.clearCart();
     }
 
