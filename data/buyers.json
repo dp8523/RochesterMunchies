@@ -1,1 +1,32 @@
-[{"username":"adam","cart":{"12":8,"14":4}},{"username":"dara","cart":{}},{"username":"jaden","cart":{}},{"username":"lucie","cart":{"12":5,"15":3}},{"username":"rober","cart":{}},{"username":"robert","cart":{}}]
+[
+    {
+        "username": "adam",
+        "cart": {
+            "12": 8,
+            "14": 4
+        }
+    },
+    {
+        "username": "dara",
+        "cart": {}
+    },
+    {
+        "username": "jaden",
+        "cart": {}
+    },
+    {
+        "username": "lucie",
+        "cart": {
+            "12": 5,
+            "15": 3
+        }
+    },
+    {
+        "username": "rober",
+        "cart": {}
+    },
+    {
+        "username": "robert",
+        "cart": {}
+    }
+]
