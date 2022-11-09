@@ -39,17 +39,11 @@ public class BuyerFileDAO implements BuyerDAO {
         load();  // load the buyers from the file
     }
 
-    private Buyer[] getBuyersArray() {
-        return getBuyersArray(null);
-    }
-
-    private Buyer[] getBuyersArray(String containsText) { // if containsText == null, no filter
+    private Buyer[] getBuyersArray() { 
         ArrayList<Buyer> buyerArrayList = new ArrayList<>();
 
         for (Buyer buyer : buyers.values()) {
-            if (containsText == null || buyer.getUsername().contains(containsText)) {
-                buyerArrayList.add(buyer);
-            }
+            buyerArrayList.add(buyer);
         }
 
         Buyer[] buyerArray = new Buyer[buyerArrayList.size()];
