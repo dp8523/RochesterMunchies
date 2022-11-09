@@ -1,1 +1,39 @@
+<<<<<<< HEAD
 [{"username":"AC","cart":{}},{"username":"adam","cart":{"14":2}},{"username":"dara","cart":{}},{"username":"jaden","cart":{}},{"username":"lucie","cart":{"12":5,"15":3}},{"username":"rober","cart":{}},{"username":"robert","cart":{}},{"username":"robert12","cart":{}}]
+=======
+[
+    {
+        "username": "AC",
+        "cart": {}
+    },
+    {
+        "username": "adam",
+        "cart": {
+            "14": 2
+        }
+    },
+    {
+        "username": "dara",
+        "cart": {}
+    },
+    {
+        "username": "jaden",
+        "cart": {}
+    },
+    {
+        "username": "lucie",
+        "cart": {
+            "12": 5,
+            "15": 3
+        }
+    },
+    {
+        "username": "rober",
+        "cart": {}
+    },
+    {
+        "username": "robert12",
+        "cart": {}
+    }
+]
+>>>>>>> 8ba8dae2a39a222302f0915eb125032e3fc2c85d

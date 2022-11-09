@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     
   }
 
-  login(username: String): void {
+  login(username: string): void {
 
     console.log("Before");
     //console.log(this.user1);
@@ -28,8 +28,10 @@ export class LoginComponent implements OnInit {
     console.log(username.trim());
 
     if (username){
+      console.log("Hello");
       this.userService.login(username).subscribe(user => {
         console.log("After");
+        console.log(user);
         if (user != null){
           this.user = user;
           console.log("User exists!");
@@ -41,26 +43,23 @@ export class LoginComponent implements OnInit {
             this.htmlPage = "/buyer_inventory";
           }
         }
-      } );
-
-      //console.log(this.user);
-      /*
-      if (this.user){
-
-        console.log("User exists!");
-        if(this.user.username === "admin"){
-        this.htmlPage = "/inventory";
-        }
-        else if (this.user.username){
-          this.htmlPage = "/buyer_inventory";
-        }
-      }
-      */
+        } );
+      
     }
-    this.htmlPage = "/login";  
+    /*
+    if(username === "admin"){
+      this.htmlPage = "/inventory";
+    }
+    else if (username){
+      this.htmlPage = "/buyer_inventory";
+    }
+    else{
+      this.htmlPage = "/login";
+    } 
+    */ 
   }
 
-  register(username: String): void {
+  register(username: string): void {
     username.trim();
     console.log("Before");
     this.userService.register(username).subscribe(user => this.user = user);
@@ -68,7 +67,7 @@ export class LoginComponent implements OnInit {
     console.log(this.user);
     if (this.user){
       console.log("User exists!");
-      if (this.user.username){
+      if (username){
         this.htmlPage = "/buyer_inventory";
       }
     }

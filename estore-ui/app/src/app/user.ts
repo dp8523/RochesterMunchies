@@ -1,4 +1,4 @@
 export interface User {
-    username: String;
-    cart: Map<Number, Number>;
+    username: string;
+    cart: { [key: string] : number };
 }
