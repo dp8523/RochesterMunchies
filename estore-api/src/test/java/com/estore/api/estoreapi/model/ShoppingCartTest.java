@@ -1,7 +1,14 @@
 package com.estore.api.estoreapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
 
+import java.util.HashMap;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -10,57 +17,92 @@ import org.junit.jupiter.api.Test;
  */
 @Tag("Model-tier")
 public class ShoppingCartTest {
+
     @Test
-    public void testCtor() {
+    public void testAddToCart() {
         // Setup
-        int expected_id = 99;
-        String expected_name = "Camel Balls";
-        String expected_description = "Extra Sour Bubble Gum Jawbreaker";
-        int expected_quantity = 5;
-        double expected_price = 9.99;
+        int snackID = 99;
+        ShoppingCart cart = new ShoppingCart();
 
         // Invoke
-        Snack snack = new Snack(expected_id,expected_name,expected_description,expected_quantity,expected_price);
+        boolean response = cart.addToCart(snackID);
 
         // Analyze
-        assertEquals(expected_id,snack.getId());
-        assertEquals(expected_name,snack.getName());
+        assertEquals(true, response);
     }
 
-    // @Test
-    // public void testName() {
-    //     // Setup
-    //     int id = 99;
-    //     String name = "Camel Balls";
-    //     String description = "Extra Sour Bubble Gum Jawbreaker";
-    //     int quantity = 5;
-    //     double price = 9.99;
-    //     Snack snack = new Snack(id,name,description,quantity,price);
+    @Test
+    public void testDeleteFromCart() {
+        // Setup
+        int snackID = 99;
+        ShoppingCart cart = new ShoppingCart();
+        cart.addToCart(snackID);
 
-    //     String expected_name = "Animal Crackers";
+        // Invoke
+        boolean response = cart.deleteFromCart(snackID);
 
-    //     // Invoke
-    //     snack.setName(expected_name);
+        // Analyze
+        assertEquals(true, response);
+    }
 
-    //     // Analyze
-    //     assertEquals(expected_name,snack.getName());
-    // }
+    @Test
+    public void testDeleteFromCartNotFound() {
+        // Setup
+        int snackID = 99;
+        ShoppingCart cart = new ShoppingCart();
 
-    // @Test
-    // public void testToString() {
-    //     // Setup
-    //     int id = 99;
-    //     String name = "Camel Balls";
-    //     String description = "Extra Sour Bubble Gum Jawbreaker";
-    //     int quantity = 5;
-    //     double price = 9.99;
-    //     String expected_string = String.format(Snack.STRING_FORMAT,id,name,description,quantity,price);
-    //     Snack snack = new Snack(id,name,description,quantity,price);
+        // Invoke
+        boolean response = cart.deleteFromCart(snackID);
 
-    //     // Invoke
-    //     String actual_string = snack.toString();
+        // Analyze
+        assertEquals(false, response);
+    }
 
-    //     // Analyze
-    //     assertEquals(expected_string,actual_string);
-    // }
+    @Test
+    public void testGetCart() {
+        // Setup
+        int snackID = 99;
+        ShoppingCart cart = new ShoppingCart();
+        cart.addToCart(snackID);
+        HashMap<Integer, Integer> expectedCart = new HashMap<Integer, Integer>();
+        expectedCart.put(snackID, 1);
+
+        // Invoke
+        HashMap<Integer, Integer> response = cart.getCart();
+
+        // Analyze
+        assertEquals(expectedCart, response);
+    }
+
+    @Test
+    public void testClearCart() {
+        // Setup
+        int snackID = 99;
+        ShoppingCart cart = new ShoppingCart();
+        cart.addToCart(snackID);
+
+        // Invoke
+        boolean response = cart.clearCart();
+
+        // Analyze
+        assertEquals(true, response);
+    }
+
+    @Test
+    public void testToString() {
+        // Setup
+        int snackID = 99;
+        ShoppingCart cart = new ShoppingCart();
+        cart.addToCart(snackID);
+
+        String expected_string = "{\"99\":1}";
+
+        // Invoke
+        String actual_string = cart.toString();
+
+        // Analyze
+        assertEquals(expected_string,actual_string);
+    }
+
+    // TODO: Test toString Handle Exception function, object mapper difficulty
 }
