@@ -2,8 +2,8 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.TreeMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -83,7 +83,7 @@ public class BuyerFileDAO implements BuyerDAO {
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
-        buyers = new TreeMap<>();
+        buyers = new HashMap<>();
 
         // Deserializes the JSON objects from the file into an array of buyers
         // readValue will throw an IOException if there's an issue with the file
