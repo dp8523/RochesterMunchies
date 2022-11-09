@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
 
 import java.io.IOException;
 
@@ -237,7 +241,7 @@ public class BuyerControllerTest {
         int snackID = 99;
     
         // When addToCart is called on the Mock Buyer DAO, throw an IOException
-        doThrow(new IOException()).when(mockBuyerDAO).addToCart(username, snackID);
+        when(mockBuyerDAO.addToCart(username, snackID)).thenThrow(new IOException());
 
         // Invoke
         ResponseEntity<Buyer> response = buyerController.addToCart(username, snackID);
