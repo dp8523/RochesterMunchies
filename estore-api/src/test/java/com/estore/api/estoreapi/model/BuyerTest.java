@@ -175,6 +175,51 @@ public class BuyerTest {
     }
 
     @Test
+    public void testEqualsIsNull() {
+        // Setup
+        String username = "SnackLover";
+
+        Buyer buyer1 = new Buyer(username);
+
+        // Invoke
+        boolean result = buyer1.equals(null);
+
+        // Analyze
+        assertEquals(false,result);
+    }
+
+    @Test
+    public void testEqualsSameClass() {
+        // Setup
+        String username = "SnackLover";
+        String username2 = "SnackHater";
+
+        Buyer buyer1 = new Buyer(username);
+        Buyer buyer2 = new Buyer(username2);
+
+        // Invoke
+        boolean result = buyer1.getClass().equals(buyer2.getClass());
+
+        // Analyze
+        assertEquals(true,result);
+    }
+
+    @Test
+    public void testEqualsSameUsername() {
+        // Setup
+        String username = "SnackLover";
+
+        Buyer buyer1 = new Buyer(username);
+        Buyer buyer2 = new Buyer(username);
+
+        // Invoke
+        boolean result = buyer1.getUsername().equals(buyer2.getUsername());
+
+        // Analyze
+        assertEquals(true,result);
+    }
+
+    @Test
     public void testEquals() {
         // Setup
         String username = "SnackLover";
@@ -187,5 +232,21 @@ public class BuyerTest {
 
         // Analyze
         assertEquals(true,result);
+    }
+
+    @Test
+    public void testEqualsNotSameUsername() {
+        // Setup
+        String username = "SnackLover";
+        String username2 = "SnackHater";
+
+        Buyer buyer1 = new Buyer(username);
+        Buyer buyer2 = new Buyer(username2);
+
+        // Invoke
+        boolean result = buyer1.equals(buyer2);
+
+        // Analyze
+        assertEquals(false,result);
     }
 }

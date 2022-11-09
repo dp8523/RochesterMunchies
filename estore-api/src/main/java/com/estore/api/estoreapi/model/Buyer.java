@@ -90,6 +90,8 @@ public class Buyer {
             return false;
         if (getClass() != obj.getClass())
             return false;
+
+        
         Buyer other = (Buyer) obj;
         if (username == null) {
             if (other.username != null)
