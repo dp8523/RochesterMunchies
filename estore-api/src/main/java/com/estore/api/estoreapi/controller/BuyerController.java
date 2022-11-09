@@ -68,7 +68,7 @@ public class BuyerController {
             if (buyer == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                return new ResponseEntity<Buyer>(buyer, HttpStatus.FOUND);
+                return new ResponseEntity<Buyer>(buyer, HttpStatus.OK);
             }
         }
         catch(IOException e) {
