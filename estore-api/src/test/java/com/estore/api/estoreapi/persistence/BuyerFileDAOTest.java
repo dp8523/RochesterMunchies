@@ -198,9 +198,7 @@ public class BuyerFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(Buyer[].class));
 
-        assertThrows(IOException.class,
-                        () -> buyerFileDAO.createBuyer("Dara"),
-                        "IOException not thrown");
+        assertThrows(IOException.class, () -> buyerFileDAO.createBuyer("djsiaod"), "IOException not thrown");
     }
 
     @Test
