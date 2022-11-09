@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'; 
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -29,11 +30,11 @@ export class LoginComponent implements OnInit {
 
     if (username){
       console.log("Hello");
-      this.userService.login(username).subscribe(user => {
+      this.userService.login(username).subscribe(dude => {
         console.log("After");
-        console.log(user);
-        if (user != null){
-          this.user = user;
+        console.log(dude);
+        if (dude != null){
+          this.user = dude;
           console.log("User exists!");
           if(username === "admin"){
             console.log("admin user");
@@ -44,7 +45,6 @@ export class LoginComponent implements OnInit {
           }
         }
         } );
-      
     }
     /*
     if(username === "admin"){

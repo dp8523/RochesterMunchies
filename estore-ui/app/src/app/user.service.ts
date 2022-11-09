@@ -17,7 +17,6 @@ export class UserService {
 
   login(username: string): Observable<User> {
     const url = `${this.userURL}/${username}`;
-    console.log(this.http.get<User>(url, this.httpOptions));
     return this.http.get<User>(url, this.httpOptions)
     .pipe(catchError(this.handleError<User>(`getUser username=${username}`)))
   }
