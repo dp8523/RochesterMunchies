@@ -175,6 +175,22 @@ public class BuyerTest {
     }
 
     @Test
+    public void testHashCodeUserNull() {
+        // Setup
+        String username = null;
+
+        Buyer buyer1 = new Buyer(username);
+        Buyer buyer2 = new Buyer(username);
+
+        // Invoke
+        int result1 = buyer1.hashCode();
+        int result2 = buyer2.hashCode();
+
+        // Analyze
+        assertEquals(result1,result2);
+    }
+
+    @Test
     public void testEqualsIsNull() {
         // Setup
         String username = "SnackLover";
@@ -183,6 +199,19 @@ public class BuyerTest {
 
         // Invoke
         boolean result = buyer1.equals(null);
+
+        // Analyze
+        assertEquals(false,result);
+    }
+
+    @Test
+    public void testEqualsB1IsNull() {
+        // Setup
+        Buyer buyer1 = new Buyer(null);
+        Buyer buyer2 = new Buyer("not null");
+
+        // Invoke
+        boolean result = buyer1.equals(buyer2);
 
         // Analyze
         assertEquals(false,result);
@@ -202,6 +231,20 @@ public class BuyerTest {
 
         // Analyze
         assertEquals(true,result);
+    }
+
+    @Test
+    public void testEqualsDiffClass() {
+        // Setup
+        String username = "SnackLover";
+
+        Buyer buyer1 = new Buyer(username);
+
+        // Invoke
+        boolean result = buyer1.equals(String.class);
+
+        // Analyze
+        assertEquals(false,result);
     }
 
     @Test
