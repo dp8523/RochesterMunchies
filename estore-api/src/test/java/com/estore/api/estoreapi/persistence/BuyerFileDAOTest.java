@@ -69,6 +69,19 @@ public class BuyerFileDAOTest {
     }
 
     @Test
+    public void testCreateBuyerAlreadyExists() {
+        // Setup
+        String username = "Adam";
+
+        // Invoke
+        Buyer result = assertDoesNotThrow(() -> buyerFileDAO.createBuyer(username),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertEquals(null, result);
+    }
+
+    @Test
     public void testCreateBuyer() {
         // Setup
         String username = "Robert";
@@ -185,9 +198,7 @@ public class BuyerFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(Buyer[].class));
 
-        assertThrows(IOException.class,
-                        () -> buyerFileDAO.createBuyer("Dara"),
-                        "IOException not thrown");
+        assertThrows(IOException.class, () -> buyerFileDAO.createBuyer("djsiaod"), "IOException not thrown");
     }
 
     @Test

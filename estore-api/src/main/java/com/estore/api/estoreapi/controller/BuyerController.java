@@ -87,11 +87,9 @@ public class BuyerController {
     public ResponseEntity<Buyer> createBuyer(@PathVariable String username) {
         LOG.info("POST /buyers " + username);
 
-        try{
-            Buyer result = buyerDao.login(username);
-            
-            if (result == null) {
-                Buyer buyer = buyerDao.createBuyer(username);
+        try{            
+            Buyer buyer = buyerDao.createBuyer(username);
+            if (buyer != null) {
                 return new ResponseEntity<Buyer>(buyer, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<Buyer>(HttpStatus.CONFLICT);

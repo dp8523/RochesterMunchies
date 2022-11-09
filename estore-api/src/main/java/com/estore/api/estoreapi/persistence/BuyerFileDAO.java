@@ -118,10 +118,15 @@ public class BuyerFileDAO implements BuyerDAO {
     @Override
     public Buyer createBuyer(String username) throws IOException {
         synchronized(buyers) {
-            Buyer buyer = new Buyer(username);
-            buyers.put(buyer.getUsername(), buyer);
-            save(); // may throw an IOException
-            return buyer;
+            if (buyers.containsKey(username)) {
+                return null;
+            }
+            else {
+                Buyer buyer = new Buyer(username);
+                buyers.put(buyer.getUsername(), buyer);
+                save(); // may throw an IOException
+                return buyer;
+            }
         }
     }
 
