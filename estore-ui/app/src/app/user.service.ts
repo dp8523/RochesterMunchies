@@ -15,14 +15,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  login(username: String): Observable<User> {
+  login(username: string): Observable<User> {
     const url = `${this.userURL}/${username}`;
-    //console.log(this.http.get<User>(url));
-    return this.http.get<User>(url)
+    console.log(this.http.get<User>(url, this.httpOptions));
+    return this.http.get<User>(url, this.httpOptions)
     .pipe(catchError(this.handleError<User>(`getUser username=${username}`)))
   }
 
-  register(username: String): Observable<User> {
+  register(username: string): Observable<User> {
     return this.http.post<User>(this.userURL, username, this.httpOptions)
     .pipe(catchError(this.handleError<User>(`createUser username=${username}`)))
   }
