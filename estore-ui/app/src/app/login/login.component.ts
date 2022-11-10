@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'; 
 import { User } from '../user';
-import { UserService } from '../user.service';
-import { count } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthServiceService } from '../auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -10,67 +10,46 @@ import { count } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  htmlPage: String | undefined;
   user: User | undefined;
 
-  //user1: User = { username: "null" } as unknown as User;
-
-  constructor(private userService: UserService) { }
+  constructor( 
+    private router: Router,
+    private authService: AuthServiceService) { }
 
   ngOnInit( ): void {
     
   }
 
-  login(username: string): void {
+  async login(username: string): Promise<void> {
 
-    console.log("Before");
-    //console.log(this.user1);
     username = username.trim();
-    console.log(username.trim());
-
     if (username){
-      console.log("Hello");
-      this.userService.login(username).subscribe(dude => {
-        console.log("After");
-        console.log(dude);
-        if (dude != null){
-          this.user = dude;
-          console.log("User exists!");
-          if(username === "admin"){
-            console.log("admin user");
-            this.htmlPage = "/inventory";
-          }
-          else{
-            this.htmlPage = "/buyer_inventory";
-          }
+      this.authService.login(username)
+      await new Promise(f => setTimeout(f, 500));
+      this.user = this.authService.user;
+
+      if (this.user != null){
+        if (this.user?.username === "admin"){
+          this.router.navigateByUrl('/inventory');
         }
-        } );
-    }
-    /*
-    if(username === "admin"){
-      this.htmlPage = "/inventory";
-    }
-    else if (username){
-      this.htmlPage = "/buyer_inventory";
-    }
-    else{
-      this.htmlPage = "/login";
-    } 
-    */ 
-  }
-
-  register(username: string): void {
-    username.trim();
-    console.log("Before");
-    this.userService.register(username).subscribe(user => this.user = user);
-
-    console.log(this.user);
-    if (this.user){
-      console.log("User exists!");
-      if (username){
-        this.htmlPage = "/buyer_inventory";
+        else{
+          this.router.navigateByUrl('/buyer_inventory');
+        }
       }
     }
-    this.htmlPage = "/login";
+  }
+
+  async register(username: string): Promise<void> {
+    
+    username = username.trim();
+    if (username){
+      this.authService.register(username)
+      await new Promise(f => setTimeout(f, 500));
+      this.user = this.authService.user;
+
+      if (this.user != null){
+        this.router.navigateByUrl('/buyer_inventory'); 
+      }
+    }
   }
 }

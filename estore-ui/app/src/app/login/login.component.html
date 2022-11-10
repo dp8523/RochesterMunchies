@@ -5,7 +5,7 @@
             <label class="label">Username: </label>
             <input class="input" placeholder="username" #username1>
         </li>
-        <a class="button" (click)="login(username1.value)">Login</a>
+        <button (click)="login(username1.value)">Login</button>
     </div>
     <div class="register">
         <h3>Create Account</h3>
@@ -13,7 +13,7 @@
             <label class="label">Username: </label>
             <input class="input" placeholder="username" #username2>
         </li>
-        <a href={{htmlPage}} class="button" (click)="register(username2.value)">Register</a>
+        <button (click)="register(username2.value)">Register</button>
     </div>
 
 

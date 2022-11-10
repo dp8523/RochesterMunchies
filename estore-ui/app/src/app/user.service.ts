@@ -8,6 +8,7 @@ import { catchError } from 'rxjs';
 export class UserService {
 
   private userURL = 'http://localhost:8080/buyers';
+  
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json;'})
@@ -22,8 +23,15 @@ export class UserService {
   }
 
   register(username: string): Observable<User> {
-    return this.http.post<User>(this.userURL, username, this.httpOptions)
+    const url = `${this.userURL}/${username}`;
+    return this.http.post<User>(url, this.httpOptions)
     .pipe(catchError(this.handleError<User>(`createUser username=${username}`)))
+  }
+
+  addCart(username: string, snackId: number): Observable<User> {
+    const url = `${this.userURL}/a/${username}/${snackId}`;
+    return this.http.post<User>(url, this.httpOptions)
+    .pipe(catchError(this.handleError<User>(`addCart username=${username} , snackId=${snackId}`)))
   }
 
   // Handle Http operation that failed
