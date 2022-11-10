@@ -2,8 +2,8 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.TreeMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,17 +39,11 @@ public class BuyerFileDAO implements BuyerDAO {
         load();  // load the buyers from the file
     }
 
-    private Buyer[] getBuyersArray() {
-        return getBuyersArray(null);
-    }
-
-    private Buyer[] getBuyersArray(String containsText) { // if containsText == null, no filter
+    private Buyer[] getBuyersArray() { 
         ArrayList<Buyer> buyerArrayList = new ArrayList<>();
 
         for (Buyer buyer : buyers.values()) {
-            if (containsText == null || buyer.getName().contains(containsText)) {
-                buyerArrayList.add(buyer);
-            }
+            buyerArrayList.add(buyer);
         }
 
         Buyer[] buyerArray = new Buyer[buyerArrayList.size()];
@@ -83,7 +77,7 @@ public class BuyerFileDAO implements BuyerDAO {
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
-        buyers = new TreeMap<>();
+        buyers = new HashMap<>();
 
         // Deserializes the JSON objects from the file into an array of buyers
         // readValue will throw an IOException if there's an issue with the file
@@ -92,7 +86,7 @@ public class BuyerFileDAO implements BuyerDAO {
 
         // Add each Buyer to the hash set
         for (Buyer buyer : buyerArray) {
-            buyers.put(buyer.getName(), buyer);
+            buyers.put(buyer.getUsername(), buyer);
         }
         
         return true;
@@ -102,7 +96,7 @@ public class BuyerFileDAO implements BuyerDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Buyer login(String username) throws IOException {
+    public Buyer login(String username) {
         synchronized(buyers) {
             if (buyers.containsKey(username)) {
                 return buyers.get(username);
@@ -118,10 +112,15 @@ public class BuyerFileDAO implements BuyerDAO {
     @Override
     public Buyer createBuyer(String username) throws IOException {
         synchronized(buyers) {
-            Buyer buyer = new Buyer(username);
-            buyers.put(buyer.getName(), buyer);
-            save(); // may throw an IOException
-            return buyer;
+            if (buyers.containsKey(username)) {
+                return null;
+            }
+            else {
+                Buyer buyer = new Buyer(username);
+                buyers.put(buyer.getUsername(), buyer);
+                save(); // may throw an IOException
+                return buyer;
+            }
         }
     }
 
@@ -135,11 +134,51 @@ public class BuyerFileDAO implements BuyerDAO {
                 return false;
             }
             Buyer buyer = new Buyer(username);
-            if (buyers.containsKey(buyer.getName())) {
-                buyers.remove(buyer.getName());
+            if (buyers.containsKey(buyer.getUsername())) {
+                buyers.remove(buyer.getUsername());
                 return save();
             } else {
                 return false;
+            }
+        }
+    }
+
+    @Override
+    public Buyer addToCart(String username, int snackID) throws IOException {
+        synchronized(buyers) {
+            Buyer buyer = buyers.get(username);
+
+            // Buyer is not found
+            if (buyers.containsKey(username) == false)
+                return null; 
+            else {
+                // Add to cart
+                buyer.addToCart(snackID);
+
+                // Update buyers list with new cart
+                buyers.put(buyer.getUsername(),buyer);
+                save(); 
+                return buyer;
+            }
+        }
+    }
+
+    @Override
+    public Buyer deleteFromCart(String username, int snackID) throws IOException {
+        synchronized(buyers) {
+            Buyer buyer = buyers.get(username);
+
+            // Buyer is not found
+            if (buyers.containsKey(username) == false)
+                return null; 
+            else {
+                // Delete item from cart
+                buyer.deleteFromCart(snackID);
+
+                // Update buyers list with new cart
+                buyers.put(buyer.getUsername(),buyer);
+                save(); 
+                return buyer;
             }
         }
     }

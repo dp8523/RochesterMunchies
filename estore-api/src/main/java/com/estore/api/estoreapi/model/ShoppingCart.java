@@ -1,53 +1,53 @@
 package com.estore.api.estoreapi.model;
-
-import java.util.HashMap;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.HashMap;
 
-public class ShoppingCart {
-    @JsonProperty("cart") private HashMap<Integer,Integer> cart;
+public class ShoppingCart extends HashMap<Integer,Integer>{
 
-    public ShoppingCart() {
-        cart = new HashMap<Integer,Integer>();
+    public boolean addToCart(@JsonProperty("id") int id) {
+        // Assume that id is valid snack
+        if (this.containsKey(id)) {
+            this.put(id, this.get(id) + 1);
+        }
+        else {
+            this.put(id, 1);
+        }
+        return true;
     }
 
-    public boolean addItemToCart(@JsonProperty("id") int id) {
-        try {
-            if (cart.containsKey(id)) {
-                cart.put(id, cart.get(id) + 1);
-                return true;
+    public boolean deleteFromCart(@JsonProperty("id") int id) {
+        // Assume that id is valid snack
+        if (this.containsKey(id)) {
+            if (this.get(id) == 1) {
+                this.remove(id);
             }
             else {
-                cart.put(id, 1);
-                return true;
+                this.put(id, this.get(id) - 1);
             }
+
+            return true;
         }
-        catch (Exception e) {
-            System.out.printf("Error adding SnackID: %i to cart.", id);
+        else {
             return false;
         }
     }
 
     public HashMap<Integer,Integer> getCart() {
-        return cart;
+        return this;
     }
 
-    public boolean setCart(HashMap<Integer,Integer> newCart) {
-        try {
-            cart = newCart;
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public boolean clearCart() {
+        this.clear();
+        return true;
     }
 
     @Override
     public String toString() {
         String s = "";
         try {
-            s = new ObjectMapper().writeValueAsString(cart);
+            s = new ObjectMapper().writeValueAsString(this);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
