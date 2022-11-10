@@ -28,23 +28,36 @@ public class Buyer {
      * Sets the username of the Buyer
      * @param username The username of the Buyer
      */
-    public void setName(String username) {this.username = username;}
+    public void setUsername(String username) {this.username = username;}
 
     /**
      * Retrieves the username of the Buyer
      * @return The username of the Buyer
      */
-    public String getName() {return username;}
+    public String getUsername() {return username;}
+
+    public void setCart(ShoppingCart newCart) {
+        cart = newCart;
+    }
 
     public ShoppingCart getCart() {
         return cart;
     }
 
-    public int addToCart(@JsonProperty("id") int snackID) {
-        if (this.cart.addItemToCart(snackID)) {
-            return snackID;
-        }
-        return 0;
+    public void addToCart(@JsonProperty("id") int snackID) {
+        cart.addToCart(snackID);
+    }
+
+    public void deleteFromCart(@JsonProperty("id") int snackID) {
+        cart.deleteFromCart(snackID);
+    }
+
+    public boolean clearCart() {
+        return cart.clearCart();
+    }
+
+    public boolean snackInCart(int snackID) {
+        return cart.containsKey(snackID);
     }
 
     /**
@@ -62,7 +75,14 @@ public class Buyer {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((username == null) ? 0 : username.hashCode());
+
+        if (username == null) {
+            result = prime * result + 0;
+        }
+        else {
+            result = prime * result + username.hashCode();
+        }
+
         return result;
     }
 
@@ -77,10 +97,13 @@ public class Buyer {
             return false;
         if (getClass() != obj.getClass())
             return false;
+
+        
         Buyer other = (Buyer) obj;
         if (username == null) {
-            if (other.username != null)
-                return false;
+            // if (other.username != null) {
+            return false;
+            // }
         } else if (!username.equals(other.username))
             return false;
         return true;
