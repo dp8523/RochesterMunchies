@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -14,7 +16,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.persistence.BuyerDAO;
+import com.estore.api.estoreapi.persistence.SnackDAO;
 import com.estore.api.estoreapi.model.Buyer;
+import com.estore.api.estoreapi.model.ShoppingCart;
+import com.estore.api.estoreapi.model.Snack;
 
 /**
  * Handles the REST API requests for the Buyer resource
@@ -29,6 +34,7 @@ import com.estore.api.estoreapi.model.Buyer;
 public class BuyerController {
     private static final Logger LOG = Logger.getLogger(BuyerController.class.getName());
     private BuyerDAO buyerDao;
+    private SnackDAO snackDao;
 
     /**
      * Creates a REST API controller to reponds to requests
@@ -37,8 +43,9 @@ public class BuyerController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public BuyerController(BuyerDAO buyerDao) {
+    public BuyerController(BuyerDAO buyerDao, SnackDAO snackDao) {
         this.buyerDao = buyerDao;
+        this.snackDao = snackDao;
     }
 
     /**
@@ -80,10 +87,9 @@ public class BuyerController {
     public ResponseEntity<Buyer> createBuyer(@PathVariable String username) {
         LOG.info("POST /buyers " + username);
 
-        try{
-            Buyer result = buyerDao.login(username);
-            if (result == null) {
-                Buyer buyer = buyerDao.createBuyer(username);
+        try{            
+            Buyer buyer = buyerDao.createBuyer(username);
+            if (buyer != null) {
                 return new ResponseEntity<Buyer>(buyer, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<Buyer>(HttpStatus.CONFLICT);
@@ -112,6 +118,95 @@ public class BuyerController {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/a/{username}/{snackID}")
+    public ResponseEntity<Buyer> addToCart(@PathVariable String username, @PathVariable int snackID) {
+        LOG.info("PUT / " + username + "/" + snackID);
+
+        try {
+            Snack snack = snackDao.getSnack(snackID);
+
+            if (snack != null) {
+                // Check if Buyer exists
+                Buyer newBuyer = buyerDao.addToCart(username, snackID);
+
+                if (newBuyer == null) {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+                else {
+                    return new ResponseEntity<Buyer>(newBuyer, HttpStatus.OK);
+                }
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/d/{username}/{snackID}")
+    public ResponseEntity<Buyer> deleteFromCart(@PathVariable String username, @PathVariable int snackID) {
+        LOG.info("DELETE / " + username + "/" + snackID);
+
+        try {
+            Snack snack = snackDao.getSnack(snackID);
+
+            if (snack != null) {
+                // Check if Buyer exists
+                Buyer newBuyer = buyerDao.deleteFromCart(username, snackID);
+
+                if (newBuyer == null) {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+                else {
+                    if (!newBuyer.snackInCart(snackID)) {
+                        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                    }
+                    return new ResponseEntity<Buyer>(newBuyer, HttpStatus.OK);
+                }
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/{username}/cartTotal")
+    public ResponseEntity<Double> getTotalCartCost(@PathVariable String username) {
+        LOG.info("GET / " + username + "/cartTotal");
+
+        try {
+            Buyer buyer = buyerDao.login(username);
+
+            if (buyer != null) {
+                double cartTotal = 0;
+                ShoppingCart cart = buyer.getCart();
+
+                for(int snackId : cart.keySet()) {
+                    Snack snack = snackDao.getSnack(snackId);
+                    double snackPrice = snack.getPrice();
+                    int quantity = cart.get(snackId);
+                    double snackTotal = snackPrice * quantity;
+                    cartTotal += snackTotal;
+                }
+                
+                return new ResponseEntity<Double>(cartTotal, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
