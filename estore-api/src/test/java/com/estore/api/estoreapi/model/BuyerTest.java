@@ -147,12 +147,12 @@ public class BuyerTest {
     public void testToString() {
         // Setup
         String username = "SnackLover";
-
         Buyer buyer = new Buyer(username);
         String expectedString = String.format(Buyer.STRING_FORMAT,username,buyer.getCart());
 
         // Invoke
         String actualString = buyer.toString();
+
 
         // Analyze
         assertEquals(expectedString,actualString);

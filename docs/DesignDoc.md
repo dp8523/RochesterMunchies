@@ -88,7 +88,7 @@ details of a snack.
 
 This section describes the application domain.
 
-![Domain Model](Team 4 SWEN Treat-Store Domain Analysis.png)
+![Domain Model](Team4SWENTreatStoreDomainAnalysis.png)
 
 This is a domain model of our snack e-store, it shows the relations
 between the user, and the features of our website such as the 
@@ -165,11 +165,15 @@ where they can login as the owner, a customer, or register for the website.
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
 ### Static Code Analysis/Design Improvements
-> _Discuss design improvements that you would make if the project were
-> to continue. These improvement should be based on your direct
-> analysis of where there are problems in the code base which could be
-> addressed with design changes, and describe those suggested design
-> improvements._
+Our Buyer implementation files have not been covered yet, and should the project continue, 
+it would be in our best interest to focus on the buyer files and testing each individual
+function. Testing these functions would allow us to continue developing the shopping
+cart files and implement an organized method for handling our data persistence for 
+buyers. 
+Design improvements would lie primarily in the shopping cart files, as our code
+analysis shows that we have malfunctioning methods that need to be revised. 
+  - We can focus on improving our shopping cart by implementing simpler
+  data structures and elaborating in the future into a more abstract class.
 
 > _With the results from the Static Code Analysis exercise, 
 > discuss the resulting issues/metrics measurements along with your analysis
@@ -181,15 +185,31 @@ where they can login as the owner, a customer, or register for the website.
 > and the results of the testing._
 
 ### Acceptance Testing
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+Passed All Criteria: 11
+Passed Some Criteria: 5
+Passed No Criteria: 17
+The main issue with acceptance criteria testing is that most 
+of our stories for Sprint 2 have yet to be implemented or need
+to be improved on. 
+The UI stories primarily build up the composition of the "Passed
+Some Criteria" category, since we found that some buttons need
+to be revised for user/admin comparison.
+On the backend, a lot of our stories passed no criteria since they
+have failed to work or need to be improved on.
 
 ### Unit Testing and Code Coverage
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
+Our unit testing strategy is primarily in creating a fake database
+of snacks and using that fake database to assert various functions
+and conditional statements. The code coverage achieved from unit 
+testing our snack files have shown to be above 90% covered, where
+the final 10% lie in additional functions yet to be covered and will
+be our primary focus for code coverage. 
+![EstoreAPI Code Coverage](EstoreAPICoverage.png)
+![EstoreAPIController Code Coverage](EstoreAPIControllerCoverage.png)
+![EstoreController Code Coverage](EstoreControllerCoverage.png)
+The team's coverage target is now in finishing the final 10% of snack
+files and then shifting over to the buyer files as we implement
+the shopping cart. 
+Currently, our code coverage meets our targets well, and we want to 
+continue this for our shopping cart, buyer login, and 10% feature 
+implementations.
