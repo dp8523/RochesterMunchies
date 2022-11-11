@@ -114,14 +114,14 @@ public class SnackFileDAOTest {
 
     @Test
     public void testUpdateSnack() {
-        /**
-         * tests the updateSnack method with snack that exists
-         */
+        // Setup
         Snack snack = new Snack(99,"Animal Crackers", "Crackers shaped like animals", 12, 8.99);
 
+        // Invoke
         Snack result = assertDoesNotThrow(() -> snackFileDAO.updateSnack(snack),
                                 "Unexpected exception thrown");
 
+        // Analyze
         assertNotNull(result);
         Snack actual = snackFileDAO.getSnack(snack.getId());
         assertEquals(actual,snack);
@@ -129,9 +129,6 @@ public class SnackFileDAOTest {
 
     @Test
     public void testSaveException() throws IOException{
-        /**
-         * tests throwing exception when snack is saved
-         */
         doThrow(new IOException())
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(Snack[].class));
@@ -145,11 +142,54 @@ public class SnackFileDAOTest {
 
     @Test
     public void testGetSnackNotFound() {
-        /**
-         * tests retrieving snack that doesn't exist
-         */
+        // Invoke
         Snack snack = snackFileDAO.getSnack(98);
 
+        // Analyze
         assertEquals(snack,null);
+    }
+
+    @Test
+    public void testDeleteSnackNotFound() {
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> snackFileDAO.deleteSnack(98),
+                                                "Unexpected exception thrown");
+
+        // Analyze
+        assertEquals(result,false);
+        assertEquals(snackFileDAO.snacks.size(),testSnacks.length);
+    }
+
+    @Test
+    public void testUpdateSnackNotFound() {
+        // Setup
+        Snack snack = new Snack(98,"Twix","Chocolate covered, caramel filled, cookie sticks",50,2.99);
+
+        // Invoke
+        Snack result = assertDoesNotThrow(() -> snackFileDAO.updateSnack(snack),
+                                                "Unexpected exception thrown");
+
+        // Analyze
+        assertNull(result);
+    }
+
+    @Test
+    public void testConstructorException() throws IOException {
+        // Setup
+        ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
+        // We want to simulate with a Mock Object Mapper that an
+        // exception was raised during JSON object deseerialization
+        // into Java objects
+        // When the Mock Object Mapper readValue method is called
+        // from the SnackFileDAO load method, an IOException is
+        // raised
+        doThrow(new IOException())
+            .when(mockObjectMapper)
+                .readValue(new File("doesnt_matter.txt"),Snack[].class);
+
+        // Invoke & Analyze
+        assertThrows(IOException.class,
+                        () -> new SnackFileDAO("doesnt_matter.txt",mockObjectMapper),
+                        "IOException not thrown");
     }
 }
