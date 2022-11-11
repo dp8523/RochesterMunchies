@@ -1,0 +1,20 @@
+<body>
+    <img class="background" 
+    src="http://i.huffpost.com/gen/1068221/images/o-OREOS-facebook.jpg">
+
+    <h1>Shop Your Favorite Treats</h1>
+
+    <div class="Homepage-Snacks">
+        <a *ngFor="let snack of snacks" 
+            routerLink="/buyer_detail/{{snack.id}}">
+            {{snack.name}}
+        </a>
+    </div> 
+
+    <h2 routerLink="/buyer_inventory">Browse To See More</h2>
+
+    <div class="Subscription">
+        <h3>Sign up for a subscription to recieve weekly or monthly treats!</h3>
+        <button id="sign-up" >Sign Up!</button>
+    </div>
+</body>
