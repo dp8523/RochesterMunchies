@@ -7,12 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -92,11 +89,9 @@ public class BuyerController {
     public ResponseEntity<Buyer> createBuyer(@PathVariable String username) {
         LOG.info("POST /buyers " + username);
 
-        try{
-            Buyer result = buyerDao.login(username);
-            
-            if (result == null) {
-                Buyer buyer = buyerDao.createBuyer(username);
+        try{            
+            Buyer buyer = buyerDao.createBuyer(username);
+            if (buyer != null) {
                 return new ResponseEntity<Buyer>(buyer, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<Buyer>(HttpStatus.CONFLICT);
@@ -196,8 +191,8 @@ public class BuyerController {
         LOG.info("GET / " + username + "/cartTotal");
 
         try {
-
             Buyer buyer = buyerDao.login(username);
+
             if (buyer != null) {
                 double cartTotal = 0;
                 ShoppingCart cart = buyer.getCart();
@@ -209,6 +204,7 @@ public class BuyerController {
                     double snackTotal = snackPrice * quantity;
                     cartTotal += snackTotal;
                 }
+                
                 return new ResponseEntity<Double>(cartTotal, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);

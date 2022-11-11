@@ -1,10 +1,6 @@
 package com.estore.api.estoreapi.model;
 
-import java.util.HashMap;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Buyer {
 
@@ -40,6 +36,10 @@ public class Buyer {
      */
     public String getUsername() {return username;}
 
+    public void setCart(ShoppingCart newCart) {
+        cart = newCart;
+    }
+
     public ShoppingCart getCart() {
         return cart;
     }
@@ -52,33 +52,13 @@ public class Buyer {
         cart.deleteFromCart(snackID);
     }
 
-    public boolean setCart(ShoppingCart newCart) {
-        try {
-            cart = newCart;
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean checkoutCart() {
+    public boolean clearCart() {
         return cart.clearCart();
     }
 
     public boolean snackInCart(int snackID) {
         return cart.containsKey(snackID);
     }
-    
-    // public double getCartCost() {
-    //     double cartTotal = 0;
-    //     for(int snackId : cart.keySet()) {
-    //         double snackPrice = snackId;
-    //         int quantity = cart.get(snackId);
-    //         double snackTotal = snackPrice * quantity;
-    //         cartTotal += snackTotal;
-    //     }
-    //     return cartTotal;
-    // }
 
     /**
      * {@inheritDoc}
@@ -95,7 +75,14 @@ public class Buyer {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((username == null) ? 0 : username.hashCode());
+
+        if (username == null) {
+            result = prime * result + 0;
+        }
+        else {
+            result = prime * result + username.hashCode();
+        }
+
         return result;
     }
 
@@ -110,12 +97,17 @@ public class Buyer {
             return false;
         if (getClass() != obj.getClass())
             return false;
+
+        
         Buyer other = (Buyer) obj;
         if (username == null) {
-            if (other.username != null)
-                return false;
+            // if (other.username != null) {
+            return false;
+            // }
         } else if (!username.equals(other.username))
             return false;
         return true;
     }
+
 }
+

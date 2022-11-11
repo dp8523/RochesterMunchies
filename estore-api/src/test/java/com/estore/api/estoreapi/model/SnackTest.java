@@ -31,6 +31,63 @@ public class SnackTest {
     }
 
     @Test
+    public void testSetDescription() {
+        // Setup
+        int id = 99;
+        String name = "Camel Balls";
+        String description = "Extra Sour Bubble Gum Jawbreaker";
+        int quantity = 5;
+        double price = 9.99;
+        Snack snack = new Snack(id,name,description,quantity,price);
+
+        String newDescription = "YUHHHH";
+
+        // Invoke
+        snack.setDescription(newDescription);
+
+        // Analyze
+        assertEquals(newDescription,snack.getDescription());
+    }
+
+    @Test
+    public void testSetQuantity() {
+        // Setup
+        int id = 99;
+        String name = "Camel Balls";
+        String description = "Extra Sour Bubble Gum Jawbreaker";
+        int quantity = 10;
+        double price = 9.99;
+        Snack snack = new Snack(id,name,description,quantity,price);
+
+        int newQuantity = 15;
+
+        // Invoke
+        snack.setQuantity(newQuantity);
+
+        // Analyze
+        assertEquals(newQuantity,snack.getQuantity());
+    }
+
+    @Test
+    public void testSetPrice() {
+        // Setup
+        int id = 99;
+        String name = "Camel Balls";
+        String description = "Extra Sour Bubble Gum Jawbreaker";
+        int quantity = 10;
+        double price = 9.99;
+        Snack snack = new Snack(id,name,description,quantity,price);
+
+        double newPrice = 15.99;
+
+        // Invoke
+        snack.setPrice(newPrice);
+
+        // Analyze
+        assertEquals(newPrice,snack.getPrice());
+    }
+
+    @Test
     public void testName() {
         // Setup
         int id = 99;

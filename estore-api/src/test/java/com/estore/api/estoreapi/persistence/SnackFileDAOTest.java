@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test the Snack File DAO class
+ * Test the SnackFileDAO class
  */
 @Tag("Persistence-tier")
 public class SnackFileDAOTest {

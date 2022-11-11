@@ -8,40 +8,28 @@ public class ShoppingCart extends HashMap<Integer,Integer>{
 
     public boolean addToCart(@JsonProperty("id") int id) {
         // Assume that id is valid snack
-        try {
-            if (this.containsKey(id)) {
-                this.put(id, this.get(id) + 1);
-                return true;
-            }
-            else {
-                this.put(id, 1);
-                return true;
-            }
+        if (this.containsKey(id)) {
+            this.put(id, this.get(id) + 1);
         }
-        catch (Exception e) {
-            System.out.printf("Error adding SnackID: %i to cart.", id);
-            return false;
+        else {
+            this.put(id, 1);
         }
+        return true;
     }
 
     public boolean deleteFromCart(@JsonProperty("id") int id) {
         // Assume that id is valid snack
-        try {
-            if (this.containsKey(id)) {
-                if (this.get(id) == 1) {
-                    this.remove(id);
-                }
-                else {
-                    this.put(id, this.get(id) - 1);
-                }
-                return true;
+        if (this.containsKey(id)) {
+            if (this.get(id) == 1) {
+                this.remove(id);
             }
             else {
-                return false;
+                this.put(id, this.get(id) - 1);
             }
+
+            return true;
         }
-        catch (Exception e) {
-            System.out.printf("Error adding SnackID: %i to cart.", id);
+        else {
             return false;
         }
     }
@@ -51,12 +39,8 @@ public class ShoppingCart extends HashMap<Integer,Integer>{
     }
 
     public boolean clearCart() {
-        try {
-            this.clear();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        this.clear();
+        return true;
     }
 
     @Override
