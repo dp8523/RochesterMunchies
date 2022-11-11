@@ -222,9 +222,7 @@ public class SnackFileDAO implements SnackDAO {
         synchronized(snacks) {
             if (snacks.containsKey(id)) {
                 Snack snack = snacks.get(id);
-                HashMap<String,Integer> ratings = snack.getRatings();
-                ratings.put(username,rating);
-                snack.setRatings(ratings);
+                snack.addRating(username, rating);
                 snacks.put(snack.getId(),snack);
                 save();
                 return snack.getAverageRating();

@@ -17,7 +17,8 @@ public class Snack {
     @JsonProperty("description") private String description;
     @JsonProperty("quantity") private int quantity;
     @JsonProperty("price") private double price;
-    @JsonProperty("rating") private HashMap<String,Integer> ratings;
+    @JsonProperty("averageRating") private double averageRating;
+    @JsonProperty("ratings") private HashMap<String,Integer> ratings;
     // @JsonProperty("ratingCount") private int ratingCount;
 
 
@@ -42,7 +43,7 @@ public class Snack {
         this.description = description;
         this.quantity = quantity;
         this.price = price;
-        this.ratings = new HashMap<>();
+        this.ratings = new HashMap<String,Integer>();
     }
 
     /**
@@ -105,7 +106,20 @@ public class Snack {
      */
     public void setRatings(HashMap<String,Integer> ratings) {this.ratings = ratings;}
 
-    public double getAverageRating() {
+    /**
+     * Retrieves the average rating of the snack
+     * @return The rating of the snack
+     */
+    public HashMap<String,Integer> getRatings() {return ratings;}
+
+    public void addRating(String username, int rating) {
+        ratings.put(username, rating);
+        averageRating = calculateAverageRating();
+    }
+
+    public double getAverageRating() {return averageRating;}
+
+    public double calculateAverageRating() {
         int ratingCount = ratings.size();
         int totalPoints = 0;
         for(int rating : ratings.values()) {
@@ -113,12 +127,6 @@ public class Snack {
         }
         return totalPoints / ratingCount;
     }
-
-    /**
-     * Retrieves the average rating of the snack
-     * @return The rating of the snack
-     */
-    public HashMap<String,Integer> getRatings() {return ratings;}
 
     // /**
     //  * Sets the number of ratings for the snack - necessary for JSON object to Java object deserialization
