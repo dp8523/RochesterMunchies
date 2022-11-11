@@ -92,5 +92,5 @@ public interface SnackDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    double rateSnack(int id, int rating) throws IOException;
+    double rateSnack(int id, String username, int rating) throws IOException;
 }

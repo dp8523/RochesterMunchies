@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.persistence;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 // import java.util.logging.Logger;
@@ -188,6 +189,9 @@ public class SnackFileDAO implements SnackDAO {
             if (snacks.containsKey(snack.getId()) == false)
                 return null;  // snack does not exist
             else {
+                Snack oldSnack = this.getSnack(snack.getId());
+                HashMap<String,Integer> ratings = oldSnack.getRatings();
+                snack.setRatings(ratings);
                 snacks.put(snack.getId(),snack);
                 save(); // may throw an IOException
                 return snack;
@@ -214,20 +218,16 @@ public class SnackFileDAO implements SnackDAO {
     ** {@inheritDoc}
      */
     @Override
-    public double rateSnack(int id, int rating) throws IOException {
+    public double rateSnack(int id, String username, int rating) throws IOException {
         synchronized(snacks) {
             if (snacks.containsKey(id)) {
                 Snack snack = snacks.get(id);
-                double averageRating = snack.getRating();
-                int count = snack.getRatingCount();
-                double totalPoints = averageRating * count;
-                totalPoints += rating;
-                count++;
-                double newRating = totalPoints/count;
-                snack.setRating(newRating);
+                HashMap<String,Integer> ratings = snack.getRatings();
+                ratings.put(username,rating);
+                snack.setRatings(ratings);
                 snacks.put(snack.getId(),snack);
                 save();
-                return newRating;
+                return snack.getAverageRating();
             }
             else
                 return -1;
