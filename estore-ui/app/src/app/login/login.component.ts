@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'; 
 import { User } from '../user';
-import { UserService } from '../user.service';
+import { Router } from '@angular/router';
+import { AuthServiceService } from '../auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -9,47 +10,46 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
-  htmlPage: String | undefined;
   user: User | undefined;
 
-  constructor(private userService: UserService) { }
+  constructor( 
+    private router: Router,
+    private authService: AuthServiceService) { }
 
   ngOnInit( ): void {
     
   }
 
-  login(username: String): void {
+  async login(username: string): Promise<void> {
 
-    console.log("Before");
     username = username.trim();
-    this.userService.login(username).subscribe(user => this.user = user);
+    if (username){
+      this.authService.login(username)
+      await new Promise(f => setTimeout(f, 500));
+      this.user = this.authService.user;
 
-    console.log(this.user);
-    if (this.user){
-
-      console.log("User exists!");
-      if(this.user.username === "admin"){
-      this.htmlPage = "/inventory";
-      }
-      else if (this.user.username){
-        this.htmlPage = "/buyer_inventory";
-      }
-    }
-    this.htmlPage = "/login";
-  }
-
-  register(username: String): void {
-    username.trim();
-    this.userService.register(username).subscribe(user => this.user = user);
-
-    if (this.user){
-      console.log("User exists!");
-      if (this.user.username){
-        this.htmlPage = "/buyer_inventory";
+      if (this.user != null){
+        if (this.user?.username === "admin"){
+          this.router.navigateByUrl('/inventory');
+        }
+        else{
+          this.router.navigateByUrl('/buyer_inventory');
+        }
       }
     }
-    this.htmlPage = "/login";
   }
 
-  
+  async register(username: string): Promise<void> {
+    
+    username = username.trim();
+    if (username){
+      this.authService.register(username)
+      await new Promise(f => setTimeout(f, 500));
+      this.user = this.authService.user;
+
+      if (this.user != null){
+        this.router.navigateByUrl('/buyer_inventory'); 
+      }
+    }
+  }
 }

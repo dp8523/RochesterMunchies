@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Snack } from '../Snack';
 import { SnackService } from '../snack.service';
+import { User } from '../user';
+import { LoginComponent } from '../login/login.component';
+import { UserService } from '../user.service';
+
 
 @Component({
   selector: 'app-buyer-inventory',
@@ -17,9 +21,12 @@ export class BuyerInventoryComponent implements OnInit {
       quantity: 5,
       price: 3.99   
   };
+  
+  user: User | undefined;
 
   constructor(
-    private snackService: SnackService
+    private snackService: SnackService,
+    private userSerice: UserService,
   ) { }
 
   ngOnInit(): void {
