@@ -49,4 +49,6 @@ public interface BuyerDAO {
     Buyer addToCart(String username, int snackID) throws IOException;
     
     Buyer deleteFromCart(String username, int snackID) throws IOException;
+
+    public Buyer clearCart(String username) throws IOException;
 }

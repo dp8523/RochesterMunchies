@@ -1,17 +1,16 @@
 [
     {
-        "username": "admin",
-        "cart": {}
-    },
-    {
         "username": "robert",
-        "cart": {}
+        "cart": {
+            "12": 2,
+            "13": 1
+        }
     },
     {
         "username": "adam",
         "cart": {
-            "12": 11,
-            "14": 4
+            "12": 5,
+            "14": 5
         }
     },
     {
@@ -31,10 +30,11 @@
         "cart": {}
     },
     {
+        "username": "admin",
+        "cart": {}
+    },
+    {
         "username": "lucie",
-        "cart": {
-            "12": 5,
-            "15": 3
-        }
+        "cart": {}
     }
 ]

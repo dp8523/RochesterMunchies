@@ -3,7 +3,7 @@
         "id": 12,
         "name": "Haribo Coca-Cola Gummies",
         "description": "Coca-cola flavored gummies in coca-cola bottle shapes",
-        "quantity": 5,
+        "quantity": 20,
         "price": 4.99
     },
     {
@@ -17,7 +17,7 @@
         "id": 14,
         "name": "Animal Crackers",
         "description": "Crackers shaped like animals",
-        "quantity": 0,
+        "quantity": 5,
         "price": 8.99
     },
     {
