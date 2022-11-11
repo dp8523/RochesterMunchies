@@ -6,6 +6,17 @@
     border: solid 2px rgb(255, 255, 255);
 }
 
+.home-flex-container {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    align-items: center;
+    position: relative;
+    padding: 1.5rem;   
+    justify-content: space-around;
+
+}
+
 h1, h2 {
     text-align: center;
 }
@@ -80,7 +91,11 @@ h2:hover {
     background-color: rgb(187, 148, 130);
 }
 
-.Subscription {
+.Subscription-flex {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    align-items: center;
     background-color: #3c1414;
     height: 200px;
     width: 100%;
@@ -88,18 +103,13 @@ h2:hover {
 
 h3 {
     background-color: rgb(147, 107, 64);
-    position: relative;
-    top: 70px;
-    left: 25px;
-    width: 45%;
     color: #ffffff;
+    padding: 25px;
 }
 
 #sign-up {
-    position: relative;
-    left: 80%;
-    top: 10%;
-    background-color: orange;
+    color: orange;
     border-radius: 12px;
     font-size: large;
+    padding: 10px;
 }
