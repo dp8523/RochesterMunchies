@@ -15,9 +15,12 @@ public class Snack {
     @JsonProperty("description") private String description;
     @JsonProperty("quantity") private int quantity;
     @JsonProperty("price") private double price;
+    @JsonProperty("rating") private double rating;
+    @JsonProperty("ratingCount") private int ratingCount;
+
 
     /**
-     * Create a hero with the given id and name
+     * Create a snack with the given id and name
      * @param id The id of the snack
      * @param name The name of the snack
      * @param description The description of the snack
@@ -37,6 +40,8 @@ public class Snack {
         this.description = description;
         this.quantity = quantity;
         this.price = price;
+        this.rating = 0;
+        this.ratingCount = 0;
     }
 
     /**
@@ -92,6 +97,30 @@ public class Snack {
      * @return The price of the snack
      */
     public double getPrice() {return price;}
+
+    /**
+     * Sets the average rating of the snack - necessary for JSON object to Java object deserialization
+     * @param price The desired rating of the snack
+     */
+    public void setRating(double rating) {this.rating = rating;}
+
+    /**
+     * Retrieves the average rating of the snack
+     * @return The rating of the snack
+     */
+    public double getRating() {return rating;}
+
+    /**
+     * Sets the number of ratings for the snack - necessary for JSON object to Java object deserialization
+     * @param price The desired rating count for the snack
+     */
+    public void setRatingCount(int ratingCount) {this.ratingCount = ratingCount;}
+
+    /**
+     * Retrieves the number of ratings for the snack
+     * @return The rating count for the snack
+     */
+    public int getRatingCount() {return ratingCount;}
 
     /**
      * {@inheritDoc}

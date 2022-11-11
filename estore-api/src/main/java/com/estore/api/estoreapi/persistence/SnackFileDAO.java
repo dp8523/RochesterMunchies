@@ -209,4 +209,28 @@ public class SnackFileDAO implements SnackDAO {
                 return false;
         }
     }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public double rateSnack(int id, int rating) throws IOException {
+        synchronized(snacks) {
+            if (snacks.containsKey(id)) {
+                Snack snack = snacks.get(id);
+                double averageRating = snack.getRating();
+                int count = snack.getRatingCount();
+                double totalPoints = averageRating * count;
+                totalPoints += rating;
+                count++;
+                double newRating = totalPoints/count;
+                snack.setRating(newRating);
+                snacks.put(snack.getId(),snack);
+                save();
+                return newRating;
+            }
+            else
+                return -1;
+        }
+    }
 }

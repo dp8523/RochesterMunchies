@@ -80,4 +80,17 @@ public interface SnackDAO {
      * @throws IOException if underlying storage cannot be accessed
      */
     boolean deleteSnack(int id) throws IOException;
+
+    /**
+     * Updates a {@linkplain Snack snack} with a new rating
+     * 
+     * @param id The id of the {@link Snack snack}
+     * 
+     * @return average rating if the {@link Snack snack} was updated with new rating
+     * <br>
+     * -1 if snack with the given id does not exist
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    double rateSnack(int id, int rating) throws IOException;
 }
