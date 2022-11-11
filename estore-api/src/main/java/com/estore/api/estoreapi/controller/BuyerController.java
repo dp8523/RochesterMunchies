@@ -215,9 +215,9 @@ public class BuyerController {
         }
     }
 
-    @PutMapping("/rate/{username}/{snackID}/{rating}")
+    @PutMapping("/r/{username}/{snackID}/{rating}")
     public ResponseEntity<Double> rateSnack(@PathVariable String username, @PathVariable int snackID, @PathVariable int rating) {
-        LOG.info("PUT / " + username + "/" + snackID + "/" + rating);
+        LOG.info("PUT /r/" + username + "/" + snackID + "/" + rating);
 
         try {
             Snack snack = snackDao.getSnack(snackID);
