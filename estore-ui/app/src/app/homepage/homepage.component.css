@@ -41,6 +41,7 @@ a {
     min-width: 70px;
     margin: .5rem auto;
     box-sizing: border-box;
+    border-radius: 12px;
 
     /* flexbox */
     order: 0;
@@ -48,6 +49,7 @@ a {
     align-self: auto;
 }
 
+/*affects the layout of the snacks on the homepage*/
 @media (min-width: 600px) {
     a {
       width: 18%;
@@ -62,9 +64,20 @@ a:hover {
 h2 {
     background-color: #3c1414;
     border-radius: 12px;
+    width: fit-content;
+    margin-left: 39%;
+    padding: calc((4.2rem - 1em)/2);
+    line-height: 1;
     color: #e4c8c8;
+    font-size: 1.6rem;
+    border: 0;
+    border-radius: 2.1rem;
+    font-weight: bold;
 
+}
 
+h2:hover {
+    background-color: rgb(187, 148, 130);
 }
 
 .Subscription {
