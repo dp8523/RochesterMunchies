@@ -42,6 +42,7 @@ public class Snack {
         this.description = description;
         this.quantity = quantity;
         this.price = price;
+        this.ratings = new HashMap<>();
     }
 
     /**
