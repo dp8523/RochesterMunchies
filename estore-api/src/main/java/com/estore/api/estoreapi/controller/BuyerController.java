@@ -236,7 +236,7 @@ public class BuyerController {
                         int oldStock = currentSnack.getQuantity();
                         int newStock = oldStock - amountToBuy;
 
-                        // the snack is out of stock
+                        // there is insufficient stock for this snack
                         if(newStock < 0) {
                             return new ResponseEntity<>(HttpStatus.CONFLICT);
                         }
