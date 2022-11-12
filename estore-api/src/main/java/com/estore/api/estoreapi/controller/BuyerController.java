@@ -64,9 +64,11 @@ public class BuyerController {
         try{
             Buyer buyer = buyerDao.login(username);
             if (buyer == null) {
+                LOG.info("   RETURNING BUYER: NULL");
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                return new ResponseEntity<Buyer>(buyer, HttpStatus.FOUND);
+                LOG.info("   RETURNING BUYER: " + buyer.toString());
+                return new ResponseEntity<Buyer>(buyer, HttpStatus.OK);
             }
         }
         catch(IOException e) {

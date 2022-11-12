@@ -3,17 +3,17 @@
         <h3>Login</h3>
         <li>
             <label class="label">Username: </label>
-            <input class="input" placeholder="username" #username>
+            <input class="input" placeholder="username" #username1>
         </li>
-        <a href={{htmlPage}} class="button" (click)="login(username.value)">Login</a>
+        <button (click)="login(username1.value)">Login</button>
     </div>
     <div class="register">
         <h3>Create Account</h3>
         <li>
             <label class="label">Username: </label>
-            <input class="input" placeholder="username" #username>
+            <input class="input" placeholder="username" #username2>
         </li>
-        <button class="button" (click)="register(username.value)">Register</button>
+        <button (click)="register(username2.value)">Register</button>
     </div>
 
 
