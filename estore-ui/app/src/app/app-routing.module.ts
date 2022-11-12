@@ -6,8 +6,11 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { LoginComponent } from './login/login.component';
 import { SnackDetailComponent } from './snack-detail/snack-detail.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/homepage', pathMatch: 'full' },
+  {path: 'homepage', component: HomepageComponent},
   {path: 'login', component: LoginComponent},
   {path: 'buyer_detail/:id', component: BuyerSnackDetailComponent},
   {path: 'buyer_inventory', component: BuyerInventoryComponent},

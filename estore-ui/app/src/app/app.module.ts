@@ -14,6 +14,7 @@ import { BuyerSnackDetailComponent } from './buyer-snack-detail/buyer-snack-deta
 import { BuyerSearchSnackComponent } from './buyer-search-snack/buyer-search-snack.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoginComponent } from './login/login.component';
     BuyerSnackDetailComponent,
     BuyerSearchSnackComponent,
     ShoppingCartComponent,
-    LoginComponent
+    LoginComponent,
+    HomepageComponent
 
   ],
   imports: [
