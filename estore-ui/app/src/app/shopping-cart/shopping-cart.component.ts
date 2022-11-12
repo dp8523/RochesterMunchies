@@ -23,8 +23,6 @@ export class ShoppingCartComponent implements OnInit {
     this.location.back();
   }
 
-  /*
-  addToCart() 
-  */
+  
 
 }
