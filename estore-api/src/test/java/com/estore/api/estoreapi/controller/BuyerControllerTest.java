@@ -453,8 +453,10 @@ public class BuyerControllerTest {
         // When buyer does exist
         when(mockBuyerDAO.login(username)).thenReturn(buyer);
 
+        when(mockSnackDAO.rateSnack(snackID, username, rating)).thenReturn(averageRating);
+
         // Invoke
-        ResponseEntity<Double> response = buyerController.rateSnack(username, snackID,rating);
+        ResponseEntity<Double> response = buyerController.rateSnack(username, snackID, rating);
 
         // Analyze
         assertEquals(averageRating, response.getBody());
