@@ -1,10 +1,10 @@
-body {
-    background-color: gray;
-}
+
 
 h1 {
     text-align: center; 
-    color: #fffefe;
+    color: #feebd0;
+    padding-top: 30px;
+    font-size: 35px;
     }
     
     nav {
@@ -12,22 +12,31 @@ h1 {
         width: 100%;
         height: 100px;
         background-size: cover;
-        background-color: #502e24;    
+        background-color: #08a9a0;    
+        padding-bottom: 45px;
     }
 
     .nav-categories {
-        display: flex;
+        /* display: flex;
         justify-content: space-evenly;
         background-color: #e8e8e8;
         color: #e4c8c8;
         font-size: 18px;
-        background: transparent;
-        transition: all .3s cubic-bezier(.39,.575,.565,1);
-        box-shadow: none;
+        background: #3c1414;
+        box-shadow: none; */
+
+        display: flex;
+        justify-content: space-evenly;
+        line-height: 1;
+        color: white;
+        font-size: 1.6rem;
+        border: 0;
+        border-radius: 2.1rem;
+
     }
 
     .nav-categories :hover {
-        background-color: rgb(187, 148, 130);
+        background-color: #3c1414;
         padding: 10px;
         border-radius: 2.1rem;
     }

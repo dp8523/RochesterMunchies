@@ -1,7 +1,5 @@
 <body>
 
-    <h1>Shop Your Favorite Treats</h1>
-
     <div class="home-flex-container">
         <div class="main-message-flex">
             <h1>Shop Your Favorite Treats</h1>
@@ -13,7 +11,7 @@
     </div>
 
     <div class="Homepage-Snacks">
-        <a *ngFor="let snack of snacks" 
+        <a class="snacks" *ngFor="let snack of snacks" 
             routerLink="/buyer_detail/{{snack.id}}">
             {{snack.name}}
         </a>
@@ -21,8 +19,15 @@
 
     <h2 routerLink="/buyer_inventory">Browse To See More</h2>
 
-    <div class="Subscription-flex">
-        <h3>Sign up for a subscription to recieve weekly or monthly treats!</h3>
+    <div class="Subscription">
+        <h3>Want More?</h3>
+
+        <div class="sub-text-col-2">
+            <h4>Sign up for a subscription to recieve weekly or monthly treats!</h4>
+        </div>
         <button id="sign-up" >Sign Up!</button>
-    </div>
+
+    </div> 
+
+
 </body>

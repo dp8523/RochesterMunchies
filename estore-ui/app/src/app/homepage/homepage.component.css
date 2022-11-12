@@ -1,3 +1,8 @@
+html, body {
+    padding:0px;
+    margin:0px;
+}
+
 .background {
     background-image: url("http://i.huffpost.com/gen/1068221/images/o-OREOS-facebook.jpg");
     background-size: contains;
@@ -6,7 +11,7 @@
     border: solid 2px rgb(255, 255, 255);
 }
 
-.home-flex-container {
+.home-flex-container, .Sub-flex-main{
     display: flex;
     flex-direction: row;
     align-self: flex-end;
@@ -14,7 +19,6 @@
     position: relative;
     padding: 1.5rem;   
     justify-content: space-around;
-
 }
 
 h1, h2 {
@@ -39,14 +43,14 @@ h1, h2 {
     align-items: flex-start;
 }
 
-a {
+.snacks {
     background: transparent;
     border-radius: 2px;
     padding: 1rem;
     font-size: 1.2rem;
     text-decoration: none;
     display: inline-block;
-    color: rgb(2, 81, 123);
+    color: black;
     text-align: center;
     width: 100%;
     min-width: 70px;
@@ -62,19 +66,18 @@ a {
 
 /*affects the layout of the snacks on the homepage*/
 @media (min-width: 600px) {
-    a {
+    .snacks {
       width: 18%;
       box-sizing: content-box;
     }
 }
 
-a:hover {
-    background-color: rgb(107, 114, 160);
+.snacks:hover {
+    background-color: orange;
 }
 
 h2 {
     background-color: #3c1414;
-    border-radius: 12px;
     width: fit-content;
     margin-left: 39%;
     padding: calc((4.2rem - 1em)/2);
@@ -84,32 +87,50 @@ h2 {
     border: 0;
     border-radius: 2.1rem;
     font-weight: bold;
-
 }
 
 h2:hover {
     background-color: rgb(187, 148, 130);
 }
 
-.Subscription-flex {
-    display: flex;
-    flex-direction: row;
-    align-self: flex-end;
-    align-items: center;
-    background-color: #3c1414;
-    height: 200px;
-    width: 100%;
+h3 {
+    color: #e4c8c8;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 30px;
+
 }
 
-h3 {
-    background-color: rgb(147, 107, 64);
-    color: #ffffff;
+.Subscription {
+    background-color: #91268e;
+    float: left;
+    clear: none;
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+h4 {
+    color: #e4c8c8;
     padding: 25px;
+    padding-left: 25%;
+    padding-right: 25%;
+    border-radius: 2.1rem;
+    text-align: center;
+    font-size: 1.3rem;
 }
 
 #sign-up {
-    color: orange;
-    border-radius: 12px;
-    font-size: large;
-    padding: 10px;
+    background-color: #3c1414;
+    padding: 12px;
+    color: #e4c8c8;
+    font-size: 1.3rem;
+    border: 0;
+    border-radius: 2.1rem;
+    font-weight: bold;
+    width: fit-content;
+    margin-left: 45%;
+}
+
+#sign-up:hover {
+    background-color: rgb(187, 148, 130);
 }
