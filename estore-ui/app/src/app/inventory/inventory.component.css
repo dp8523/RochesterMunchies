@@ -1,39 +1,70 @@
-.Inventory li {
-    
+body {
+    background-color: #3c1414;
+}
+.Inventory-grid {
+    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+}
+
+.Inventory-grid-item-3 li {
+    grid-column-start: 1;
+    grid-column-end: 2;
     list-style: none;
     padding: 10px;
     cursor: pointer;
     background-color: white;
     position: relative;
 }
-.Inventory{
+.Inventory-grid-item-3{
     padding-inline-start: 0px;
 }
 
-.Inventory a {
+.Inventory-grid-item-3 a {
 
-    padding: 1rem;
+    /* padding: 1rem;
     text-decoration: none;
     display: inline-block;
-    background-color: #e8e8e8;
-    color: #3d3d3d;
+    background-color: pink;
+    color: black;
     border-radius: 5px;
     font-size: 18px;
     width: 50%;
+    text-align: center; */
+    
+    background: transparent;
+    border-radius: 2px;
+    padding: 1rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    display: inline-block;
+    color: black;
     text-align: center;
+    width: 100%;
+    min-width: 70px;
+    margin: .5rem auto;
+    box-sizing: border-box;
+    border-radius: 12px;
+
+    /* flexbox */
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+
 }
 
-.Inventory a:hover {
+.Inventory-grid-item-3 a:hover {
     background-color: rgb(221, 221, 221);
 }
 
-.Inventory a:link {
+.Inventory-grid-item-3 a:link {
     text-decoration: none;
 }
 
+/*affects the layout of the snacks on the homepage*/
+
+
 .badge {
     display: inline-block;
-    
     color: black;
 }
 
@@ -43,14 +74,17 @@
     border-radius: 5px;
 }
 
-.add-snack {
+.add-snack-grid-item-2 {
+    grid-column-start: 2;
+    grid-column-end: 3;
     border: 1px solid;
     border-radius: 5px;
     margin-bottom: 8px;
     width: 75%;
+    background-color: #91268e;
 }
 
-.add-snack li{
+.add-snack-grid-item-2 li{
     list-style: none;
     padding: 10px;
 }
