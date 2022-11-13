@@ -36,7 +36,7 @@ body {
     padding: 1rem;
     text-decoration: none;
     display: inline-block;
-    background-color: #e8e8e8;
+    background-color: orange;
     color: black;
     border-radius: 5px;
     font-size: 18px;
@@ -70,7 +70,7 @@ body {
     border: 1px solid;
     border-radius: 5px;
     margin-bottom: 8px;
-    width: 75%;
+    width: 50%;
     background-color: #91268e;
 }
 
