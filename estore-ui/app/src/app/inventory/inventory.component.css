@@ -1,12 +1,14 @@
 body {
     background-color: #efeaea;
+    background-image: url('./../../assets/oreos_background.png');
+    background-size: cover;
+    background-position: center center;
 }
 
 .Inventory-grid-top {
-    display: flex;
-    flex-direction: row;
-    align-self: flex-end;
-    align-items: center;
+    display: grid;
+    grid-auto-columns:200px;
+    grid-template-columns: auto auto;
     padding: 1.5rem;   
     justify-content: space-around;
 
@@ -19,7 +21,7 @@ body {
     padding: 10px;
     column-gap: normal;
     row-gap: normal;
-    background-color: #efeaea;
+    background-color: transparent;
 }
 
 .Inventory-grid-bottom li {
@@ -28,7 +30,7 @@ body {
     cursor: pointer;
     background-color: white;
     position: relative;
-    background-color: #efeaea;
+    background-color: transparent;
     text-align: center;
 }
 
@@ -73,19 +75,19 @@ body {
     color: pink;
 }
 
-.add-snack-flex {
+.add-snack-grid-2 {
     padding:20px;
     border: 1px solid;
     border-radius: 5px;
     margin-bottom: 8px;
-    width: 50%;
-    background-color: #b7d34a;
+    width: 100%;
+    background-color: #3c1414;
     position: relative;
     border: 0;
-    
+
 }
 
-.add-snack-flex li{
+.add-snack-grid-2 li{
     list-style: none;
     padding: 10px;
 }
@@ -97,6 +99,7 @@ body {
     box-sizing: border-box;
     background-color:white;
     border:0;
+    padding-right: 50px;
 }
 
 .label {
@@ -104,7 +107,7 @@ body {
     width: 25%;
     padding-bottom: 10px;
     font-size: 18px;
-    color:#3c1414;
+    color:#efeaea;
     font-weight: bold;
 }
 
@@ -114,8 +117,7 @@ body {
 }
 
 .add-button {
-
-    background-color: #3c1414;
+    background-color: rgb(187, 148, 130);
     padding: 12px;
     color: #e4c8c8;
     font-size: 1.3rem;
@@ -125,5 +127,5 @@ body {
 }
 
 .add-button:hover {
-    background-color: rgb(187, 148, 130);
+    background-color: white;
 }

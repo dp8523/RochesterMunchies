@@ -5,12 +5,13 @@ label {
     margin-top: 1rem;
     margin-bottom: .5rem;
     color:#3c1414;
+    text-align: center;
   
   }
   input {
     padding: .5rem;
-    width: 100%;
-    max-width: 800px;
+    width: 75%;
+    max-width: 600px;
     box-sizing: border-box;
     display: block;
   }
@@ -18,6 +19,7 @@ label {
   li {
     list-style-type: none;
   }
+
   .search-result li a {
     display: inline-block;
     width: 75%;
