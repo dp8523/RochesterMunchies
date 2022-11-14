@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.estore.api.estoreapi.model.Buyer;
 import com.estore.api.estoreapi.model.Snack;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -191,5 +192,35 @@ public class SnackFileDAOTest {
         assertThrows(IOException.class,
                         () -> new SnackFileDAO("doesnt_matter.txt",mockObjectMapper),
                         "IOException not thrown");
+    }
+
+    @Test
+    public void testRateSnack() throws IOException {
+        // Setup
+        Snack snack = new Snack(99,"Animal Crackers", "Crackers shaped like animals", 12, 8.99);
+        Buyer buyer = new Buyer("Sudhir");
+
+        // Invoke
+        Double result = assertDoesNotThrow(() -> snackFileDAO.rateSnack(snack.getId(),buyer.getUsername(),5),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertNotNull(result);
+        Double actual = snackFileDAO.rateSnack(snack.getId(),buyer.getUsername(),5);
+        assertEquals(actual,result);
+    }
+
+    @Test
+    public void testRateSnackNotFound() {
+        // Setup
+        // no snack    
+
+        // Invoke
+        Double result = assertDoesNotThrow(() -> snackFileDAO.rateSnack(98,"Abdul",5),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertEquals(result,-1);
+
     }
 }
