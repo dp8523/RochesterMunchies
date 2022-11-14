@@ -143,6 +143,9 @@ public class BuyerFileDAO implements BuyerDAO {
         }
     }
 
+    /**
+    ** {@inheritDoc}
+     */
     @Override
     public Buyer addToCart(String username, int snackID) throws IOException {
         synchronized(buyers) {
@@ -163,6 +166,9 @@ public class BuyerFileDAO implements BuyerDAO {
         }
     }
 
+    /**
+    ** {@inheritDoc}
+     */
     @Override
     public Buyer deleteFromCart(String username, int snackID) throws IOException {
         synchronized(buyers) {
@@ -183,6 +189,9 @@ public class BuyerFileDAO implements BuyerDAO {
         }
     }
 
+    /**
+    ** {@inheritDoc}
+     */
     @Override
     public Buyer clearCart(String username) throws IOException {
         synchronized(buyers) {

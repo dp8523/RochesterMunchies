@@ -46,8 +46,34 @@ public interface BuyerDAO {
      */
     boolean deleteBuyer(String username) throws IOException;
 
+    /**
+     * Adds a {@linkplain Snack snack} with the given snackID to the cart of a {@linkplain Buyer buyer}
+     * 
+     * @param username The username of the {@link Buyer buyer}
+     * 
+     * @param snackID The snackID of the {@link Snack snack}
+     * 
+     * @return the {@link Buyer buyer} with the updated cart
+     * <br>
+     * false if buyer with the given username does not exist or if attempting to delete admin
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
     Buyer addToCart(String username, int snackID) throws IOException;
     
+    /**
+     * Deletes a {@linkplain Snack snack} with the given snackID from the cart of a {@linkplain Buyer buyer}
+     * 
+     * @param username The username of the {@link Buyer buyer}
+     * 
+     * @param snackID The snackID of the {@link Snack snack}
+     * 
+     * @return the {@link Buyer buyer} with the updated cart
+     * <br>
+     * false if buyer with the given username does not exist or if attempting to delete admin
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
     Buyer deleteFromCart(String username, int snackID) throws IOException;
 
     /**
