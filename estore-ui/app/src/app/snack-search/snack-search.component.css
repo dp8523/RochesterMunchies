@@ -4,6 +4,10 @@ label {
     font-size: 1.2rem;
     margin-top: 1rem;
     margin-bottom: .5rem;
+    color:#3c1414;
+    text-align: center;
+    position: relative;
+    right: 50px;
   
   }
   input {
@@ -17,10 +21,8 @@ label {
   li {
     list-style-type: none;
   }
+
   .search-result li a {
-    border-bottom: 1px solid gray;
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
     display: inline-block;
     width: 75%;
     max-width: 600px;
@@ -28,11 +30,11 @@ label {
     box-sizing: border-box;
     text-decoration: none;
     color: black;
+    background-color:white ;
   }
   
   .search-result li a:hover {
-    background-color: gray;
-    color: white;
+    background-color: #feebd0;
   }
   
   ul.search-result {

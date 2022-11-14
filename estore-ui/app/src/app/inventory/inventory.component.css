@@ -1,56 +1,108 @@
-.Inventory li {
-    
+body {
+    background-color: #efeaea;
+    background-image: url('./../../assets/oreos_background.png');
+    background-size: cover;
+}
+
+.Inventory-grid-top {
+    display: grid;
+    grid-auto-columns:200px;
+    grid-template-columns: auto auto;
+    padding: 1.5rem;   
+    justify-content: space-around;
+}
+
+.Inventory-grid-bottom {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding-inline-start: 0px;
+    padding: 10px;
+    padding-left: 80px;
+    padding-right: 80px;
+    column-gap: normal;
+    row-gap: normal;
+    background-color: transparent;
+}
+
+.Inventory-grid-bottom li {
     list-style: none;
     padding: 10px;
     cursor: pointer;
     background-color: white;
     position: relative;
-}
-.Inventory{
-    padding-inline-start: 0px;
-}
-
-.Inventory a {
-
-    padding: 1rem;
-    text-decoration: none;
-    display: inline-block;
-    background-color: #e8e8e8;
-    color: #3d3d3d;
-    border-radius: 5px;
-    font-size: 18px;
-    width: 50%;
+    background-color: transparent;
     text-align: center;
 }
 
-.Inventory a:hover {
+.snack-flex {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding:0;
+    border:0;
+    align-items: center;
+}
+
+.snack-flex a {
+    padding: 1rem;
+    color: black;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 50%;
+    background-color: transparent;
+}
+
+.Inventory-grid-bottom a:hover {
     background-color: rgb(221, 221, 221);
 }
 
-.Inventory a:link {
+.Inventory-grid-bottom a:link {
     text-decoration: none;
 }
 
-.badge {
-    display: inline-block;
-    
-    color: black;
+.badge-price {
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.button {
-    background-color: red;
+.badge-qty {
+    font-size: 15px;
+}
+
+.delete-button {
+    background-color: transparent;
     padding: 15px;
     border-radius: 5px;
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+    border: 0;
 }
 
-.add-snack {
+.delete-button:hover {
+    color: pink;
+}
+
+.search-snack-grid-1 {
+    width:500px;
+    max-width: 500px;
+    padding-left: 100px;
+}
+
+.add-snack-grid-2 {
+    padding-right: 50px;
+    padding: 20px;
     border: 1px solid;
     border-radius: 5px;
     margin-bottom: 8px;
-    width: 75%;
+    width: 100%;
+    background-color: #4c3333;
+    position: relative;
+    border: 0;
+    right: 80px;
 }
 
-.add-snack li{
+.add-snack-grid-2 li{
     list-style: none;
     padding: 10px;
 }
@@ -60,6 +112,10 @@
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+    background-color:white;
+    border:0;
+    padding-right: 30px;
+    padding-left: 80px;
 }
 
 .label {
@@ -67,12 +123,25 @@
     width: 25%;
     padding-bottom: 10px;
     font-size: 18px;
+    color:#efeaea;
+    font-weight: bold;
 }
 
 .buttons {
     text-align: center;
+    padding-bottom: 20px;
 }
 
 .add-button {
-    padding: 10px;
+    background-color: rgb(187, 148, 130);
+    padding: 12px;
+    color: 3c1414;
+    font-size: 1.3rem;
+    border: 0;
+    border-radius: 2.1rem;
+    font-weight: bold;
+}
+
+.add-button:hover {
+    background-color: white;
 }

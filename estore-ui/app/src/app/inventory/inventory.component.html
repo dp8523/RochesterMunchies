@@ -1,37 +1,55 @@
-<app-snack-search></app-snack-search>
+<body>
+    <div class="Inventory">
 
-<div class="add-snack">
-    <li>
-        <label class="label" for="new-snack">Snack name: </label>
-        <input class="input" id="new-snack-name" #snackName/>
-    </li>
-    <li>
-        <label class="label" for="new-snack">Snack description: </label>
-        <input class="input" id="new-snack-description" #snackDescription/>
-    </li>
-    <li>
-        <label class="label" for="new-snack">Snack quantity: </label>
-        <input class="input" id="new-snack-quantity" #snackQuantity/>
-    </li>
-    <li>
-        <label class="label" for="new-snack">Snack price: </label>
-        <input class="input" id="new-snack-price" #snackPrice/>
-    </li>
-    <div class="buttons">
-        <button type="button" class="add-button" (click)="add(snackName.value, snackDescription.value, snackQuantity.value, snackPrice.value);">
-            Add snack
-        </button>
+        <div class="Inventory-grid-top">
+
+            <app-snack-search class="search-snack-grid-1"></app-snack-search>
+            
+            <div class="add-snack-grid-2">
+                <li>
+                    <label class="label" for="new-snack">Snack name: </label>
+                    <input class="input" id="new-snack-name" #snackName/>
+                </li>
+                <li>
+                    <label class="label" for="new-snack">Snack description: </label>
+                    <input class="input" id="new-snack-description" #snackDescription/>
+                </li>
+                <li>
+                    <label class="label" for="new-snack">Snack quantity: </label>
+                    <input class="input" id="new-snack-quantity" #snackQuantity/>
+                </li>
+                <li>
+                    <label class="label" for="new-snack">Snack price: </label>
+                    <input class="input" id="new-snack-price" #snackPrice/>
+                </li>
+                <div class="buttons">
+                    <button type="add-button" class="add-button" (click)="add(snackName.value, snackDescription.value, snackQuantity.value, snackPrice.value);">
+                        Add snack
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <ul class="Inventory-grid-bottom">
+
+            <li *ngFor="let snack of snacks">
+
+                <div class="snack-flex">
+                    <a routerLink="/detail/{{snack.id}}">
+                        <span class="badge-name">{{snack.name}}</span>
+                        <br>
+                        <span class="badge-price">{{snack.price}}</span>
+                        <br>
+                        <span class="badge-qty">Qty: {{snack.quantity}}</span>
+                    </a>
+                    <button class="delete-button" type="button" title="delete snack"
+                    (click)="delete(snack)">X</button>
+                </div>
+
+            </li>
+
+        </ul>
+        
     </div>
 
-</div>
-
-
-<ul class="Inventory">
-    <li *ngFor="let snack of snacks">
-        <a routerLink="/detail/{{snack.id}}">
-            <span class="badge">{{snack.id}}</span> {{snack.name}}
-        </a>
-        <button class="button" type="button" title="delete snack"
-      (click)="delete(snack)">X</button>
-    </li>
-</ul>
+</body>
