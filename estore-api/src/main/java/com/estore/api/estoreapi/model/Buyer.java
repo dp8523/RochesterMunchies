@@ -2,6 +2,10 @@ package com.estore.api.estoreapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Buyer class for objects containing a username and shopping cart. Represents
+ * users on the estore page.
+ */
 public class Buyer {
 
     // Package private for tests
