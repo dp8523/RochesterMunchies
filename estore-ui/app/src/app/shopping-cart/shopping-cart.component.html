@@ -1,18 +1,20 @@
+<div *ngIf="!Loggedin()">
+    <label>Please Login to see your Cart</label>  
+</div>
+
 <div *ngIf="Loggedin()">
     <ul class="Items">
         <li *ngFor="let snack of items; let i=index">
             <label>Snack: {{snack.name}} </label>
+            <label>Price: ${{costs[i]}} </label>
             <button (click)="deleteCart(snack.id)">-</button>
             <label>Quantity: {{quantities[i]}} </label>
             <button (click)="addCart(snack.id)">+</button>
         </li>
     </ul>
+    <label>Total Cost: {{totalCost}}</label>
 </div>
 
-<div *ngIf="!Loggedin()">
-    <label>Please Login to see your Cart</label>
-    
-</div>
 <div class="buttons">
     <button class="back" type="button" (click)="goBack()">Go Back</button>
 </div>

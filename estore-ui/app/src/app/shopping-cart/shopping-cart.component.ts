@@ -16,7 +16,9 @@ export class ShoppingCartComponent implements OnInit {
   user: User | undefined;
   items: Snack[] = [];
   quantities: number[] = [];
+  costs: number[] = [];
   shoppingCart = new Map<string, number>();
+  totalCost = 0;
 
   constructor(  
     private snackService: SnackService,
@@ -32,7 +34,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getUser(): void {
-    if(sessionStorage['user'] == ""){
+    if(sessionStorage['user'] == "" || sessionStorage['user'] == null){
       this.user = undefined;
     }
     else{
@@ -41,12 +43,11 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   Loggedin(): Boolean{
-    if (sessionStorage['login'] == "true"){
-      return true;
-    }
-    else{
+    
+    if(sessionStorage['login'] == "false" || sessionStorage['login'] == null ){
       return false;
     }
+    return true;
   }
 
   isCartEmpty(): Boolean {
@@ -77,15 +78,26 @@ export class ShoppingCartComponent implements OnInit {
 
         this.items = [];
         this.quantities = [];
+        this.costs = [];
+
         this.shoppingCart.forEach((value: number, key: string) => {
           const id = Number(key);
         
           this.snackService.getSnack(id).subscribe(snack => {
             this.items.push(snack);
             this.quantities.push(value);
+
+            const num1 = snack.price * value;
+            const result = num1.toFixed(2);
+            const final = parseFloat(result);
+            this.costs.push(final);
           });
           
-        })       
+        })
+        this.userService.getTotalCost(this.user.username).subscribe(cost => {
+          
+          this.totalCost = parseFloat(cost.toFixed(2));
+        });        
       }    
     }
   }
@@ -107,21 +119,32 @@ export class ShoppingCartComponent implements OnInit {
         this.shoppingCart = new Map(Object.entries(this.user.cart));
         this.items = [];
         this.quantities = [];
-
+        this.costs = [];
+     
         this.shoppingCart.forEach((value: number, key: string) => {
           const id = Number(key);
         
           this.snackService.getSnack(id).subscribe(snack => { 
             this.items.push(snack);
             this.quantities.push(value);
+            
+            const num1 = snack.price * value;
+            const result = num1.toFixed(2);
+            const final = parseFloat(result);
+            this.costs.push(final);
+            
           });    
         })
+        this.userService.getTotalCost(this.user.username).subscribe(cost => { 
+          
+          this.totalCost = parseFloat(cost.toFixed(2)); 
+        }); 
+
       });
     }
   }
 
   deleteCart(snackId: number): void {
-    //console.log("Hello");
     
     if(sessionStorage['user'] == "" || sessionStorage['user'] == null){
       this.user = undefined;
@@ -139,18 +162,23 @@ export class ShoppingCartComponent implements OnInit {
         
         this.items = [];
         this.quantities = [];
+        this.costs = [];
 
         this.shoppingCart.forEach((value: number, key: string) => {
           const id = Number(key);
-          
-          console.log(key, value);
+        
           this.snackService.getSnack(id).subscribe(snack => {
             this.items.push(snack)
             this.quantities.push(value);
+            
+            const num1 = snack.price * value;
+            const result = num1.toFixed(2);
+            const final = parseFloat(result);
+            this.costs.push(final);
+
           });
-        }) 
-       
-        
+        })
+        this.userService.getTotalCost(this.user.username).subscribe(cost => this.totalCost = parseFloat(cost.toFixed(2)));    
       });
     }
   }

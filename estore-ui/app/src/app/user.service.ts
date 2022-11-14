@@ -40,6 +40,13 @@ export class UserService {
     .pipe(catchError(this.handleError<User>(`deleteCart username=${username} , snackId=${snackId}`)))
   }
 
+  getTotalCost(username: string): Observable<number>{
+    const url = `${this.userURL}/${username}/cartTotal`;
+    return this.http.get<number>(url,this.httpOptions)
+    .pipe(catchError(this.handleError<number>(`getTotalCost username=${username}`)))
+    
+  }
+
   // Handle Http operation that failed
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
