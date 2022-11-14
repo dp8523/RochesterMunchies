@@ -26,9 +26,7 @@ import com.estore.api.estoreapi.model.Snack;
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
- * 
  */
-
 @RestController
 @RequestMapping("buyers")
 public class BuyerController {
