@@ -248,6 +248,9 @@ public class BuyerController {
         }
     }
 
+    /**
+     * 
+     */
     @PutMapping("/r/{username}/{snackID}/{rating}")
     public ResponseEntity<Double> rateSnack(@PathVariable String username, @PathVariable int snackID, @PathVariable int rating) {
         LOG.info("PUT /r/" + username + "/" + snackID + "/" + rating);
@@ -277,6 +280,14 @@ public class BuyerController {
         }
     }
 
+    /**
+     * Updates the stock within the snack database whenever a Buyer checks out their cart
+     * 
+     * @param cart - ShoppingCart instance with hashmap of items being checked out
+     * 
+     * @return ResponseEntity with HTTP status OK when there is insufficient stock 
+     * ResponseEntity with HTTP status NOT_FOUND when the snack is not found
+     */
     private ResponseEntity<Buyer> updateStock(ShoppingCart cart) throws IOException {
         // first loop ensures there is enough of every snack in the inventory. if not, cancel checkout
         for (Map.Entry<Integer, Integer> snack : cart.entrySet()) {
@@ -314,6 +325,15 @@ public class BuyerController {
         return null;
     }
 
+    /**
+     * Checkouts the {@linkplain Buyer buyer} cart when provided the buyer's username
+     * 
+     * @param username - The username of the {@link Buyer buyer} to delete item from cart
+     * 
+     * @return ResponseEntity with {@link Buyer buyer} object and HTTP status of OK if cart was checked out
+     * ResponseEntity with HTTP status NOT_FOUND if buyer with username is not found
+     * ResponseEntity with INTERNAL_SERVER_ERROR otherwise
+     */
     @PostMapping("/{username}/checkout")
     public ResponseEntity<Buyer> checkoutCart(@PathVariable String username) {
         LOG.info("Post / " + username);
