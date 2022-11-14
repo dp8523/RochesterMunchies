@@ -69,6 +69,19 @@ public class BuyerFileDAOTest {
     }
 
     @Test
+    public void testCreateBuyerAlreadyExists() {
+        // Setup
+        String username = "Adam";
+
+        // Invoke
+        Buyer result = assertDoesNotThrow(() -> buyerFileDAO.createBuyer(username),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertEquals(null, result);
+    }
+
+    @Test
     public void testCreateBuyer() {
         // Setup
         String username = "Robert";
@@ -180,14 +193,43 @@ public class BuyerFileDAOTest {
     }
 
     @Test
+    public void testClearCart() {
+        // Setup
+        int snackID = 1;
+        testBuyers[0].addToCart(snackID);
+        String username = "Adam";
+
+        ShoppingCart emptyCart = new ShoppingCart();
+
+        // Invoke
+        Buyer buyer = assertDoesNotThrow(() -> buyerFileDAO.clearCart(username),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertEquals(emptyCart,buyer.getCart());
+        assertEquals(emptyCart,testBuyers[0].getCart());
+    }
+
+    @Test
+    public void testClearCartBuyerNotFound() {
+        // Setup
+        String username = "Robert";
+
+        // Invoke
+        Buyer buyer = assertDoesNotThrow(() -> buyerFileDAO.clearCart(username),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertNull(buyer);
+    }
+
+    @Test
     public void testSaveException() throws IOException{
         doThrow(new IOException())
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(Buyer[].class));
 
-        assertThrows(IOException.class,
-                        () -> buyerFileDAO.createBuyer("Dara"),
-                        "IOException not thrown");
+        assertThrows(IOException.class, () -> buyerFileDAO.createBuyer("djsiaod"), "IOException not thrown");
     }
 
     @Test

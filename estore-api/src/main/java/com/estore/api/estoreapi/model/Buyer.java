@@ -75,7 +75,14 @@ public class Buyer {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((username == null) ? 0 : username.hashCode());
+
+        if (username == null) {
+            result = prime * result + 0;
+        }
+        else {
+            result = prime * result + username.hashCode();
+        }
+
         return result;
     }
 
@@ -94,10 +101,13 @@ public class Buyer {
         
         Buyer other = (Buyer) obj;
         if (username == null) {
-            if (other.username != null)
-                return false;
+            // if (other.username != null) {
+            return false;
+            // }
         } else if (!username.equals(other.username))
             return false;
         return true;
     }
+
 }
+

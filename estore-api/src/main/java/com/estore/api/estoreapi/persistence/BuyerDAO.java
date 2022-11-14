@@ -49,4 +49,15 @@ public interface BuyerDAO {
     Buyer addToCart(String username, int snackID) throws IOException;
     
     Buyer deleteFromCart(String username, int snackID) throws IOException;
+
+    /**
+     * Empties the {@linkplain ShoppingCart cart} of the {@linkplain Buyer buyer} with the given username
+     * 
+     * @param username The username of the {@link Buyer buyer}
+     * 
+     * @return the new {@link Buyer buyer} after the shopping cart was emptied
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    public Buyer clearCart(String username) throws IOException;
 }

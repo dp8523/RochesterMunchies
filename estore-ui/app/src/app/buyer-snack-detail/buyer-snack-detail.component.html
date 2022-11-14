@@ -1,5 +1,3 @@
-<a routerLink="/shopping_cart">Shopping Cart</a>
-
 <div class="total" *ngIf="snack">
 
     <h2>{{snack.name}} Details </h2>
@@ -22,7 +20,7 @@
     </div>
     <div class="buttons">
         <button class="back" type="button" (click)="goBack()">Go Back</button>
-        <button class="addToCart" type="button">Add To Cart</button>
+        <button class="addToCart" type="button" (click)="addCart()">Add To Cart</button>
     </div>
 
 </div>

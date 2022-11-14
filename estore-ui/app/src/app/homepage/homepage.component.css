@@ -1,0 +1,138 @@
+html, body {
+    padding:0px;
+    margin:0px;
+}
+
+.background {
+    background-image: url("http://i.huffpost.com/gen/1068221/images/o-OREOS-facebook.jpg");
+    background-size: contains;
+    width: 100%;
+    height: 300px;
+    border: solid 2px rgb(255, 255, 255);
+}
+
+.home-flex-container, .Sub-flex-main{
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    align-items: center;
+    position: relative;
+    padding: 1.5rem;   
+    justify-content: space-around;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.Homepage-Snacks {
+    padding: 0;
+    margin: auto;
+    max-width: 1000px;
+
+    /* flexbox */
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.snacks {
+    background: transparent;
+    border-radius: 2px;
+    padding: 1rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    display: inline-block;
+    color: black;
+    text-align: center;
+    width: 100%;
+    min-width: 70px;
+    margin: .5rem auto;
+    box-sizing: border-box;
+    border-radius: 12px;
+
+    /* flexbox */
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+
+/*affects the layout of the snacks on the homepage*/
+@media (min-width: 600px) {
+    .snacks {
+      width: 18%;
+      box-sizing: content-box;
+    }
+}
+
+.snacks:hover {
+    background-color: orange;
+}
+
+h2 {
+    background-color: #3c1414;
+    width: fit-content;
+    margin-left: 39%;
+    padding: calc((4.2rem - 1em)/2);
+    line-height: 1;
+    color: #e4c8c8;
+    font-size: 1.6rem;
+    border: 0;
+    border-radius: 2.1rem;
+    font-weight: bold;
+}
+
+h2:hover {
+    background-color: rgb(187, 148, 130);
+}
+
+h3 {
+    color: #e4c8c8;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 30px;
+
+}
+
+.Subscription {
+    background-image: url('./../../assets/teal_hershey.png');
+    background-size: cover;
+    background-position: center center;
+    float: left;
+    clear: none;
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+h4 {
+    color: #e4c8c8;
+    padding: 25px;
+    padding-left: 25%;
+    padding-right: 25%;
+    border-radius: 2.1rem;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+#sign-up {
+    background-color: #3c1414;
+    padding: 12px;
+    color: #e4c8c8;
+    font-size: 1.3rem;
+    border: 0;
+    border-radius: 2.1rem;
+    font-weight: bold;
+    width: fit-content;
+    margin-left: 45%;
+}
+
+#sign-up:hover {
+    background-color: rgb(187, 148, 130);
+}

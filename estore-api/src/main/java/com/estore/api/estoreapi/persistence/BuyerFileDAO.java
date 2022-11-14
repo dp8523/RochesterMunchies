@@ -2,8 +2,8 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.TreeMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,17 +39,11 @@ public class BuyerFileDAO implements BuyerDAO {
         load();  // load the buyers from the file
     }
 
-    private Buyer[] getBuyersArray() {
-        return getBuyersArray(null);
-    }
-
-    private Buyer[] getBuyersArray(String containsText) { // if containsText == null, no filter
+    private Buyer[] getBuyersArray() { 
         ArrayList<Buyer> buyerArrayList = new ArrayList<>();
 
         for (Buyer buyer : buyers.values()) {
-            if (containsText == null || buyer.getUsername().contains(containsText)) {
-                buyerArrayList.add(buyer);
-            }
+            buyerArrayList.add(buyer);
         }
 
         Buyer[] buyerArray = new Buyer[buyerArrayList.size()];
@@ -83,7 +77,7 @@ public class BuyerFileDAO implements BuyerDAO {
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
-        buyers = new TreeMap<>();
+        buyers = new HashMap<>();
 
         // Deserializes the JSON objects from the file into an array of buyers
         // readValue will throw an IOException if there's an issue with the file
@@ -118,10 +112,15 @@ public class BuyerFileDAO implements BuyerDAO {
     @Override
     public Buyer createBuyer(String username) throws IOException {
         synchronized(buyers) {
-            Buyer buyer = new Buyer(username);
-            buyers.put(buyer.getUsername(), buyer);
-            save(); // may throw an IOException
-            return buyer;
+            if (buyers.containsKey(username)) {
+                return null;
+            }
+            else {
+                Buyer buyer = new Buyer(username);
+                buyers.put(buyer.getUsername(), buyer);
+                save(); // may throw an IOException
+                return buyer;
+            }
         }
     }
 
@@ -175,6 +174,26 @@ public class BuyerFileDAO implements BuyerDAO {
             else {
                 // Delete item from cart
                 buyer.deleteFromCart(snackID);
+
+                // Update buyers list with new cart
+                buyers.put(buyer.getUsername(),buyer);
+                save(); 
+                return buyer;
+            }
+        }
+    }
+
+    @Override
+    public Buyer clearCart(String username) throws IOException {
+        synchronized(buyers) {
+            Buyer buyer = buyers.get(username);
+
+            // Buyer is not found
+            if (buyers.containsKey(username) == false)
+                return null; 
+            else {
+                // Clear buyer's cart
+                buyer.clearCart();
 
                 // Update buyers list with new cart
                 buyers.put(buyer.getUsername(),buyer);
