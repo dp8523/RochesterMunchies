@@ -231,7 +231,7 @@ public class BuyerController {
 
                 // there is insufficient stock for this snack
                 if(newStock < 0) {
-                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                    return new ResponseEntity<>(HttpStatus.OK);
                 }
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);

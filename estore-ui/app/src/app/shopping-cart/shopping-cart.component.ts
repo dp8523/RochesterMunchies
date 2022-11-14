@@ -58,7 +58,8 @@ export class ShoppingCartComponent implements OnInit {
     else{
       this.user = JSON.parse(sessionStorage['user']);
       if (this.user){
-        if(this.user.cart.size == 0){
+        this.shoppingCart = new Map(Object.entries(this.user.cart));
+        if(this.shoppingCart.size == 0){
           return true;
         }
       }
@@ -183,5 +184,23 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+  checkoutCart(): void{
+    if(sessionStorage['user'] == "" || sessionStorage['user'] == null){
+      this.user = undefined;
+    }
+    else{
+      this.user = JSON.parse(sessionStorage['user']);
+    }
+
+    if (this.user){
+      this.userService.checkoutCart(this.user.username).subscribe(user => {
+        this.user = user;
+        sessionStorage.setItem('user', JSON.stringify(this.user));
+        this.getItems();
+      })
+    }
+    
+
+  }
 
 }
