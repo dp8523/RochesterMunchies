@@ -26,36 +26,69 @@ public class Buyer {
 
     /**
      * Sets the username of the Buyer
+     * 
      * @param username The username of the Buyer
      */
     public void setUsername(String username) {this.username = username;}
 
     /**
      * Retrieves the username of the Buyer
+     * 
      * @return The username of the Buyer
      */
     public String getUsername() {return username;}
 
+    /**
+     * Sets the cart of the Buyer
+     * 
+     * @param newCart The new ShoppingCart instance
+     */
     public void setCart(ShoppingCart newCart) {
         cart = newCart;
     }
 
+    /**
+     * Retrieves the shopping cart of the Buyer
+     * 
+     * @return cart The ShoppingCart of the buyer
+     */
     public ShoppingCart getCart() {
         return cart;
     }
 
+    /**
+     * Adds snacks to a buyer's cart
+     * 
+     * @param snackID
+     */
     public void addToCart(@JsonProperty("id") int snackID) {
         cart.addToCart(snackID);
     }
 
+    /**
+     * Deletes snacks from a buyer's cart
+     * 
+     * @param snackID
+     */
     public void deleteFromCart(@JsonProperty("id") int snackID) {
         cart.deleteFromCart(snackID);
     }
 
+    /**
+     * Removes all items in the current buyer's cart
+     * 
+     * @return Boolean value true always
+     */
     public boolean clearCart() {
         return cart.clearCart();
     }
 
+    /**
+     * Detects if a particular snackID is found in the buyer's cart
+     * 
+     * @param snackID Snack id of snack being checked
+     * @return true if snack was found, false otherwise
+     */
     public boolean snackInCart(int snackID) {
         return cart.containsKey(snackID);
     }
