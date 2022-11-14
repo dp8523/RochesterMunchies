@@ -1,24 +1,26 @@
+    <div *ngIf="!Loggedin()" class="total-login" >
 
-<div *ngIf="!Loggedin()" class="total" >
+        <div class="login">
+            <h3>Login</h3>
+            <li>
+                <label class="label">Username: </label>
+                <input class="input" placeholder="username" #username1>
+            </li>
+            <button (click)="login(username1.value)">Login</button>
+        </div>
+        
+        <div class="register">
+            <h3>Create Account</h3>
+            <li>
+                <label class="label">Username: </label>
+                <input class="input" placeholder="username" #username2>
+            </li>
+            <button (click)="register(username2.value)">Register</button>
+        </div>
+    </div>
 
-    <div class="login">
-        <h3>Login</h3>
-        <li>
-            <label class="label">Username: </label>
-            <input class="input" placeholder="username" #username1>
-        </li>
-        <button (click)="login(username1.value)">Login</button>
+    <div class="total-logout">
+        <div *ngIf="Loggedin()">
+            <button class="logout" (click)="logout()">Logout</button>
+        </div>
     </div>
-    
-    <div class="register">
-        <h3>Create Account</h3>
-        <li>
-            <label class="label">Username: </label>
-            <input class="input" placeholder="username" #username2>
-        </li>
-        <button (click)="register(username2.value)">Register</button>
-    </div>
-</div>
-<div *ngIf="Loggedin()">
-    <button (click)="logout()">Logout</button>
-</div>

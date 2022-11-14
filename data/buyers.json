@@ -1,1 +1,3 @@
-[{"username":"AC","cart":{}},{"username":"adam","cart":{}},{"username":"dara","cart":{}},{"username":"jaden","cart":{"12":35}},{"username":"matt","cart":{}},{"username":"rober","cart":{}},{"username":"admin","cart":{}},{"username":"j","cart":{}},{"username":"robert12","cart":{}},{"username":"lucie","cart":{"12":5,"15":3}}]
+
+[{"username":"AC","cart":{}},{"username":"adam","cart":{}},{"username":"dara","cart":{}},{"username":"jaden","cart":{"12":30,"13":7}},{"username":"matt","cart":{}},{"username":"rober","cart":{}},{"username":"admin","cart":{}},{"username":"j","cart":{}},{"username":"robert12","cart":{}},{"username":"lucie","cart":{"12":5,"15":3}}]
+
