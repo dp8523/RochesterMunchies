@@ -1,1 +1,40 @@
-[{"username":"AC","cart":{}},{"username":"adam","cart":{}},{"username":"dara","cart":{}},{"username":"jaden","cart":{"12":35}},{"username":"matt","cart":{}},{"username":"rober","cart":{}},{"username":"admin","cart":{}},{"username":"j","cart":{}},{"username":"robert12","cart":{}},{"username":"lucie","cart":{"12":5,"15":3}}]
+[
+    {
+        "username": "robert",
+        "cart": {
+            "12": 2,
+            "13": 1
+        }
+    },
+    {
+        "username": "adam",
+        "cart": {
+            "12": 5,
+            "14": 5
+        }
+    },
+    {
+        "username": "dara",
+        "cart": {}
+    },
+    {
+        "username": "robertdsadsa",
+        "cart": {}
+    },
+    {
+        "username": "jaden",
+        "cart": {}
+    },
+    {
+        "username": "rober",
+        "cart": {}
+    },
+    {
+        "username": "admin",
+        "cart": {}
+    },
+    {
+        "username": "lucie",
+        "cart": {}
+    }
+]

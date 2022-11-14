@@ -193,6 +193,37 @@ public class BuyerFileDAOTest {
     }
 
     @Test
+    public void testClearCart() {
+        // Setup
+        int snackID = 1;
+        testBuyers[0].addToCart(snackID);
+        String username = "Adam";
+
+        ShoppingCart emptyCart = new ShoppingCart();
+
+        // Invoke
+        Buyer buyer = assertDoesNotThrow(() -> buyerFileDAO.clearCart(username),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertEquals(emptyCart,buyer.getCart());
+        assertEquals(emptyCart,testBuyers[0].getCart());
+    }
+
+    @Test
+    public void testClearCartBuyerNotFound() {
+        // Setup
+        String username = "Robert";
+
+        // Invoke
+        Buyer buyer = assertDoesNotThrow(() -> buyerFileDAO.clearCart(username),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertNull(buyer);
+    }
+
+    @Test
     public void testSaveException() throws IOException{
         doThrow(new IOException())
             .when(mockObjectMapper)
