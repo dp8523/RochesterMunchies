@@ -25,6 +25,12 @@ h1 {
 
     }
 
+    nav a1, a2, a3, a4, a5 {
+        text-decoration: none;
+        margin: 5px;
+        display: inline-block;
+    }
+
     .nav-categories {
         /* display: flex;
         justify-content: space-evenly;
