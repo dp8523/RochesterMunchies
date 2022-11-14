@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -208,6 +207,35 @@ public class BuyerController {
                 
                 return new ResponseEntity<Double>(cartTotal, HttpStatus.OK);
             } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/r/{username}/{snackID}/{rating}")
+    public ResponseEntity<Double> rateSnack(@PathVariable String username, @PathVariable int snackID, @PathVariable int rating) {
+        LOG.info("PUT /r/" + username + "/" + snackID + "/" + rating);
+
+        try {
+            Snack snack = snackDao.getSnack(snackID);
+
+            if (snack != null) {
+                // Check if Buyer exists
+                Buyer buyer = buyerDao.login(username);
+
+                if (buyer != null) {
+                    double averageRating = snackDao.rateSnack(snackID, username, rating);
+                    return new ResponseEntity<Double>(averageRating, HttpStatus.OK);
+                }
+                else {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+            }
+            else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }

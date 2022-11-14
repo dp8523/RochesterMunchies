@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
 
 import java.io.IOException;
 
@@ -395,6 +399,86 @@ public class BuyerControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+
+    @Test
+    public void testRateSnackSnackNotFound() throws IOException { // rateSnack may throw IOException
+        // Setup
+        String username = "Sudhir";
+        int snackID = 99;
+        Buyer buyer = new Buyer(username);
+        int rating = 5;
+
+        // When snack does not exist
+        when(mockSnackDAO.getSnack(snackID)).thenReturn(null);
+        // When buyer exists in mock
+        when(mockBuyerDAO.login(username)).thenReturn(buyer);
+
+        ResponseEntity<Double> response = buyerController.rateSnack(username, snackID, rating);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testRateSnackBuyerNotFound() throws IOException { // rateSnack may throw IOException
+        // Setup
+        String username = "Sudhir";
+        int snackID = 99;
+        Snack snack = new Snack(99, "Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 5, 4.99);
+        int rating = 5;
+
+        // When snack does exist
+        when(mockSnackDAO.getSnack(snackID)).thenReturn(snack);
+        // When buyer does not exist
+        when(mockBuyerDAO.login(username)).thenReturn(null);
+
+        ResponseEntity<Double> response = buyerController.rateSnack(username, snackID, rating);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testRateSnack() throws IOException { // rateSnack may throw IOException
+        // Setup
+        int snackID = 99;
+        String username = "Sudhir";
+        Buyer buyer = new Buyer(username);
+        Snack snack = new Snack(snackID, "Haribo Coca-Cola Gummies", "Coca-cola flavored gummies in coca-cola bottle shapes", 5, 4.99);
+        int rating = 5;
+        double averageRating = 5;
+
+        // When snack does exist
+        when(mockSnackDAO.getSnack(snackID)).thenReturn(snack);
+        // When buyer does exist
+        when(mockBuyerDAO.login(username)).thenReturn(buyer);
+
+        when(mockSnackDAO.rateSnack(snackID, username, rating)).thenReturn(averageRating);
+
+        // Invoke
+        ResponseEntity<Double> response = buyerController.rateSnack(username, snackID, rating);
+
+        // Analyze
+        assertEquals(averageRating, response.getBody());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testRateSnackHandleException() throws IOException { // addToCart may throw IOException
+        // Setup
+        String username = "Sudhir";
+        int snackID = 99;
+        int rating = 5;
+    
+        // When getSnack is called on the Mock Snack DAO, throw an IOException
+        doThrow(new IOException()).when(mockSnackDAO).getSnack(snackID);
+
+        // Invoke
+        ResponseEntity<Double> response = buyerController.rateSnack(username, snackID, rating);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
     @Test
     public void testCheckoutCart() throws IOException { // getTotalCartCost may throw IOException
         // Setup
@@ -493,4 +577,3 @@ public class BuyerControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
-}
