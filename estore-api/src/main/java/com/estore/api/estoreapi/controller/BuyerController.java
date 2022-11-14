@@ -259,7 +259,7 @@ public class BuyerController {
 
                 // there is insufficient stock for this snack
                 if(newStock < 0) {
-                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                    return new ResponseEntity<>(HttpStatus.OK);
                 }
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -282,9 +282,9 @@ public class BuyerController {
         return null;
     }
 
-    @DeleteMapping("/{username}/checkout")
+    @PostMapping("/{username}/checkout")
     public ResponseEntity<Buyer> checkoutCart(@PathVariable String username) {
-        LOG.info("DELETE / " + username);
+        LOG.info("Post / " + username);
         try {
             Buyer buyer = buyerDao.login(username);
 
