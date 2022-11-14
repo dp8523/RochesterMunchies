@@ -16,7 +16,9 @@ export class ShoppingCartComponent implements OnInit {
   user: User | undefined;
   items: Snack[] = [];
   quantities: number[] = [];
+  costs: number[] = [];
   shoppingCart = new Map<string, number>();
+  totalCost = 0;
 
   constructor(  
     private snackService: SnackService,
@@ -77,15 +79,19 @@ export class ShoppingCartComponent implements OnInit {
 
         this.items = [];
         this.quantities = [];
+        this.costs = [];
+
         this.shoppingCart.forEach((value: number, key: string) => {
           const id = Number(key);
         
           this.snackService.getSnack(id).subscribe(snack => {
             this.items.push(snack);
             this.quantities.push(value);
+            this.costs.push(snack.price * value);
           });
           
-        })       
+        })
+        this.userService.getTotalCost(this.user.username).subscribe(cost => this.totalCost = cost);        
       }    
     }
   }
@@ -107,21 +113,24 @@ export class ShoppingCartComponent implements OnInit {
         this.shoppingCart = new Map(Object.entries(this.user.cart));
         this.items = [];
         this.quantities = [];
-
+        this.costs = [];
+     
         this.shoppingCart.forEach((value: number, key: string) => {
           const id = Number(key);
         
           this.snackService.getSnack(id).subscribe(snack => { 
             this.items.push(snack);
             this.quantities.push(value);
+            this.costs.push(snack.price*value);
+            
           });    
         })
+        this.userService.getTotalCost(this.user.username).subscribe(cost => this.totalCost = cost); 
       });
     }
   }
 
   deleteCart(snackId: number): void {
-    //console.log("Hello");
     
     if(sessionStorage['user'] == "" || sessionStorage['user'] == null){
       this.user = undefined;
@@ -139,6 +148,7 @@ export class ShoppingCartComponent implements OnInit {
         
         this.items = [];
         this.quantities = [];
+        this.costs = [];
 
         this.shoppingCart.forEach((value: number, key: string) => {
           const id = Number(key);
@@ -147,10 +157,10 @@ export class ShoppingCartComponent implements OnInit {
           this.snackService.getSnack(id).subscribe(snack => {
             this.items.push(snack)
             this.quantities.push(value);
+            this.costs.push(snack.price * value);
           });
-        }) 
-       
-        
+        })
+        this.userService.getTotalCost(this.user.username).subscribe(cost => this.totalCost = cost);    
       });
     }
   }
