@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -52,8 +51,8 @@ public class BuyerController {
      * Determines whether a {@linkplain Buyer buyer} exists with the given username and logs in if so
      * 
      * @param username the username of the {@link Buyer buyer}
-     * @return ResponseEntity with true and HTTP status of FOUND if the buyer exists
-     * ResponseEntity with false and HTTP status of NOT_FOUND if the buyer does not exist
+     * @return ResponseEntity with the found buyer instance and HTTP status of OK if the buyer exists
+     * ResponseEntity with HTTP status of NOT_FOUND if the buyer does not exist
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{username}")
@@ -63,10 +62,8 @@ public class BuyerController {
         try{
             Buyer buyer = buyerDao.login(username);
             if (buyer == null) {
-                LOG.info("   RETURNING BUYER: NULL");
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                LOG.info("   RETURNING BUYER: " + buyer.toString());
                 return new ResponseEntity<Buyer>(buyer, HttpStatus.OK);
             }
         }
@@ -127,6 +124,18 @@ public class BuyerController {
         }
     }
 
+    /**
+     * Adds a {@linkplain Snack snack} to a Buyer's shoppingcart provided the buyer's username and the snack's
+     * snack identifier
+     * 
+     * @param username - The username of the {@link Buyer buyer} to add to cart
+     * @param snackID - The snackID of the {@link Snack snack} to add to the buyer's cart
+     * 
+     * @return ResponseEntity with {@link Buyer buyer} object and HTTP status of OK if the item was added
+     * ResponseEntity with HTTP status of NOT FOUND if the item does not exist in the snack database
+     * ResponseEntity with HTTP status of NOT FOUND if the buyer does not exist
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @PutMapping("/a/{username}/{snackID}")
     public ResponseEntity<Buyer> addToCart(@PathVariable String username, @PathVariable int snackID) {
         LOG.info("PUT / " + username + "/" + snackID);
@@ -155,6 +164,19 @@ public class BuyerController {
         }
     }
 
+    /**
+     * Deletes a {@linkplain Snack snack} from a Buyer's shoppingcart provided the buyer's username and the snack's
+     * snack identifier
+     * 
+     * @param username - The username of the {@link Buyer buyer} to delete item from cart
+     * @param snackID - The snackID of the {@link Snack snack} to delete from the buyer's cart
+     * 
+     * @return ResponseEntity with {@link Buyer buyer} object and HTTP status of OK if the item was deleted
+     * ResponseEntity with HTTP status of NOT FOUND if the item does not exist in the buyer's cart
+     * ResponseEntity with HTTP status of NOT FOUND if the item does not exist in the snack database
+     * ResponseEntity with HTTP status of NOT FOUND if the buyer does not exist
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @DeleteMapping("/d/{username}/{snackID}")
     public ResponseEntity<Buyer> deleteFromCart(@PathVariable String username, @PathVariable int snackID) {
         LOG.info("DELETE / " + username + "/" + snackID);
@@ -186,6 +208,15 @@ public class BuyerController {
         }
     }
 
+    /**
+     * Gets the total cost of a {@linkplain Buyer buyer} cart provided the buyer's username
+     * 
+     * @param username - The username of the {@link Buyer buyer} to retrieve cost of cart
+     * 
+     * @return ResponseEntity with HTTP status OK and a double value of the total cost
+     * ResponseEntity with HTTP status of NOT_FOUND if the buyer does not exist
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @GetMapping("/{username}/cartTotal")
     public ResponseEntity<Double> getTotalCartCost(@PathVariable String username) {
         LOG.info("GET / " + username + "/cartTotal");
