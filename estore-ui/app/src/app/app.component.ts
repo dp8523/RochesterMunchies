@@ -7,7 +7,8 @@ import { User } from './user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Rochester Snack Shop';
+
+  title = 'Rochester Munchies';
   user: User | undefined;
   username: string | undefined;
   login: Boolean = false;
@@ -21,8 +22,7 @@ export class AppComponent {
   }
 
   isAdmin(): Boolean {
-    
-    
+
     if(sessionStorage['user'] == "" || sessionStorage['user'] == null ){
       this.user = undefined;
       return false;

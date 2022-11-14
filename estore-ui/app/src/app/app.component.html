@@ -1,10 +1,13 @@
 <nav>
     <h1>{{title}}</h1>
-    <a1 *ngIf="isAdmin()" routerLink="/inventory">Inventory</a1>
-    <a2 *ngIf="!isAdmin()" routerLink="/buyer_inventory">Catalog</a2>
-    <a3 *ngIf="!isAdmin()" routerLink="/shopping_cart">Shopping Cart</a3>
-    <a4 *ngIf="!loggedin()"routerLink="/login">Login</a4>
-    <a4 *ngIf="loggedin()"routerLink="/login">Logout</a4>
+    <div class="nav-categories">
+        <a1 *ngIf="!isAdmin()" routerLink="/homepage">Home</a1>
+        <a2 *ngIf="isAdmin()" routerLink="/inventory">Inventory</a2>
+        <a3 *ngIf="!isAdmin()" routerLink="/buyer_inventory">Catalog</a3>
+        <a4 *ngIf="!isAdmin()" routerLink="/shopping_cart">Shopping Cart</a4>
+        <a5 *ngIf="!loggedin()" routerLink="/login">Login</a5>
+        <a5 *ngIf="loggedin()" routerLink="/login">Logout</a5>    
+    </div>
 </nav>
 
 <router-outlet></router-outlet>
