@@ -281,4 +281,52 @@ public class SnackControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
+    @Test
+    public void testGetRating() throws IOException {  // getRating may throw IOException
+        // Setup
+        Snack snack = new Snack(99,"Camel Balls", "Extra Sour Bubble Gum Jawbreaker", 5, 9.99);
+        snack.addRating("dara", 5);
+        snack.addRating("robert", 3);
+        double averageRating = 4;        
+
+        // When snack exists
+        when(mockSnackDAO.getSnack(snack.getId())).thenReturn(snack);
+
+        // Invoke
+        ResponseEntity<Double> response = snackController.getRating(snack.getId());
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(averageRating,response.getBody());
+    }
+
+    @Test
+    public void testGetRatingSnackNotFound() throws Exception { // getRating may throw IOException
+        // Setup
+        int snackId = 99;
+        // When the same id is passed in, our mock Snack DAO will return null, simulating
+        // no Snack found
+        when(mockSnackDAO.getSnack(snackId)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Double> response = snackController.getRating(snackId);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    public void testGetRatingHandleException() throws Exception { // getRating may throw IOException
+        // Setup
+        int snackId = 99;
+        // When getSnack is called on the Mock Snack DAO, throw an IOException
+        doThrow(new IOException()).when(mockSnackDAO).getSnack(snackId);
+
+        // Invoke
+        ResponseEntity<Double> response = snackController.getRating(snackId);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 }

@@ -73,7 +73,7 @@ h1, h2 {
 }
 
 .snacks:hover {
-    background-color: orange;
+    background-color: rgb(187, 148, 130);
 }
 
 h2 {
@@ -102,7 +102,9 @@ h3 {
 }
 
 .Subscription {
-    background-color: #91268e;
+    background-image: url('./../../assets/teal_hershey.png');
+    background-size: cover;
+    background-position: center center;
     float: left;
     clear: none;
     width: 100%;

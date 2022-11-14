@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
       this.user = this.authService.user;
 
       if (this.user != null){
-        console.log(this.user);
         if(sessionStorage['login'] == "true"){
           this.isLoggedin = true;
         }
@@ -73,7 +72,6 @@ export class LoginComponent implements OnInit {
     if(sessionStorage['login'] == "false"){
       this.isLoggedin = !this.isLoggedin;
     }
-    console.log(this.user);
   }
 
   Loggedin(): Boolean{
