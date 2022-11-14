@@ -171,9 +171,9 @@ public class BuyerController {
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 }
                 else {
-                    if (!newBuyer.snackInCart(snackID)) {
-                        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-                    }
+                    // if (!newBuyer.snackInCart(snackID)) {
+                    //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                    // }
                     return new ResponseEntity<Buyer>(newBuyer, HttpStatus.OK);
                 }
             }

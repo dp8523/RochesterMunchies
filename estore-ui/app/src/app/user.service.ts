@@ -30,8 +30,14 @@ export class UserService {
 
   addCart(username: string, snackId: number): Observable<User> {
     const url = `${this.userURL}/a/${username}/${snackId}`;
-    return this.http.post<User>(url, this.httpOptions)
+    return this.http.put<User>(url, this.httpOptions)
     .pipe(catchError(this.handleError<User>(`addCart username=${username} , snackId=${snackId}`)))
+  }
+
+  deleteCart(username: string, snackId: number): Observable<User> {
+    const url = `${this.userURL}/d/${username}/${snackId}`;
+    return this.http.delete<User>(url, this.httpOptions)
+    .pipe(catchError(this.handleError<User>(`deleteCart username=${username} , snackId=${snackId}`)))
   }
 
   // Handle Http operation that failed

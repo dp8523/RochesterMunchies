@@ -1,24 +1,33 @@
 .total {
-    background-color: lightblue;
-    padding: 5px;
-}
+    padding-top: 50px;
+    padding-left: 20%;
+    padding-right: 20%;
+    background-color: #3c1414;
+    padding-bottom: 100px;
 
+}
 .login {
     list-style: none;
-    padding: 10px;
+    padding: 20px;
     border: 1px solid;
     border-radius: 5px;
+    margin-top: 8px;
     margin-bottom: 8px;
-    background-color: aliceblue;
+    background-color: #91268e;
+    color: #e4c8c8;
+    border: 0;
+    
 }
 
 .register {
     list-style: none;
-    padding: 10px;
+    padding: 20px;
     border: 1px solid;
     border-radius: 5px;
     margin-bottom: 8px;
-    background-color: aliceblue;
+    background-color: #91268e;
+    color: #e4c8c8;
+    border: 0;
 }
 
 .input {
@@ -26,6 +35,9 @@
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+    background: #e4c8c8;
+    border: 0;
+    border-radius: 2.1rem;
 }
 
 .label {
@@ -33,11 +45,16 @@
     font-size: 18px;
 }
 
-.button {
-    padding: 4px;
-    text-decoration: none;
-    background-color: #e8e8e8;
-    border: 1px solid;
-    border-radius: 5px;
-    font-size: 18px;
+button {
+    background-color: #3c1414;
+    padding: 12px;
+    color: #e4c8c8;
+    font-size: 1.3rem;
+    border: 0;
+    border-radius: 2.1rem;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: rgb(187, 148, 130);
 }
