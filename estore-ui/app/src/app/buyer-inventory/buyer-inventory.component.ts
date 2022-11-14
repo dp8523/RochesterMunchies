@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Snack } from '../Snack';
 import { SnackService } from '../snack.service';
 import { User } from '../user';
-import { LoginComponent } from '../login/login.component';
 import { UserService } from '../user.service';
+import { AuthServiceService } from '../auth-service.service';
 
 
 @Component({
@@ -14,19 +14,9 @@ import { UserService } from '../user.service';
 export class BuyerInventoryComponent implements OnInit {
 
   snacks: Snack[] = [];
-  snack: Snack = {
-      id: 1,
-      name: "Oreos",
-      description: "Cream cookies",
-      quantity: 5,
-      price: 3.99   
-  };
-  
-  user: User | undefined;
 
   constructor(
     private snackService: SnackService,
-    private userSerice: UserService,
   ) { }
 
   ngOnInit(): void {
