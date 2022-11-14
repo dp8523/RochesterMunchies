@@ -11,7 +11,7 @@ body {
     grid-template-columns: auto auto;
     padding: 1.5rem;   
     justify-content: space-around;
-
+    
 }
 
 .Inventory-grid-bottom {
@@ -19,6 +19,8 @@ body {
     grid-template-columns: repeat(5, 1fr);
     padding-inline-start: 0px;
     padding: 10px;
+    padding-left: 80px;
+    padding-right: 80px;
     column-gap: normal;
     row-gap: normal;
     background-color: transparent;
@@ -34,16 +36,22 @@ body {
     text-align: center;
 }
 
-.Inventory-grid-bottom a {
+.snack-flex {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding:0;
+    border:0;
+    align-items: center;
+}
+
+.snack-flex a {
     padding: 1rem;
-    text-decoration: none;
-    display: inline-block;
     color: black;
     border-radius: 5px;
     font-size: 18px;
     width: 50%;
-    text-align: center;
-    background-color: white;
+    background-color: transparent;
 }
 
 .Inventory-grid-bottom a:hover {
@@ -60,23 +68,28 @@ body {
 }
 
 .delete-button {
-    background-color: pink;
+    background-color: transparent;
     padding: 15px;
     border-radius: 5px;
     color: red;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
     border: 0;
-    position:relative;
-    width: 5px;
 }
 
 .delete-button:hover {
     color: pink;
 }
 
+.search-snack-grid-1 {
+    width:500px;
+    max-width: 500px;
+    padding-left: 100px;
+}
+
 .add-snack-grid-2 {
-    padding:20px;
+    padding-right: 50px;
+    padding: 20px;
     border: 1px solid;
     border-radius: 5px;
     margin-bottom: 8px;
@@ -84,7 +97,7 @@ body {
     background-color: #3c1414;
     position: relative;
     border: 0;
-
+    right: 80px;
 }
 
 .add-snack-grid-2 li{
@@ -119,7 +132,7 @@ body {
 .add-button {
     background-color: rgb(187, 148, 130);
     padding: 12px;
-    color: #e4c8c8;
+    color: #3c1414;
     font-size: 1.3rem;
     border: 0;
     border-radius: 2.1rem;

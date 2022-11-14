@@ -31,13 +31,19 @@
         </div>
 
         <ul class="Inventory-grid-bottom">
+
             <li *ngFor="let snack of snacks">
-                <a routerLink="/detail/{{snack.id}}">
-                    <span class="badge"></span> {{snack.name}}
-                </a>
-                <button class="delete-button" type="button" title="delete snack"
-            (click)="delete(snack)">X</button>
+
+                <div class="snack-flex">
+                    <a routerLink="/detail/{{snack.id}}">
+                        <span class="badge"></span> {{snack.name}}
+                    </a>
+                    <button class="delete-button" type="button" title="delete snack"
+                    (click)="delete(snack)">X</button>
+                </div>
+
             </li>
+
         </ul>
         
     </div>
