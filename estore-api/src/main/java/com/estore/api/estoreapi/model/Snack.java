@@ -112,11 +112,22 @@ public class Snack {
      */
     public HashMap<String,Integer> getRatings() {return ratings;}
 
+    /**
+     * Adds rating given a buyer's username and the buyer's rating value
+     * 
+     * @param username Username of the buyer
+     * @param rating Integer value of the buyer's rating
+     */
     public void addRating(String username, int rating) {
         ratings.put(username, rating);
         averageRating = calculateAverageRating();
     }
 
+    /**
+     * Gets average rating of this snack
+     * 
+     * @return Average rating
+     */
     public double getAverageRating() {return averageRating;}
 
     public double calculateAverageRating() {
