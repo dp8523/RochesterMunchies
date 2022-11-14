@@ -74,17 +74,23 @@ export class ShoppingCartComponent implements OnInit {
       this.user = JSON.parse(sessionStorage['user']);
       if (this.user){
         this.shoppingCart = new Map(Object.entries(this.user.cart));
+
+        this.items = [];
+        this.quantities = [];
         this.shoppingCart.forEach((value: number, key: string) => {
           const id = Number(key);
         
-          this.snackService.getSnack(id).subscribe(snack => this.items.push(snack));
-          this.quantities.push(value);
+          this.snackService.getSnack(id).subscribe(snack => {
+            this.items.push(snack);
+            this.quantities.push(value);
+          });
+          
         })       
       }    
     }
   }
 
-  addCart(snackId: number, index: number): void{
+  addCart(snackId: number): void{
 
     if(sessionStorage['user'] == "" || sessionStorage['user'] == null){
       this.user = undefined;
@@ -99,14 +105,55 @@ export class ShoppingCartComponent implements OnInit {
         sessionStorage.setItem("user", JSON.stringify(this.user));
 
         this.shoppingCart = new Map(Object.entries(this.user.cart));
-        let count = 0;
-        for (const value of this.shoppingCart.values()){
-            if (count == index){
-              this.quantities[index] = value;
-            }
-            count++;
-        }
+        this.items = [];
+        this.quantities = [];
+
+        this.shoppingCart.forEach((value: number, key: string) => {
+          const id = Number(key);
+        
+          this.snackService.getSnack(id).subscribe(snack => { 
+            this.items.push(snack);
+            this.quantities.push(value);
+          });    
+        })
       });
     }
   }
+
+  deleteCart(snackId: number): void {
+    //console.log("Hello");
+    
+    if(sessionStorage['user'] == "" || sessionStorage['user'] == null){
+      this.user = undefined;
+    }
+    else{
+      this.user = JSON.parse(sessionStorage['user']);
+    }
+
+    if (this.user){
+
+      this.userService.deleteCart(this.user.username, snackId).subscribe(user => {
+        this.user = user;
+        sessionStorage.setItem("user", JSON.stringify(this.user));
+        this.shoppingCart = new Map(Object.entries(this.user.cart));
+        
+        this.items = [];
+        this.quantities = [];
+
+        this.shoppingCart.forEach((value: number, key: string) => {
+          const id = Number(key);
+          
+          console.log(key, value);
+          this.snackService.getSnack(id).subscribe(snack => {
+            this.items.push(snack)
+            this.quantities.push(value);
+          });
+        }) 
+       
+        
+      });
+    }
+  }
+
+
 }

@@ -2,8 +2,9 @@
     <ul class="Items">
         <li *ngFor="let snack of items; let i=index">
             <label>Snack: {{snack.name}} </label>
+            <button (click)="deleteCart(snack.id)">-</button>
             <label>Quantity: {{quantities[i]}} </label>
-            <button (click)="addCart(snack.id, i)">+</button>
+            <button (click)="addCart(snack.id)">+</button>
         </li>
     </ul>
 </div>
