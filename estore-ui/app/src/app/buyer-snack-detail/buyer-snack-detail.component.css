@@ -1,36 +1,89 @@
-.list {
-    list-style: none;
-    padding: 10px;
-    border: 1px solid;
-    border-radius: 5px;
-    margin-bottom: 8px;
-    background-color: aliceblue;
+body {
+    background-color: #efeaea;
+    background-image: url('./../../assets/doritos_exploding.png');
+    background-size: cover;
 }
 
 .total {
-    background-color: lightblue;
-    padding: 5px;
+    background-color: transparent;
+    padding: 50px;
 }
 
-.id {
-    font-size: 18px;
-}
-
-.input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-}
-
-.label {
-    padding-bottom: 10px;
-    font-size: 18px;
-}
-
-
-.buttons {
+h2 {
     text-align: center;
+    padding-bottom: 30px;
+}
+
+.Snack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-evenly;
+}
+
+.image {
+    position: relative;
+    left:100px;
+    width:100%;
+    height:100%;
+    max-width: 400px;
+    height: 500px;
+    background-color: white;
+    column-gap: normal;
+}
+
+.snack-info {
+    margin:20px;
+    height: 500px;
+    background-color:transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly
+}
+
+.list {
+    list-style: none;
+    padding: 40px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    background-color: rgb(187, 148, 130);
+    color: #3c1414;
+}
+
+.snack-name {
+    font-weight: bold;
+    font-size: 50px;
+    color: #3c1414;
+}
+
+.snack-description {
+    font-size: 20px;
+}
+
+.snack-quantity {
+    font-size: 15px;
+}
+
+.snack-price {
+    font-size: 30px;
+    color: white;
+}
+
+.buttons{
+    text-align: center;
+}
+
+button {
+    background-color: #3c1414;
+    padding: 12px;
+    color: #e4c8c8;
+    font-size: 1.3rem;
+    border: 0;
+    border-radius: 2.1rem;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: rgb(187, 148, 130);
 }
 
 .back {
@@ -43,12 +96,4 @@
     padding: 10px;
 }
 
-.a { 
-    padding: 1rem;
-    text-decoration: none;
-    margin-top: 10px;
-    display: inline-block;
-    background-color: #e8e8e8;
-    color: #3d3d3d;
-    border-radius: 4px;
- }
+
