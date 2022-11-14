@@ -2,7 +2,6 @@ body {
     background-color: #efeaea;
     background-image: url('./../../assets/oreos_background.png');
     background-size: cover;
-    background-position: center center;
 }
 
 .Inventory-grid-top {
@@ -11,7 +10,6 @@ body {
     grid-template-columns: auto auto;
     padding: 1.5rem;   
     justify-content: space-around;
-    
 }
 
 .Inventory-grid-bottom {
@@ -62,9 +60,13 @@ body {
     text-decoration: none;
 }
 
-.badge {
-    display: inline-block;
-    color: black;
+.badge-price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.badge-qty {
+    font-size: 15px;
 }
 
 .delete-button {
@@ -94,7 +96,7 @@ body {
     border-radius: 5px;
     margin-bottom: 8px;
     width: 100%;
-    background-color: #3c1414;
+    background-color: #4c3333;
     position: relative;
     border: 0;
     right: 80px;
@@ -112,7 +114,8 @@ body {
     box-sizing: border-box;
     background-color:white;
     border:0;
-    padding-right: 50px;
+    padding-right: 30px;
+    padding-left: 80px;
 }
 
 .label {
@@ -132,7 +135,7 @@ body {
 .add-button {
     background-color: rgb(187, 148, 130);
     padding: 12px;
-    color: #3c1414;
+    color: 3c1414;
     font-size: 1.3rem;
     border: 0;
     border-radius: 2.1rem;

@@ -36,7 +36,11 @@
 
                 <div class="snack-flex">
                     <a routerLink="/detail/{{snack.id}}">
-                        <span class="badge"></span> {{snack.name}}
+                        <span class="badge-name">{{snack.name}}</span>
+                        <br>
+                        <span class="badge-price">{{snack.price}}</span>
+                        <br>
+                        <span class="badge-qty">Qty: {{snack.quantity}}</span>
                     </a>
                     <button class="delete-button" type="button" title="delete snack"
                     (click)="delete(snack)">X</button>
