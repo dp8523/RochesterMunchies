@@ -1,5 +1,17 @@
-<h2>SHOPPING CART</h2>
+<div *ngIf="Loggedin()">
+    <ul class="Items">
+        <li *ngFor="let snack of items; let i=index">
+            <label>Snack: {{snack.name}} </label>
+            <label>Quantity: {{quantities[i]}} </label>
+            <button (click)="addCart(snack.id, i)">+</button>
+        </li>
+    </ul>
+</div>
 
+<div *ngIf="!Loggedin()">
+    <label>Please Login to see your Cart</label>
+    
+</div>
 <div class="buttons">
     <button class="back" type="button" (click)="goBack()">Go Back</button>
 </div>
