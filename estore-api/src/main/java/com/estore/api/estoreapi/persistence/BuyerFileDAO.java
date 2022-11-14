@@ -182,4 +182,24 @@ public class BuyerFileDAO implements BuyerDAO {
             }
         }
     }
+
+    @Override
+    public Buyer clearCart(String username) throws IOException {
+        synchronized(buyers) {
+            Buyer buyer = buyers.get(username);
+
+            // Buyer is not found
+            if (buyers.containsKey(username) == false)
+                return null; 
+            else {
+                // Clear buyer's cart
+                buyer.clearCart();
+
+                // Update buyers list with new cart
+                buyers.put(buyer.getUsername(),buyer);
+                save(); 
+                return buyer;
+            }
+        }
+    }
 }

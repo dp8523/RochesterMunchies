@@ -11,6 +11,7 @@ import { AuthServiceService } from '../auth-service.service';
 export class LoginComponent implements OnInit {
 
   user: User | undefined;
+  isLoggedin: Boolean = true;
 
   constructor( 
     private router: Router,
@@ -29,12 +30,18 @@ export class LoginComponent implements OnInit {
       this.user = this.authService.user;
 
       if (this.user != null){
+        if(sessionStorage['login'] == "true"){
+          this.isLoggedin = true;
+        }
         if (this.user?.username === "admin"){
           this.router.navigateByUrl('/inventory');
         }
         else{
           this.router.navigateByUrl('/buyer_inventory');
         }
+      }
+      else{
+        alert("Invalid Login")
       }
     }
   }
@@ -48,8 +55,32 @@ export class LoginComponent implements OnInit {
       this.user = this.authService.user;
 
       if (this.user != null){
+        if(sessionStorage['login'] == "true"){
+          this.isLoggedin = true;
+        }
         this.router.navigateByUrl('/buyer_inventory'); 
       }
+    }
+  }
+
+  logout(): void {
+    this.authService.logout();
+
+    if (sessionStorage['user'] == ""){
+      this.user = undefined;
+    }
+    if(sessionStorage['login'] == "false"){
+      this.isLoggedin = !this.isLoggedin;
+    }
+  }
+
+  Loggedin(): Boolean{
+
+    if (sessionStorage['login'] == "true"){
+      return true;
+    }
+    else{
+      return false;
     }
   }
 }

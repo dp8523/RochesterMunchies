@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -170,9 +171,9 @@ public class BuyerController {
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 }
                 else {
-                    if (!newBuyer.snackInCart(snackID)) {
-                        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-                    }
+                    // if (!newBuyer.snackInCart(snackID)) {
+                    //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                    // }
                     return new ResponseEntity<Buyer>(newBuyer, HttpStatus.OK);
                 }
             }
@@ -206,6 +207,71 @@ public class BuyerController {
                 }
                 
                 return new ResponseEntity<Double>(cartTotal, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private ResponseEntity<Buyer> updateStock(ShoppingCart cart) throws IOException {
+        // first loop ensures there is enough of every snack in the inventory. if not, cancel checkout
+        for (Map.Entry<Integer, Integer> snack : cart.entrySet()) {
+            Snack currentSnack = snackDao.getSnack(snack.getKey());
+
+            // checks if the snack exists in the inventory
+            if (currentSnack != null) {
+                int amountToBuy = snack.getValue();
+
+                int oldStock = currentSnack.getQuantity();
+                int newStock = oldStock - amountToBuy;
+
+                // there is insufficient stock for this snack
+                if(newStock < 0) {
+                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                }
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+
+        // there is enough of each snack in the inventory, so this loop subtracts from the inventory accordingly
+        for (Map.Entry<Integer, Integer> snack : cart.entrySet()) {
+            // we know currentSnack exists in the inventory from the previous loop
+            Snack currentSnack = snackDao.getSnack(snack.getKey());
+            int amountToBuy = snack.getValue();
+
+            int oldStock = currentSnack.getQuantity();
+            int newStock = oldStock - amountToBuy;
+
+            // updates inventory with new stock amount for this snack
+            currentSnack.setQuantity(newStock);
+            snackDao.updateSnack(currentSnack);
+        }
+        return null;
+    }
+
+    @DeleteMapping("/{username}/checkout")
+    public ResponseEntity<Buyer> checkoutCart(@PathVariable String username) {
+        LOG.info("DELETE / " + username);
+        try {
+            Buyer buyer = buyerDao.login(username);
+
+            // ensures that the buyer has an existing account
+            if (buyer != null) {
+                ShoppingCart cart = buyer.getCart();
+
+                ResponseEntity<Buyer> result = updateStock(cart);
+                // result is null if there were no issues
+                if(result != null) {
+                    return result;
+                }
+
+                buyer = buyerDao.clearCart(username);
+                return new ResponseEntity<Buyer>(buyer, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
