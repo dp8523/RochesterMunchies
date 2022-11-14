@@ -254,9 +254,9 @@ public class BuyerController {
         return null;
     }
 
-    @PostMapping("/{username}/checkout")
+    @DeleteMapping("/{username}/checkout")
     public ResponseEntity<Buyer> checkoutCart(@PathVariable String username) {
-        LOG.info("POST / " + username);
+        LOG.info("DELETE / " + username);
         try {
             Buyer buyer = buyerDao.login(username);
 
