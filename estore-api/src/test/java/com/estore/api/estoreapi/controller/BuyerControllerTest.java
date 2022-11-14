@@ -54,7 +54,7 @@ public class BuyerControllerTest {
         ResponseEntity<Buyer> response = buyerController.login(username);
 
         // Analyze
-        assertEquals(HttpStatus.FOUND,response.getStatusCode());
+        assertEquals(HttpStatus.OK,response.getStatusCode());
         assertEquals(buyer,response.getBody());
     }
 
