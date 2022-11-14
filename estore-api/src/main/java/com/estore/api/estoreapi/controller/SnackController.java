@@ -201,6 +201,15 @@ public class SnackController {
         }
     }
 
+    /**
+     * Gets ratings of a {@linkplain Snack snack} with the given id
+     * 
+     * @param id The id of the {@link Snack snack} to retrieve ratings of
+     * 
+     * @return ResponseEntity HTTP status of OK with double value of average rating
+     * ResponseEntity with HTTP status of NOT_FOUND if snack not found
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @GetMapping("/{id}/rating")
     public ResponseEntity<Double> getRating(@PathVariable int id) {
         LOG.info("GET / "+ id + "/rating");
