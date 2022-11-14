@@ -1,19 +1,26 @@
-.list {
-    list-style: none;
-    padding: 10px;
-    border: 1px solid;
-    border-radius: 5px;
-    margin-bottom: 8px;
-    background-color: aliceblue;
+body {
+    background-color: #efeaea;
+    background-image: url('./../../assets/doritos_exploding.png');
+    background-size: cover;
 }
 
 .total {
-    background-color: lightblue;
-    padding: 5px;
+    background-color: transparent;
+    padding: 50px;
 }
 
-.id {
-    font-size: 18px;
+.snack-flex {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.list {
+    list-style: none;
+    padding: 40px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    background-color: rgb(187, 148, 130);
+    color: #3c1414;
 }
 
 .input {
@@ -21,16 +28,34 @@
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+    background-color:#efeaea;
+    border: 0;
+    border-radius: 0.3rem;
+    font-size: 18px;
 }
 
 .label {
     padding-bottom: 10px;
-    font-size: 18px;
+    font-size: 25px;
+    font-weight: bold;
 }
 
-
-.buttons {
+.buttons{
     text-align: center;
+}
+
+button {
+    background-color: #3c1414;
+    padding: 12px;
+    color: #e4c8c8;
+    font-size: 1.3rem;
+    border: 0;
+    border-radius: 2.1rem;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: rgb(187, 148, 130);
 }
 
 .back {

@@ -200,4 +200,22 @@ public class SnackController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/{id}/rating")
+    public ResponseEntity<Double> getRating(@PathVariable int id) {
+        LOG.info("GET / "+ id + "/rating");
+        try {
+            Snack snack = snackDao.getSnack(id);
+            if (snack != null){ 
+                double averageRating = snack.getAverageRating();
+                return new ResponseEntity<Double>(averageRating,HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
