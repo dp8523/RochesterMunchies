@@ -1,4 +1,4 @@
-.total {
+.total-login, .total-logout {
     padding-top: 50px;
     padding-left: 20%;
     padding-right: 20%;
@@ -8,6 +8,13 @@
     background-image: url('./../../assets/teal_hershey.png');
     background-size: cover;
 }
+
+.total-logout {
+    padding-top: 100px;
+    height: 400px;
+    text-align: center;
+}
+
 .login {
     list-style: none;
     padding: 20px;
@@ -49,12 +56,16 @@
 
 button {
     background-color: #3c1414;
-    padding: 12px;
+    padding: 14px;
     color: #e4c8c8;
     font-size: 1.3rem;
     border: 0;
     border-radius: 2.1rem;
     font-weight: bold;
+}
+
+.logout{
+    font-size: 40px;
 }
 
 button:hover {
