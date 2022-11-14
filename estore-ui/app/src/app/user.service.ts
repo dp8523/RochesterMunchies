@@ -48,7 +48,7 @@ export class UserService {
 
   checkoutCart(username: string): Observable<User>{
     const url = `${this.userURL}/${username}/checkout`;
-    return this.http.delete<User>(url, this.httpOptions)
+    return this.http.post<User>(url, this.httpOptions)
     .pipe(catchError(this.handleError<User>(`checkoutCart username=${username}`)))
   }
 

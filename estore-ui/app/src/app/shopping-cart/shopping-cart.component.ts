@@ -157,6 +157,7 @@ export class ShoppingCartComponent implements OnInit {
     if (this.user){
 
       this.userService.deleteCart(this.user.username, snackId).subscribe(user => {
+        
         this.user = user;
         sessionStorage.setItem("user", JSON.stringify(this.user));
         this.shoppingCart = new Map(Object.entries(this.user.cart));
@@ -194,9 +195,15 @@ export class ShoppingCartComponent implements OnInit {
 
     if (this.user){
       this.userService.checkoutCart(this.user.username).subscribe(user => {
-        this.user = user;
-        sessionStorage.setItem('user', JSON.stringify(this.user));
-        this.getItems();
+
+        if(user){
+          this.user = user;
+          sessionStorage.setItem('user', JSON.stringify(this.user));
+          this.getItems();
+        }
+        else{
+          alert("Shopping cart quantity greater than snack quantity");
+        }
       })
     }
     
