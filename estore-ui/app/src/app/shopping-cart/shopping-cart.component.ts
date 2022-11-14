@@ -200,6 +200,7 @@ export class ShoppingCartComponent implements OnInit {
           this.user = user;
           sessionStorage.setItem('user', JSON.stringify(this.user));
           this.getItems();
+          alert("Successful checkout!")
         }
         else{
           alert("Shopping cart quantity greater than snack quantity");
