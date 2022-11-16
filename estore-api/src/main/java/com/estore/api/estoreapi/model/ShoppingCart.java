@@ -4,8 +4,21 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 
+/**
+ * ShoppingCart class that extends HashMap<Integer, Integer> for storage of
+ * Snack items within Buyer objects. Represents the shopping carts of users
+ * on the estore.
+ */
 public class ShoppingCart extends HashMap<Integer,Integer>{
 
+    /**
+     * Adds a snack to the Hashmap representing the cart of the parent buyer.
+     * Increments the value of the key representing the snack id if the id already
+     * exists within the cart.
+     * 
+     * @param id ID representing the snack's id
+     * @return true if successfully added to the cart, false otherwise
+     */
     public boolean addToCart(@JsonProperty("id") int id) {
         // Assume that id is valid snack
         if (this.containsKey(id)) {
@@ -17,6 +30,14 @@ public class ShoppingCart extends HashMap<Integer,Integer>{
         return true;
     }
 
+    /**
+     * Deletes a snack from the Hashmap representing the cart of the parent
+     * buyer. Decrements the value of the key representing the snack id if the 
+     * id already exists within the cart.
+     * 
+     * @param id ID representing the snack's id
+     * @return true if successfully removed from the cart, false otherwise
+     */
     public boolean deleteFromCart(@JsonProperty("id") int id) {
         // Assume that id is valid snack
         if (this.containsKey(id)) {
@@ -34,15 +55,28 @@ public class ShoppingCart extends HashMap<Integer,Integer>{
         }
     }
 
+    /**
+     * Retrieves the cart of the parent buyer
+     * 
+     * @return this
+     */
     public HashMap<Integer,Integer> getCart() {
         return this;
     }
 
+    /**
+     * Clears the cart of the buyer
+     * 
+     * @return true if the cart was successfully cleared, false otherwise
+     */
     public boolean clearCart() {
         this.clear();
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String s = "";

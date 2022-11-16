@@ -247,7 +247,17 @@ public class BuyerController {
     }
 
     /**
+     * Enters a new rating for a {@linkplain Snack snack} by a {@linkplain Buyer buyer}
      * 
+     * @param username - The username of the {@link Buyer buyer}
+     * 
+     * @param snackID the ID of the snack to be rated
+     * 
+     * @param rating the number rating the user gave the snack
+     * 
+     * @return ResponseEntity with HTTP status OK and a double value of the the average rating
+     * ResponseEntity with HTTP status of NOT_FOUND if the buyer or snack does not exist
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("/r/{username}/{snackID}/{rating}")
     public ResponseEntity<Double> rateSnack(@PathVariable String username, @PathVariable int snackID, @PathVariable int rating) {

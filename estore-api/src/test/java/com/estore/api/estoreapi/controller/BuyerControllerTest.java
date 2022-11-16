@@ -302,7 +302,7 @@ public class BuyerControllerTest {
         ResponseEntity<Buyer> response = buyerController.deleteFromCart(username, snackID);
 
         // Analyze
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
@@ -525,7 +525,7 @@ public class BuyerControllerTest {
         ResponseEntity<Buyer> response = buyerController.checkoutCart(username);
 
         // Analyze
-        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
