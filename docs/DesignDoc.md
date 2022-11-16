@@ -20,9 +20,8 @@ geometry: margin=1in
 ## Executive Summary
 
 A snack e-store where users can browse, purchase, and rate snacks. 
-If users love certain snacks they can set up a subscription that 
-can automatically buy snacks at a weekly, monthly, or annual 
-period.
+They can also view their purchase history just in case they loved
+a snack but dont remember the name.
 
 ### Purpose
 The purpose behind the project is to learn about the development 
@@ -58,11 +57,9 @@ of a snack that would show others how good a snack is
 worth buying. They are able to see the average rating 
 of a snack along with individual ratings of others. 
 
-Subscription: Users who are frequent buyers can sign 
-up for a subscription that will be able to repurchase
-snacks in a weekly, monthly, or annual period. They 
-can update the snacks they want to purchase or just
-cancel their membership.
+Order History: users will be able to see their order 
+history for every snack purchase they made. They can
+see the date, time and what snacks they bought.
 
 
 ### Definition of MVP
@@ -80,7 +77,7 @@ details of a snack.
 - Get a single snack
 
 ### Roadmap of Enhancements
-- Subscription
+- Order history
 - Ratings & reviews for snacks
 
 
@@ -88,7 +85,7 @@ details of a snack.
 
 This section describes the application domain.
 
-![Domain Model](Team4SWENTreatStoreDomainAnalysis.png)
+![Domain Model](UpdatedDomainAnalysis.png)
 
 This is a domain model of our snack e-store, it shows the relations
 between the user, and the features of our website such as the 
@@ -145,6 +142,8 @@ where they can login as the owner, a customer, or register for the website.
 > Be sure to include an relevant HTTP reuqests from the client-side to the server-side 
 > to help illustrate the end-to-end flow._
 
+![View tier sequence diagram](view_sequence_diagram.jpeg)
+
 
 
 ### ViewModel Tier
@@ -185,17 +184,16 @@ analysis shows that we have malfunctioning methods that need to be revised.
 > and the results of the testing._
 
 ### Acceptance Testing
-Passed All Criteria: 11
-Passed Some Criteria: 5
-Passed No Criteria: 17
-The main issue with acceptance criteria testing is that most 
-of our stories for Sprint 2 have yet to be implemented or need
-to be improved on. 
-The UI stories primarily build up the composition of the "Passed
-Some Criteria" category, since we found that some buttons need
-to be revised for user/admin comparison.
-On the backend, a lot of our stories passed no criteria since they
-have failed to work or need to be improved on.
+Passed All Criteria: 27
+Passed Some Criteria: 0
+Passed No Criteria: 2
+The main issue with acceptance criteria testing is that we haven't
+completed the frontend of the 10% features for out product.
+There is 0 passed com criteria because we split up the frontend
+and backend parts of features and right now only the front end of
+the 10% features havent been completed so there is 0 for some
+criteria passed.
+On the backend, a lot of our stories passed all the criteria.
 
 ### Unit Testing and Code Coverage
 Our unit testing strategy is primarily in creating a fake database
@@ -204,12 +202,8 @@ and conditional statements. The code coverage achieved from unit
 testing our snack files have shown to be above 90% covered, where
 the final 10% lie in additional functions yet to be covered and will
 be our primary focus for code coverage. 
-![EstoreAPI Code Coverage](EstoreAPICoverage.png)
-![EstoreAPIController Code Coverage](EstoreAPIControllerCoverage.png)
-![EstoreController Code Coverage](EstoreControllerCoverage.png)
-The team's coverage target is now in finishing the final 10% of snack
-files and then shifting over to the buyer files as we implement
-the shopping cart. 
-Currently, our code coverage meets our targets well, and we want to 
-continue this for our shopping cart, buyer login, and 10% feature 
-implementations.
+![api controller coverage](api_controller_coverage.png)
+![api model coverage](api_model_coverage.png)
+![api persistence coverage](api_persistence_coverage.png)
+The teams code coverage is finished with the mvp and 10% for the backend.
+
