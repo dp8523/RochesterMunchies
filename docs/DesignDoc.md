@@ -143,6 +143,7 @@ where they can login as the owner, a customer, or register for the website.
 > to help illustrate the end-to-end flow._
 
 ![Successfully Add to Cart Sequence Diagram](AddToCartSequenceDiagram.png)
+![Create a Snack Sequence Diagram](Create_a_snack_sequence_diagram.png)
 
 
 
