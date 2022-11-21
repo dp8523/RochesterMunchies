@@ -142,7 +142,7 @@ where they can login as the owner, a customer, or register for the website.
 > Be sure to include an relevant HTTP reuqests from the client-side to the server-side 
 > to help illustrate the end-to-end flow._
 
-![View tier sequence diagram](view_sequence_diagram.jpeg)
+![Successfully Add to Cart Sequence Diagram](AddToCartSequenceDiagram.png)
 
 
 
