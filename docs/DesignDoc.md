@@ -121,13 +121,29 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 This section describes the web interface flow; this is how the user views and interacts
 with the e-store application.
 
-When a user first encounters our website they are presented with 3 buttons: 
-inventory, catalog, and login. When they click on inventory they have access
-to the owners actions such as updating a snack, adding a new snack, and 
-even deleting it. When they choose the catalog they are presented with 
-snacks, they can search but cannot update them, and they can add items 
-to their shopping cart. When they click login they are given 3 fields 
-where they can login as the owner, a customer, or register for the website.
+When a user first encounters our website they are presented with the homepage and 
+a navigation bar with 4 buttons: Home, Catalog, Shopping cart and Login. Initially
+the user is given the homepage to view. They are greeted with messages enticing them 
+to shop and some snacks to browse. If they want to see more they can click on the 
+catalog button and they are sent to a page where all the snacks are present, they 
+can click on a snack and view the details of a snack as well. They can click on 
+the shooping cart link in the nav bar however it will tell them to login first to 
+access it. 
+
+The login link will show 2 options one is for current buyers of the store
+to login and a register button so that new users can sign up. Once a user signs up 
+they now have access to the shopping cart and can add snacks to their shopping cart.
+They can add snacks to their cart by going to the individual snack and clicking on
+the add snack button and it will be sent to their shopping cart. They can change the 
+contents of their shopping cart and checkout when they are satisfied with their 
+order. 
+
+As a owner they have access to different features when they log in. When 
+an admin logins in they have access to the inventory, and they cannot see the shopping
+cart. They can add, delete, and update a snack. When updating a snack they have to 
+go to the individual snack and change the contents of a snack. When any user is done
+with their session they can logout and the webpage changes back to the main 4 buttons,
+and assumes guest access.
 
 
 ### View Tier
@@ -144,6 +160,57 @@ where they can login as the owner, a customer, or register for the website.
 
 ![Successfully Add to Cart Sequence Diagram](AddToCartSequenceDiagram.png)
 ![Create a Snack Sequence Diagram](Create_a_snack_sequence_diagram.png)
+
+The main component that holds all the components together is the app component and it
+holds the navigation bar along with all the features of the website together. It Allows for a 
+central domain for where all users, buyers, and owners can access the website and its features.
+
+Within the app component is the homepage which is the first thing a user will see upon 
+entering the website. It serves as a welcoming message to the user and it allows them to see a sample
+of snacks in the inventory. Entices them to stay and see more about the website. 
+
+The login componenet restricts certain actions and features from different users. Owners who log in as admin
+are able to access inventory of the snacks, they can add, edit, and delete snacks, howvever they are
+unable to view/access shopping cart. As a buyer with an acconut they are able to view their cart,
+add items to their cart, remove items, edit the quantity of items, and check out. They are unable to 
+edit information about the snacks. As a user who does not have an account on the website they cannot 
+have access to any of these features, all they can do is browse the store. If they want to buy an item
+they can register an account and they are allowed to have access to a buyers features.
+
+buyer-inventory - a catalog of all snacks in inventory that buyers can view, and purchase. They can 
+see a variety of snacks and make their decision.
+
+buyer-search snack - a search bar that allows buyers to narrow down on certain snacks they desire. 
+If they want a snack that has chocolate they can type that key work and several snack options that
+fit that description will appear. Snack options will only show based on matching names or letters 
+from the key word. They can click on 1 of the options and they are sent to that snack to learn 
+more.
+
+buyer snack detail - a seperate page where you can view all the details of a snack chosen by the 
+buyer. They can see the name, description, price, and quantity. If they desire that snack they 
+click add to cart which will automatically add 1 quantity of that product in their cart. If the
+buyer feels they want to browse more they can click the go back button. 
+
+shopping cart - If a buyer wants to see their shopping cart they can do so by clicking the link
+in the navigation bar. The buyer is sent to a separate page where they can view the items they
+added to their cart. Automatically the quantity of each item in the cart is 1 but this can be 
+changed on the buyers discrection. They can increase or decrease the number of each snack in
+the cart, or even remove them if quantity of the snack reaches 0. They can buy as many snacks
+as they want however they cannot buy more than the snacks stock quantity. Based on how many
+snacks a buyer has in the cart the total cost will fluxuate, and so will the indivdual prices
+for each snack. Once a buyer is satisfied they can click checkout and a success purchase will
+be made.
+
+inventory - On the owener side they are able to view all the snacks in the e-store. They 
+can add a new snack, edit, or delete an entire snack from the the website. 
+
+snack-search - The owner is able to search for specific snacks using a search bar. They type in 
+a key word and several options will show based on the key word. They can click on one of the
+options and they can see a snack that can be edited.
+
+snack-detail - The owner is able to see details of snacks and change the information. They can
+rename, change the description, restock, or fluxuate the price of a snack and save it. The
+updated information will be shown to current and future buyers once this change is made.
 
 
 
