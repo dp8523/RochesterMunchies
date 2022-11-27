@@ -161,8 +161,8 @@ and assumes guest access.
 ![Successfully Add to Cart Sequence Diagram](AddToCartSequenceDiagram.png)
 ![Create a Snack Sequence Diagram](Create_a_snack_sequence_diagram.png)
 
-The main component that holds all the components together is the app component and it
-holds the navigation bar along with all the features of the website together. It Allows for a 
+The main component that holds all the sub components together is the app component and it
+holds the navigation bar along with all the features of the website together. It allows for a 
 central domain for where all users, buyers, and owners can access the website and its features.
 
 Within the app component is the homepage which is the first thing a user will see upon 
@@ -171,46 +171,66 @@ of snacks in the inventory. Entices them to stay and see more about the website.
 
 The login componenet restricts certain actions and features from different users. Owners who log in as admin
 are able to access inventory of the snacks, they can add, edit, and delete snacks, howvever they are
-unable to view/access shopping cart. As a buyer with an acconut they are able to view their cart,
-add items to their cart, remove items, edit the quantity of items, and check out. They are unable to 
-edit information about the snacks. As a user who does not have an account on the website they cannot 
-have access to any of these features, all they can do is browse the store. If they want to buy an item
-they can register an account and they are allowed to have access to a buyers features.
+unable to view/access their shopping cart. 
 
-buyer-inventory - a catalog of all snacks in inventory that buyers can view, and purchase. They can 
-see a variety of snacks and make their decision.
+  As a buyer with an acconut they are able to view their cart,
+  add items to their cart, remove items, edit the quantity of items, and check out. They are unable to 
+  edit information about the snacks. 
 
-buyer-search snack - a search bar that allows buyers to narrow down on certain snacks they desire. 
-If they want a snack that has chocolate they can type that key work and several snack options that
-fit that description will appear. Snack options will only show based on matching names or letters 
-from the key word. They can click on 1 of the options and they are sent to that snack to learn 
-more.
+  As a user who does not have an account on the website they cannot 
+  have access to any of these features, all they can do is browse the store. If they want to buy an item
+  they can register an account and they are allowed to have access to a buyers features. 
 
-buyer snack detail - a seperate page where you can view all the details of a snack chosen by the 
-buyer. They can see the name, description, price, and quantity. If they desire that snack they 
-click add to cart which will automatically add 1 quantity of that product in their cart. If the
-buyer feels they want to browse more they can click the go back button. 
+  This switch is made due to multiple callings sent to the buyer controller from the login component.
+  Once the user had entered their username, the login component will then go the auth-service file to 
+  the user service file and then that would send an http request of GET along with the username to the
+  buyer controller where it would process the request and send back info if the process was fullfilled
+  and if the user is confirmed. If the process was fulfilled an http resposne would be status code OK (200),
+  and the user would be directed to the appropriate page with limited features.
 
-shopping cart - If a buyer wants to see their shopping cart they can do so by clicking the link
-in the navigation bar. The buyer is sent to a separate page where they can view the items they
-added to their cart. Automatically the quantity of each item in the cart is 1 but this can be 
-changed on the buyers discrection. They can increase or decrease the number of each snack in
-the cart, or even remove them if quantity of the snack reaches 0. They can buy as many snacks
-as they want however they cannot buy more than the snacks stock quantity. Based on how many
-snacks a buyer has in the cart the total cost will fluxuate, and so will the indivdual prices
-for each snack. Once a buyer is satisfied they can click checkout and a success purchase will
-be made.
+When a buyer wants to browse the snacks they are able to when they click on the catalog link.
+They are given all the snacks in a list and they can search for a snack when they type a key word
+and several snack options will appear. This is due to the Http Request of GET along with the the
+name of the snack sent from the snack service file to the snack controller file. 
 
-inventory - On the owener side they are able to view all the snacks in the e-store. They 
-can add a new snack, edit, or delete an entire snack from the the website. 
+Once a buyer clicks on a snack to view they are routed to that snack details page. If they desire that snack they click 
+add to cart and that calls the addToCart method from the snack-detail componenet to the user service file.
+The user service file will send a Http request of PUT along with the username of the buyer, and the id if the snack to 
+the BuyerController. The BuyerController file will process the demand in the Buyer and Snack DAO files and send
+a response status of OK (200) and an updated buyer cart if successful. If the buyer feels they want to browse more they 
+can click the go back button. 
 
-snack-search - The owner is able to search for specific snacks using a search bar. They type in 
-a key word and several options will show based on the key word. They can click on one of the
-options and they can see a snack that can be edited.
+By clicking the shopping cart link in the navigation bar buyers are sent to a separate page 
+where they can view the items they added to their cart. Automatically the quantity of each item in the cart is 1 but this can be 
+changed on the buyers discrection. 
 
-snack-detail - The owner is able to see details of snacks and change the information. They can
-rename, change the description, restock, or fluxuate the price of a snack and save it. The
-updated information will be shown to current and future buyers once this change is made.
+  To increase or decrease the number of each snack in the cart, or even remove the item the buyer will click on either the + or 
+  button and that will call either the addCart or deleteCart method from the shopping cart component to the user service file.
+  The file will then send a http request of either PUT or DELETE along with the the buyers username and the snack's id to the 
+  Buyer controller. If successfull a status code of OK (200) along with the updated buyer's shopping cart will be sent to the component.
+  Buyers can buy as many snacks as they want however they cannot buy more than the snacks stock quantity. Based on how many
+  snacks a buyer has in the cart the total cost will fluxuate, and so will the indivdual prices
+  for each snack. Once a buyer is satisfied they can click checkout and a success purchase will
+  be made.
+
+When an admin is logged in they are limited to viewing only the inventory, homepage, and login.
+In the iventory the admin side they are able to view all the snacks in the e-store. They can also search for 
+specific snacks using a search bar. This process is similar to the buyers search however the snacks that appear
+can be edited. They can edit all the information of a snack and save it. The updated information will be shown 
+to current and future buyers once this change is made. Admins can also can add a new snack or delete an entire 
+snack from the the website.
+
+  By filling out all the information boxes in the add snack section and click add snack this will make the inventory
+  component call the add method in the snack service file. The method will create a snack object and send a http request 
+  of POST with that snack object to the SnackController. The snack controller will send a createSnack method
+  to the SnackDAO file to update the JSON file that contains all the snacks in the store. A response entity will
+  be sent back containing a status code of OK (200) and the new snack if successfull. The new snack will be sent to the inventory
+  of the owner and to the buyers side.
+
+  To delete a snack the admin can click on a button below the snack with an x mark and that will call the delete method
+  in the inventory component. That will call the deleteSnack method in the user service which will send a Http request of DELETE
+  followed by the id of the snack to the SnackController. The SnackController will then call the deleteSnack method, processes
+  the request and then return a resposne entity of OK(200) to the front.
 
 
 
@@ -222,6 +242,7 @@ updated information will be shown to current and future buyers once this change 
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
+![ViewModel Controllers](ViewModel_Controllers.png)
 
 ### Model Tier
 > _Provide a summary of this tier of your architecture. This
@@ -230,6 +251,10 @@ updated information will be shown to current and future buyers once this change 
 
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
+
+![Model Buyer UML Diagram](Model_Buyer_UML_Diagram.png)
+![Model ShoppingCart UML Diagram](Model_ShoppingCart_UML_Diagram.png)
+![Model Snack UML Diagram](Model_Snack_UML_Diagram.png)
 
 ### Static Code Analysis/Design Improvements
 Our Buyer implementation files have not been covered yet, and should the project continue, 
