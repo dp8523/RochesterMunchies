@@ -195,7 +195,7 @@ name of the snack sent from the snack service file to the snack controller file.
 
 Once a buyer clicks on a snack to view they are routed to that snack details page. If they desire that snack they click 
 add to cart and that calls the addToCart method from the snack-detail componenet to the user service file.
-The user service file will send a Http request of PUT along with the username of the buyer, and the id if the snack to 
+The user service file will send a Http request of PUT along with the username of the buyer, and the id of the snack to 
 the BuyerController. The BuyerController file will process the demand in the Buyer and Snack DAO files and send
 a response status of OK (200) and an updated buyer cart if successful. If the buyer feels they want to browse more they 
 can click the go back button. 
@@ -243,6 +243,58 @@ snack from the the website.
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
 ![ViewModel Controllers](ViewModel_Controllers.png)
+
+Buyer controller:
+
+For all actions of a buyer this is where most of those actions are called. The buyer controller
+is where each action of a buyer is sent to the server for the server to process and fufill. 
+With each function call, it sends the information necessary for that action such as HTTP requests and returns
+new information along with a http response declaring if that action was successful or not.
+
+When registering an account the login component will call the register method in the auth-service service file
+and then it calls the register method in the user service file. The register method in the user servive file
+will send a Http request of POST along with the users new username. The http request will be sent to the 
+BuyerController where the createBuyer method will be called. That method will go the BuyerDAO file and update 
+the buyers in the JSON file. Once updated a response entity of type Buyers along with the status code of CREATED 
+will be sent back to the controller. If theres already another user with that name then status code of CONFLICT will
+be sent. If not either of those codes are sent then it will send INTERNAL_SERVER_ERROR.
+
+For login its the same path as registering however instead of a Http request of POST it will send GET with the username. 
+The responseEntity returned would be of type Buyer and would return 1 of 3 status codes of OK if found, NOT_FOUND, and 
+INTERNAL_SERVER_ERROR.
+
+For addToCart the buyer-snack-detail componenet will call the addCart method from the 
+user service file which sends a http request of PUT along wth the username of the buyer and the snack id 
+to the BuyerController. It will call the addToCart method which will add a snack from the SnackDAO file to 
+the BuyerDAO file and returns a new buyer with an updated shopping cart along with status code OK
+
+Delete from cart is similar as it follows the same path through files however it uses the deletefromcart
+methods. Get total cart cost gives the total cart cost by calling getTotalCost in the user service, which sends
+a http request of GET with the username to the BuyerController. That file processes it and returns a status
+code of OK (200) if successful.
+
+When the buyer is done browsing they can checkout which calls the checkout method in the user service and that sends
+a http request of POST and with the buyers name to the BuyerController. It processes the request and returns
+a status code of OK with the updated buyers cart.
+
+Snack controller - 
+
+Getting a snack will use the snack service file and which sends a http request of GET and depending
+on if the id of a snack is given then it will locate the appropriate method in the SnackController. 
+The Snack Controller will fulfill the request and return the snack with status code OK. Search snacks 
+has a simiar path as getting a snack however it requires a string parameter and it returns an array
+of snacks that fit the provided string.
+
+Creating a snack requires a snack object to be made prior to this method being called. The snack object
+is created in a typescript file of the inventory componenet and that calls the add snack method in the 
+snack service file. The addSnack will send a http request of POST and the snack object to the Snack
+Controller. The Snack Controller will then execute the createSnack() function and that adds a snack
+object to the JSON file. When completed it will return that new snack to update the inventory and a 
+status code of CREATED.
+
+Update and delete snack have a similar path to the create snack method except that update snack requires
+a snack object parameter while the deleteSnack requires a int parameter. Both returns a Response entity of
+type Snack once completed.
 
 ### Model Tier
 > _Provide a summary of this tier of your architecture. This
