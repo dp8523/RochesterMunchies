@@ -47,7 +47,7 @@ User authentication: Depending on username and password the
 user will have certain responsibilities, and features they 
 are able to access. The owner will be able to add, remove 
 and change info of a product. Customers will see their 
-subscription, reviews, and browse snacks.
+shopping cart, and browse snacks.
 
 Shopping cart: Users will be able to add and remove 
 stuff from their cart, and update it to their satisfaction.
@@ -92,9 +92,9 @@ between the user, and the features of our website such as the
 shopping cart, where the customer can add and remove items from 
 the cart. The model also displays the relationship between the 
 owner and the inventory, adding, removing, and updating snacks.
-Also it shows new features such as the subscription where the
-customer can edit a subscription and change how frequently 
-they can recieve snacks.
+Also it shows new features such as the rating system where the
+customer leave a numerical rating for a snack, and order history 
+where contents of past purchases and timestamps are recorded.
 
 
 ## Architecture and Design
