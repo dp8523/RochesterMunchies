@@ -304,16 +304,61 @@ type Snack once completed.
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
-![Model Buyer UML Diagram](Model_Buyer_UML_Diagram.png)
-![Model ShoppingCart UML Diagram](Model_ShoppingCart_UML_Diagram.png)
+The model tier is where the main logic behind the store is. Its what defines the functionality 
+of the store as a buyer, by defining methods to interact with snacks and their shopping cart.
+
 ![Model Snack UML Diagram](Model_Snack_UML_Diagram.png)
 
+The main product our estore is selling are snacks. The snack model contains various private 
+attributes to define a snack. Theres the id of a snack, the name, description, quantity, price,
+averageRating, and a HashMap of ratings. We also have several methods under this model that aid 
+in defining each attribute and obtaining each value. For ratings we have addRating that contains
+2 parameters a string for the username of the buyer and a number for the actual rating. This method
+created a rating and sets it in the Hashmap of ratings. The setRatings will set the average ratings
+in the hashmap, and getAverageRating will return a double.
+
+![Model Buyer UML Diagram](Model_Buyer_UML_Diagram.png)
+
+To set functionality and restricted features for only buyers of the website this model creates those actions.
+The Buyer model contains 2 private attributes username as a string and a cart as a ShoppingCart object.
+Within the class there are several defining and obtaining methods for each of these
+attributes. There is setUsername, getUsername, setCart, and getCart. For setCart it requires for 
+a shopping cart object to be made first before assigning it to a buyer. Once created and
+assigned you can get the cart, add to the cart which requires a snack ID, and delete from the cart which also 
+requries a snack ID. From these methods the buyer can see their cart and add and remove snacks from their
+cart. Along with modifying the contents of a buyers cart they can checkout with the clearCart method. This
+method provides the logic and functionality behind checking out a cart by removing all the contents in the 
+cart. The snackInCart method is a helper function that determines if a specific snack is in the cart to 
+reduce snack copies in the cart.
+
+![Model ShoppingCart UML Diagram](Model_ShoppingCart_UML_Diagram.png)
+
+The Shopping cart itself is a hashmap, it contains the properties of a hashmap, therefore there
+are no private attributes assigned. It has several methods that would help the buyer edit their cart 
+and checkout. It has similar methods to the buyer class such as addToCart, deleteFromCart, getCart, 
+and clearCart, however there are slight differences. The addToCart method returns a boolean, the 
+getCart method returns a HashMap of the snack id and the quantity of the snacks. The clearCart method
+checkouts the cart by removing the contents of the cart and returning a boolean to indicate if it was 
+done successfully.
+
+Persistence: 
+
+The model classes provide a layout of methods to be used for the persistent files to use.
+The persistence files use the methods in the models to update the JSON files, and to process
+the requests sent from the controller. 
+
+
+
 ### Static Code Analysis/Design Improvements
+The frontend portion of the 10% features have not been implemented. For the future of the
+project it would be great if 
+
 Our Buyer implementation files have not been covered yet, and should the project continue, 
 it would be in our best interest to focus on the buyer files and testing each individual
 function. Testing these functions would allow us to continue developing the shopping
 cart files and implement an organized method for handling our data persistence for 
 buyers. 
+
 Design improvements would lie primarily in the shopping cart files, as our code
 analysis shows that we have malfunctioning methods that need to be revised. 
   - We can focus on improving our shopping cart by implementing simpler
@@ -323,6 +368,9 @@ analysis shows that we have malfunctioning methods that need to be revised.
 > discuss the resulting issues/metrics measurements along with your analysis
 > and recommendations for further improvements. Where relevant, include 
 > screenshots from the tool and/or corresponding source code that was flagged._
+
+
+
 
 ## Testing
 > _This section will provide information about the testing performed
