@@ -347,6 +347,69 @@ The model classes provide a layout of methods to be used for the persistent file
 The persistence files use the methods in the models to update the JSON files, and to process
 the requests sent from the controller. 
 
+BUYERDAO - INTERFACE
+
+BuyerDAO is the interface to the BuyerFileDAO file. The interface consists of the main methods for a buyer such as login, createBuyer, deleteBuyer,
+addToCart, deleteFromCart, and clearCart.
+
+BUYERFILEDAO - IMPLEMENTS BUYERDAO
+
+BuyerFileDAO is the file that implements the methods in the interface to buyer objects. It consists of 
+creating a public buyers map thats of type String and Buyer and the other methods from the BuyerDAO file.
+This file is the persistence tier of the overall estore architechture which means that this file is 
+responsible for maintaining consistenty with any updates and changes sent from the front to the back. 
+  
+  For createBuyer once the buyer controller calls the createBuyer method in the BuyerDAO file, the BuyerFILEDAO
+  file will process that method and save that information into the JSON object file. This updates the data in
+  the server and makes it persistent to all users of the website. This logic is the same when it comes to the 
+  other methods as well. 
+
+  With a new buyer they can now add items to their cart by using the addToCart method. When the addtoCart method 
+  is called in the buyerController it will call the addToCart method in the BuyerDAO which will then call the 
+  addToCart method in the BuyerFileDAO. The addToCart function in the BuyerFileDao will check if the buyer exists 
+  then it will add the snack to the buyers shopping cart, update the shoppingcart for the buyer, save that information
+  in the JSON files and then send the buyer with their new shopping cart back to the controller.
+
+  The buyer can checkout their cart with the clearCart method. The user servive file will send a http request of 
+  POST along with the username of the buyer. That would then be processed by checkoutCart in Buyercontroller and that 
+  would call clearcart in the BuyerFileDAO. ClearCart would clear the buyers shopping cart and save the updated
+  shopping cart info to the JSON files. The buyer with their updated shopping cart would be sent back to the controller
+  where it would then be sent back to the frontend to display the new information.
+
+SNACKDAO - INTERFACE
+
+SnackDAO is the interface to the SnackFileDAO file. The interface consists of the main methods for a snack such as getSnacks, findSnacks, 
+createSnack, uodateSnack, deleteSnack, and rateSnack.
+
+SNACKFILEDAO - IMPLEMENTS SNACKDAO
+
+SnackFileDAO implements the methods in the SnackDAO interface. It contains a map of snacks consisting
+of type Integer and Snack along with many methods to get and update snacks. Methods include getSnacks, findSnacks,
+createSnack, updateSnack, deleteSnack, and rateSnack
+
+  If a user wanted to get a snack they use the getSnack methods. Depending on if the id of the snack was given 
+  the user can find one specific snack or a list of snacks. The snack service file would send a http request of GET and 
+  the id of the snack, if given, to the SnackController. The SnackController uses the getSnacks method in the SnackFileDAO
+  and it retrieves that snack or a list of snacks from the JSON object file. The snacks will then be sent from the JSON file
+  to the UI of the estore.
+
+  When an admin wants to create a new snack they use the createSnack method. Snack service will send a http request of POST
+  along with the new snack to the SnackController. The SnackController will call the createSnack method in the SnackFileDAO 
+  which will create a new snack by getting the information from the snack passed in as a parameter. After a snack is created 
+  it will be put in the Snack map and saved into the JSON file. The new snack will then be returned back to the UI to show 
+  users the new snack in stock.
+
+  If the admin decides to update a snack they use the update snack method. Snack service will send a http request of PUT
+  along with the updated snack to the SnackController. The snacks information was already updated in the inventory typescript 
+  componenet. The SnackController will call the updateSnack method in the SnackFileDAO which will update the snack by reassigning the
+  new snack to the same snack id as before. This information will be saved in the Snack map and saved into the JSON file. 
+  The new snack will then be returned back to the UI to show users the new snack in stock.
+
+  If an admin wants to delete a snack, they can do so by using the delete snack method. Http request of DELETE along with the 
+  id of the snack will be sent to the SnackController from the snack service file. It will then call deleteSnack from the SnackFileFAO
+  and delete the snack from the JSON file. The deletion will be saved and persist for future user experiences.
+
+
 
 
 ### Static Code Analysis/Design Improvements
