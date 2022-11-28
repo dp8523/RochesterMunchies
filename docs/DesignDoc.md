@@ -416,34 +416,44 @@ createSnack, updateSnack, deleteSnack, and rateSnack
 ### Static Code Analysis/Design Improvements
 
 ![EstoreAPI Code Analysis](StaticCode_EstoreAPI_overall.png)
-
-The 
-
 ![EstoreAPI Code Analysis Code Smells](StaticCode_EstoreAPI_Code_Smells.png)
 ![EstoreAPI Code Analysis Bug Fix](StaticCode_EstoreAPI_bug_fix.png)
 ![EstoreAPI Code Analysis Security Hotspot](StaticCode_EstoreAPI_security_hotspot.png)
 
-The frontend portion of the 10% features have not been implemented. For the future of the
-project it would be great if 
+Based on the Code analysis from sonarqube we can say that we have to improve upon our hotspots and bugs.
+The bug is a small issue in that there should be a blantant casting of one of the operands 
+in the divison operation for the snack model file. The issue behind the security hotspot is 
+that a debug feature should be deactivated before selivering the code in production. In addition
+to these issues we also have many other major and minor issues in the code such as formatting
+issues, cleaning up unwanted code, and cleaning up unnecessry code. 
 
-Our Buyer implementation files have not been covered yet, and should the project continue, 
-it would be in our best interest to focus on the buyer files and testing each individual
-function. Testing these functions would allow us to continue developing the shopping
-cart files and implement an organized method for handling our data persistence for 
-buyers. 
+Some improvements that can be made would be to cast one of the operands in the division operation
+to a double to fix that bug. We can fix the security hotspot by removing the debug feature before
+production. We can also reduce the amount of minor and major issues with reformatting, and cleaning
+up code such as removing the keyword public when writing all the junit tests as its not necessary in this
+version. 
 
-Design improvements would lie primarily in the shopping cart files, as our code
-analysis shows that we have malfunctioning methods that need to be revised. 
-  - We can focus on improving our shopping cart by implementing simpler
-  data structures and elaborating in the future into a more abstract class.
+  Some formatting issues can be to take out the object type in between <> for the ResponseEntities. 
+  Its not necessary as java 7 compiler can infer the type. Commented out code should be removed and cleaned 
+  out to improve readibility and reduce bloating. 
+  
+  Another issue to use a map instead of a hash map as a map can be hidden when its implemented but a hashmap 
+  can be seen as its exposed as a public member and returned and accepted for public methods. 
+  
+  Other issues were to use the built in formatting to construct the parameters for the LOG.info within the 
+  Controllers. It was suggested to not pass concatenated strings to the logging method as it would slow down 
+  performance. We decided to not focus on fixing this issue as the performance of the website is still adequate.
 
-> _With the results from the Static Code Analysis exercise, 
-> discuss the resulting issues/metrics measurements along with your analysis
-> and recommendations for further improvements. Where relevant, include 
-> screenshots from the tool and/or corresponding source code that was flagged._
+For the future of the project we will be targeting these issues to improve upon our architecture, security, 
+and readibiltiy. We will prioritize using code structures and practices that would ensure certain code will
+be hidden such as using a map instead of a hash map where appropriate. We will use default formatting and 
+modifiers such as not writing public in junit tests and not specifiying object type in <> of Response Entities.
 
-
-
+Design improvements could consists of working on the frontend of the 10% feauture. We have not set up the Angular
+portion of the 10% features and therefore users aren't able to see or interact with it. Besides this major design
+improvement we can improve upon security and proper code techniques. We will consider using more secure code structures
+to hide implementation such as maps. We could also improve upon the Angular side of the estore by cleaning up the
+html and css of the website, in order to improve readibility and consistency of the website. 
 
 ## Testing
 > _This section will provide information about the testing performed
@@ -465,11 +475,11 @@ On the backend, a lot of our stories passed all the criteria.
 Our unit testing strategy is primarily in creating a fake database
 of snacks and using that fake database to assert various functions
 and conditional statements. The code coverage achieved from unit 
-testing our snack files have shown to be above 90% covered, where
-the final 10% lie in additional functions yet to be covered and will
-be our primary focus for code coverage. 
+testing our snack files have shown to be above 90% covered.
+The teams code coverage is finished with the mvp and 10% for the backend.
+
 ![api controller coverage](api_controller_coverage.png)
 ![api model coverage](api_model_coverage.png)
 ![api persistence coverage](api_persistence_coverage.png)
-The teams code coverage is finished with the mvp and 10% for the backend.
+
 
