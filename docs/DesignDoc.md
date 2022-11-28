@@ -413,6 +413,12 @@ createSnack, updateSnack, deleteSnack, and rateSnack
 
 
 ### Static Code Analysis/Design Improvements
+
+![EstoreAPI Code Analysis](StaticCode_EstoreAPI_overall.png)
+![EstoreAPI Code Analysis Code Smells](StaticCode_EstoreAPI_Code_Smells.png)
+![EstoreAPI Code Analysis Bug Fix](StaticCode_EstoreAPI_bug_fix.png)
+![EstoreAPI Code Analysis Security Hotspot](StaticCode_EstoreAPI_security_hotspot.png)
+
 The frontend portion of the 10% features have not been implemented. For the future of the
 project it would be great if 
 
