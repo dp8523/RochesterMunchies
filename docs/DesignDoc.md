@@ -349,6 +349,8 @@ the requests sent from the controller.
 
 BUYERDAO - INTERFACE
 
+![Persistence Buyer UML Diagram](Persistence_Buyer_uml_diagrams.png)
+
 BuyerDAO is the interface to the BuyerFileDAO file. The interface consists of the main methods for a buyer such as login, createBuyer, deleteBuyer,
 addToCart, deleteFromCart, and clearCart.
 
@@ -377,6 +379,8 @@ responsible for maintaining consistenty with any updates and changes sent from t
   where it would then be sent back to the frontend to display the new information.
 
 SNACKDAO - INTERFACE
+
+![Persistence Snack UML Diagram](Persistence_Snack_uml_diagrams.png)
 
 SnackDAO is the interface to the SnackFileDAO file. The interface consists of the main methods for a snack such as getSnacks, findSnacks, 
 createSnack, uodateSnack, deleteSnack, and rateSnack.
@@ -409,12 +413,12 @@ createSnack, updateSnack, deleteSnack, and rateSnack
   id of the snack will be sent to the SnackController from the snack service file. It will then call deleteSnack from the SnackFileFAO
   and delete the snack from the JSON file. The deletion will be saved and persist for future user experiences.
 
-
-
-
 ### Static Code Analysis/Design Improvements
 
 ![EstoreAPI Code Analysis](StaticCode_EstoreAPI_overall.png)
+
+The 
+
 ![EstoreAPI Code Analysis Code Smells](StaticCode_EstoreAPI_Code_Smells.png)
 ![EstoreAPI Code Analysis Bug Fix](StaticCode_EstoreAPI_bug_fix.png)
 ![EstoreAPI Code Analysis Security Hotspot](StaticCode_EstoreAPI_security_hotspot.png)
