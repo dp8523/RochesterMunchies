@@ -444,6 +444,15 @@ version.
   Controllers. It was suggested to not pass concatenated strings to the logging method as it would slow down 
   performance. We decided to not focus on fixing this issue as the performance of the website is still adequate.
 
+![EstoreUI Code Analysis](StaticCode_EstoreUI_overall.jpg)
+![EstoreUI Code Analysis Bugs](StaticCode_EstoreUI_bugs.jpg)
+![EstoreUI Code Analysis Bug Fix](StaticCode_EstoreUI_bug_fix.jpg)
+
+Based on the Code analysis from sonar scanner, we can say that we have to improve on our html pages. 
+All of our bugs and smells are about surrounding our li tags with an ul or ol container tag. We did not focus 
+on this bug because it does not change the overall display of our html pages. We can fix these bugs by 
+surrounding our li html tags with the ul html tag. By doing this, we can achieve the zero bugs for the ui. 
+
 For the future of the project we will be targeting these issues to improve upon our architecture, security, 
 and readibiltiy. We will prioritize using code structures and practices that would ensure certain code will
 be hidden such as using a map instead of a hash map where appropriate. We will use default formatting and 
