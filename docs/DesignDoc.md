@@ -491,4 +491,36 @@ The teams code coverage is finished with the mvp and 10% for the backend.
 ![api model coverage](api_model_coverage.png)
 ![api persistence coverage](api_persistence_coverage.png)
 
+### Design Principles
+
+Single Responsibility: 
+  Some aspects of the project that exhibit the single responsibility principle is the
+  snack controller where it only controls methods for snacks objects, and the componenets
+  in the angular side where each componenet handles specific features of the website. 
+  The snack controller has methods such as createSnack, updateSnack, getSnack, and deleteSnack
+  that only edits snack objects. This helps organize code and limits code modification to only that 
+  codes responsibiltiy, in this case any modifications would be relevant to snack objects.
+
+  Some future improvements that could be made would be to take out the ratings feature from the 
+  snack controller. As the project grows and ratings becomes more complex it would be wise to 
+  make it its own class and and have its own controller. By separating the ratings from the snack
+  controller it would allow for any changes in the snack controller to only affects methods in that 
+  class and not ratings.
+
+Open Closed Principle: 
+  The principle is exhibtited in the project through the buyer and shopping cart class. The buyer 
+  class holds the methods for a buyer interacting with the website, such as logging in, and 
+  interacting with snack objects while the shopping cart class hold methods where a buyer can add a snack
+  to the cart and delete a snack from the cart. The shopping cart methods are an extension to buyer objects 
+  where buyer objects can use those methods while the buyer class is not modified to include the
+  shopping cart methods. This allows for a class to be open for extension while being closed for modification.
+
+  Future design improvements that would enhance the open / closed principle would be to take the ratings 
+  feature out of the snack class. Ratings is an addition to snack objects and it should be an extension to
+  the snack class while keeping the class unchanged. Ratings should be made into its own class and have snack
+  objects extend into the ratings class. Snack objects will be able to use rating methods and remain unchanged 
+  to modifications.
+
+  
+
 
