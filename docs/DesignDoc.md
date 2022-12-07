@@ -521,6 +521,10 @@ Open Closed Principle:
   objects extend into the ratings class. Snack objects will be able to use rating methods and remain unchanged 
   to modifications.
 
+Pure Fabrication:
+  This GRASP principle is exhibited in the project through the implementations of Data Access Objects(DAOs). Within the DAOs of our persistence tier are methods that handle database updates. Handling data manipulation with the local json files for the inventory and account details is representative of Pure Fabrication. Apart from the DAOs, our project's design is lacking in terms of this principle. 
+
+  There are many improvements to our implementations that could be made to better employ this principle. Currently, ShoppingCart data handling is processed through the Snack object where the ShoppingCart resides as an attribute. A ShoppingCartHandler could be implemented to handle any data access or modification. The ratings for a Snack are stored within the Snack, and the data handling methods for the ratings attribute are within the Snack object. This could be improved in a similar way to the ShoppingCart situation, by creating a handler object that will allow Snack to possess a Single Responsibility state. 
   
 
 
