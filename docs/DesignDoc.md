@@ -521,10 +521,39 @@ Open Closed Principle:
   objects extend into the ratings class. Snack objects will be able to use rating methods and remain unchanged 
   to modifications.
 
+Controller Principle:
+  This GRASP principle is practiced in the project through the buyer Controller and snack controller. These
+  controllers delegate the requests from the UI snack and buyer objects. Since there are many actions that each snack
+  and buyer object can do the controller essentially coordinates what methods from the model class should be called. 
+
+  Future design improvements would be to add more controllers for different features. The shopping cart and the ratings 
+  could become more complex and instead of having a bloated controller that controls more than necessary, it would be
+  beneficial if we had more controllers. It would allow for more activites to be fulfilled quickly and efficiently.
+
+Information Expert principle:
+  This GRASP principle is practiced in the project through the snack object class. Essentially since we want to assign responsibilites
+  to a class that has the information to fulfill the responsibility it seems wise to put all the methods revolving around snacks
+  in the snack class. The snack java class has access to a snacks attributes so placing methods that would get a snack, update a snack, and create a snack in 
+  that class would be appropriate. 
+
+  Future design improvements would be to clean up the snack class with the ratings feature. Snacks do have ratings
+  however to put ratings in a snack object class would be assigning it too much responsibility to handle another feature that it not
+  its main responsibility. Possibily making a rating class and assigning rating responsibilities would be beneficial.
+
+Low Coupling:
+  This GRASP principle is exhibited in the project when we separate responsibilities between buyers and snacks while also maintaining low
+  dependency between few classes. The buyer and snack classes reply on each other very minimally. They each have methods that pertain to their
+  specific responsibility so the reliance between buyer and snack classes is low. However we do have a coupling between buyer and shopping cart objects,
+  as a buyer has a shopping cart. 
+  Future design improvements would be to possibly make shopping cart more independent thus making it more reusable in future development.
+
 Pure Fabrication:
   This GRASP principle is exhibited in the project through the implementations of Data Access Objects(DAOs). Within the DAOs of our persistence tier are methods that handle database updates. Handling data manipulation with the local json files for the inventory and account details is representative of Pure Fabrication. Apart from the DAOs, our project's design is lacking in terms of this principle. 
 
   There are many improvements to our implementations that could be made to better employ this principle. Currently, ShoppingCart data handling is processed through the Snack object where the ShoppingCart resides as an attribute. A ShoppingCartHandler could be implemented to handle any data access or modification. The ratings for a Snack are stored within the Snack, and the data handling methods for the ratings attribute are within the Snack object. This could be improved in a similar way to the ShoppingCart situation, by creating a handler object that will allow Snack to possess a Single Responsibility state. 
+
+
   
+
 
 
