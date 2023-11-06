@@ -1,14 +1,14 @@
 [
     {
-        "username": "SWEN261Grindr",
-        "cart": {}
-    },
-    {
         "username": "adam",
         "cart": {}
     },
     {
         "username": "dara",
+        "cart": {}
+    },
+    {
+        "username": "SWEN261Grindr",
         "cart": {}
     },
     {
@@ -20,15 +20,15 @@
         "cart": {}
     },
     {
+        "username": "jadenSmith",
+        "cart": {}
+    },
+    {
         "username": "roberto",
         "cart": {}
     },
     {
         "username": "admin",
-        "cart": {}
-    },
-    {
-        "username": "jadenSmith",
         "cart": {}
     },
     {

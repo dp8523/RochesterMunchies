@@ -19,10 +19,11 @@ An online E-store system built in Java 8=>11 and ___ _replace with other platfor
 
 ## How to run it
 
-1. Go to 'estore-api\src\main\java\com\estore\api\estoreapi\EstoreApiApplication.java' and run the main function.
-2. Go to 'estore-ui\app' and run the command 'npm install'
-3. In the same directory, run 'npm start'
-4. Open your browser to http://localhost:4200
+1. Clone the repository and go to the root directory.
+2. Go to 'estore-api' and execute `mvn compile exec:java`
+3. Go back to the root, then go to 'estore-ui/app' and run the command `npm install`
+4. In the same directory, run `npm start`
+5. Open your browser to http://localhost:4200
 
 ## How to test it
 
